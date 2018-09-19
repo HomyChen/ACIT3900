@@ -1,0 +1,28 @@
+{
+  "name": "acit3900",
+  "version": "1.0.0",
+  "description": "BCIT School of Transportation Project F18-013",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HomyChen/ACIT3900.git"
+  },
+  "author": "Homy Chen, Iris Lee, Glenn Parale, Jap Johal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HomyChen/ACIT3900/issues"
+  },
+  "homepage": "https://github.com/HomyChen/ACIT3900#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
+    "pg": "^7.4.3",
+    "socket.io": "^2.1.1",
+    "webpack": "^4.19.1"
+  }
+}
