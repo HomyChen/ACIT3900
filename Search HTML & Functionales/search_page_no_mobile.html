@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OPUD: Search vehicles</title>
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <link href="./search_page_no_mobile.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="title_ncbut">
+        <h2 id="title">
+			Search for Vehicles
+		</h2>
+        <button id="ncbut">
+            New Customer
+        </button>
+    </div>
+    <div id="main_div">
+        <div id="search_input">
+            <select id="query_category">
+                <option value="last_name">Last Name</option>
+                <option value="license_number">License Plate #</option>
+                <option value="VIN">VIN</option>
+            </select>
+            <input type="text" id="query_search" />
+            <button id="search_button">Search</button>
+        </div>
+        <div id="search_result">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Vehicle Model</th>
+                        <th>License Plate#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bolstrom</td>
+                        <td>Nick</td>
+                        <td>F-150</td>
+                        <td>EBR 675</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button id="submit_button">Select Vehicle/Person</button>
+    </div>
+</body>
+
+</html>

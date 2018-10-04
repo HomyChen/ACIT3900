@@ -1,0 +1,75 @@
+#main_div{
+	position: absolute;
+	top: 100px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	width: 80vw;
+	height: 85vh;
+	background-color: #C4C4C4
+}
+
+#search_result{
+	background-color: white;
+	width: 80%;
+	position: absolute;
+	margin:auto;
+	left: 0px;
+	right: 0px;
+	top: 100px;
+	height: 80%;
+}
+
+#search_input{
+	top: 33px;
+	width: 80%;
+	position: absolute;
+	margin:auto;
+	left: 0px;
+	right: 0px;
+}
+
+#title_ncbut{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	width: 80vw;
+}
+
+#title{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	text-align: center;
+	top: 25px;
+}
+
+#ncbut{
+	position: absolute;
+	right: 0px;
+	top: 25px;
+}
+
+#submit_button{
+	position: absolute;
+	right: 9.5%;
+	bottom: 2%;
+}
+
+
+#query_category{
+	height: 40px;
+	width: 15%;
+}
+
+#query_search{
+	height: 40px;
+	width: 70%;
+}
+
+#search_button{
+	height: 40px;
+	width: 14%;
+}
