@@ -55,6 +55,7 @@ a, a:hover, a:focus {
     z-index: 1000;
     
 }
+
 .dactive {
     margin-right: 225px;
 }
@@ -103,4 +104,15 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
+
 /* Hamburger */
+
+.arrow-toggle .icon-arrow-down,
+.arrow-toggle.collapsed .icon-arrow-up {
+    display: inline-block;
+}
+.arrow-toggle.collapsed .icon-arrow-down,
+.arrow-toggle .icon-arrow-up {
+    display: none;
+}
+
