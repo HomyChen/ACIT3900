@@ -19,14 +19,17 @@ var io = require("socket.io")(server);
 const pg = require("pg");
 
 //dburl
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:password@localhost:0000/databasename";
+var dbURL = process.env.DATABASE_URL || "postgres://postgres:password@localhost:11000/databasename";
 
 app.use("/scripts", exp.static("build"));
+
 app.use("/css", exp.static("style"));
 app.use(bodyParser.urlencoded({
     extended:true
 }));
-
+app.get("/", function(req, resp){
+    resp.sendFile(pF+"/checkin.html")
+});
 
 //use sessions
 /*app.use(session({
@@ -52,4 +55,9 @@ server.listen(10000, function(err){
     }
     
     console.log(port+" is running");
+});
+
+
+app.get("/menu", function(req, resp){
+    resp.sendFile(pF+"/menu.html")
 });

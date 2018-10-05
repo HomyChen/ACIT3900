@@ -1,0 +1,83 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#boxHeader {
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-family: arial;
+    font-weight: bold;
+}
+
+#searchBut {
+    width: 100%;
+    margin-bottom: 10px;  
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#container {
+    
+    padding: 0, 0, 0, 0;
+}
+
+.form {
+    background-color: darkgray;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+#serviceRequests {
+    margin-top: 10px;
+    overflow: auto;
+}
+
+#requestedServicesTable {
+    background-color: white;
+    border-radius: 7px;
+}
+
+#submitBut {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#requestsDropdown {
+    width: 100%;
+}
+
+#otherRequestsInp {
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+}
+
+#headerDiv {
+    text-align: center;
+    font-size: 40px;
+    font-family: calibri;
+    padding: 30px;
+}
+
+#logoDiv {
+    background-image: url(content/bcit.png);
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+#menuDiv {
+    background-color: antiquewhite;
+    width: 50px;
+    height: 50px;
+    float: right;
+}
+
+#firstRow {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
