@@ -39,7 +39,7 @@ a, a:hover, a:focus {
 
 
 #sidebar.active {
-    margin-right: -275px;
+    margin-right: 275px;
 }
 
 #sidebar {
@@ -49,11 +49,14 @@ a, a:hover, a:focus {
     background: #EBB582;
     color: white;
     transition: all 0.3s;
-    position: absolute;
+    position: fixed;
     top: 0;
-    right: 25px;
-    z-index:-1;
+    right: -275px;
+    z-index: 1000;
     
+}
+.dactive {
+    margin-right: 225px;
 }
 
 #sidebar .sidebar-header {
