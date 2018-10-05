@@ -39,7 +39,7 @@ a, a:hover, a:focus {
 
 
 #sidebar.active {
-    margin-right: -275px;
+    margin-right: 275px;
 }
 
 #sidebar {
@@ -49,10 +49,15 @@ a, a:hover, a:focus {
     background: #EBB582;
     color: white;
     transition: all 0.3s;
-    position: absolute;
+    position: fixed;
     top: 0;
-    right: 25px;
-    z-index:-1;
+    right: -275px;
+    z-index: 1000;
+    
+}
+
+.dactive {
+    margin-right: 225px;
 }
 
 #sidebar .sidebar-header {
@@ -99,4 +104,15 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
+
 /* Hamburger */
+
+.arrow-toggle .icon-arrow-down,
+.arrow-toggle.collapsed .icon-arrow-up {
+    display: inline-block;
+}
+.arrow-toggle.collapsed .icon-arrow-down,
+.arrow-toggle .icon-arrow-up {
+    display: none;
+}
+
