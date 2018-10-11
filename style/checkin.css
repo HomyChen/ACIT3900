@@ -28,6 +28,13 @@ body {
     padding: 10px;
 }
 
+@media only screen and (max-width : 768px){
+    #vehicleInfo {
+        margin-top: 10px;
+    }
+}
+
+
 #serviceRequests {
     margin-top: 10px;
     overflow: auto;
