@@ -116,5 +116,39 @@ a[data-toggle="collapse"] {
     display: none;
 }
 
+/*Header*/
+#logoDiv {
+    background-image: url(content/bcit.png);
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+#menuPosition {
+    float: right;
+}
+
+#firstRow {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+#headerDiv {
+    text-align: center;
+    font-size: 40px;
+    font-family: calibri;
+    padding: 30px;
+}
+
+/* Form */
+.form {
+    background-color: darkgray;
+    border-radius: 7px;
+    padding: 10px;
+}
+
 
 

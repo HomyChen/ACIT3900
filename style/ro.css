@@ -1,0 +1,28 @@
+#SOptionsDropdown {
+    width: 100%;
+}
+
+#ROOptionsDropdown {
+    width: 100%;
+}
+
+#searchROBut {
+    width: 100%;
+}
+
+#resultsDiv {
+    margin-top: 10px;
+}
+
+#resultsTable {
+    background-color: white;
+    border-radius: 7px;
+}
+
+#resultsTable_filter {
+    visibility: hidden;
+}
+
+.form {
+    overflow:auto;
+}
