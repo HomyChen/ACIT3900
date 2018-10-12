@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 // had to change button Id of second add button for the other request option
 
 var dbFunctions = require("./routes/dbFunctions");
+
 var pF = path.resolve(__dirname, "public");
 var app = exp();
 
@@ -35,6 +36,9 @@ app.use(bodyParser.urlencoded({
 app.get("/", function(req, resp){
     resp.sendFile(pF+"/checkin.html")
 });
+app.get("/orders", function(req, resp){
+    resp.sendFile(pF+"/ro.html")
+});
 app.use("/data",dbFunctions);
 
 
@@ -48,6 +52,7 @@ server.listen(10000, function(err){
 });
 
 
-app.get("/menu", function(req, resp){
+/*app.get("/menu", function(req, resp){
     resp.sendFile(pF+"/menu.html")
 });
+*/
