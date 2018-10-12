@@ -5,6 +5,7 @@
     <title>OPUD: Search vehicles</title>
     <link rel="stylesheet" href="./bootstrap.min.css" />
     <link href="./search_page_mobile2.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                 <h2 id="title" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         		Search for Vehicles
         		</h2>
-                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-primary">
                     New Customer
                 </button>
 
@@ -49,7 +50,7 @@
                                     <option value="VIN">VIN</option>
                                 </select>
                                 <input type="text" id="query_search" class="col-xs-12 col-sm-4 col-md-6 col-lg-6"/>
-                                <button id="search_button" class="col-xs-12 col-sm-4 col-md-3 col-lg-3">Search</button>
+                                <button id="search_button" class="col-xs-12 col-sm-4 col-md-3 col-lg-3 btn btn-primary">Search</button>
                             </div>
                         </div>
                     </div>
@@ -68,13 +69,8 @@
                                         <th>License Plate#</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Bolstrom</td>
-                                        <td>Nick</td>
-                                        <td>F-150</td>
-                                        <td>EBR 675</td>
-                                    </tr>
+                                <tbody id="search_result_row" selected>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -89,7 +85,7 @@
                                     
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                    <button id="submit_button">Select Vehicle/Person</button>
+                                    <button id="submit_button" class="btn btn-primary">Select Vehicle/Person</button>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +98,7 @@
     </div>
 
     </div>
+    <script type="text/javascript" src="./search_page_mobile2.js"></script>
 </body>
 
 </html>
