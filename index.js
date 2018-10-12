@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 
 // had to change button Id of second add button for the other request option
 
+//defining routed function files -Homy
+const dbfun = require('./routes/searchFunctions.js')
 var dbFunctions = require("./routes/dbFunctions");
 
 var pF = path.resolve(__dirname, "public");
@@ -39,8 +41,19 @@ app.get("/", function(req, resp){
 app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
+
+app.get("/s", function(req, resp){
+    resp.sendFile(pF+"/search.html")
+});
+
 app.use("/data",dbFunctions);
 
+//search function from Glenn
+app.post("/search", (request,response)=>{
+	dbfun.getExactSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
+		response.send({status: 'OK', data: result})
+	})
+});
 
 server.listen(10000, function(err){
     if(err){
