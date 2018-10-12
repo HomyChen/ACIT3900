@@ -28,6 +28,13 @@ body {
     padding: 10px;
 }
 
+@media only screen and (max-width : 768px){
+    #vehicleInfo {
+        margin-top: 10px;
+    }
+}
+
+
 #serviceRequests {
     margin-top: 10px;
     overflow: auto;
@@ -54,27 +61,3 @@ body {
     padding-right: 0;
 }
 
-#headerDiv {
-    text-align: center;
-    font-size: 40px;
-    font-family: calibri;
-    padding: 30px;
-}
-
-#logoDiv {
-    background-image: url(content/bcit.png);
-    background-size: contain;
-    width: 100px;
-    height: 100px;
-    float: left;
-}
-
-#menuPosition {
-    float: left;
-}
-
-#firstRow {
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-}

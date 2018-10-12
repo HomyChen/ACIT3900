@@ -61,3 +61,7 @@ server.listen(10000, function(err){
 app.get("/menu", function(req, resp){
     resp.sendFile(pF+"/menu.html")
 });
+
+app.get("/orders", function(req, resp){
+    resp.sendFile(pF+"/ro.html")
+});
