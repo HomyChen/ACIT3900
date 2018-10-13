@@ -5,7 +5,8 @@ $(document).ready(()=>{
 	query_search = document.getElementById("query_search")
 	search_result_row = document.getElementById("search_result_row")
 	submit_button = document.getElementById("submit_button")
-
+    searchBody = document.getElementById("searchBody")
+    containerDiv = document.getElementById("container")
     
     $('#searchTable').DataTable( {
         select: true
@@ -13,10 +14,13 @@ $(document).ready(()=>{
     
 	var selected_id = null
     
-    searchBody = document.getElementById("searchBody")
+    
     
 	ncbut.onclick = ()=>{
-        window.location.assign("/")  
+        searchBody.style.display = 'none';
+        containerDiv.style.display = 'block';
+        searchBody.style.width = '0px';
+        containerDiv.style.width = '100vw';
 	}
 
 	/*Search Button*/
