@@ -6,6 +6,11 @@ $(document).ready(()=>{
 	search_result_row = document.getElementById("search_result_row")
 	submit_button = document.getElementById("submit_button")
 
+    /*
+    $('#searchTable').DataTable( {
+        select: true
+    } );
+    */
 	var selected_id = null
 
 	ncbut.onclick = ()=>{
@@ -13,8 +18,11 @@ $(document).ready(()=>{
 	}
 
 	/*Search Button*/
-
+    
+    
+    
 	search_button.onclick = ()=>{
+        $('#searchTable').DataTable().destroy();
 		$.ajax({
 			url: '/search',
 			type: 'post',
@@ -23,6 +31,18 @@ $(document).ready(()=>{
 				searchType: query_category.value
 			},
 			success: (data) => {
+                console.log(data);
+                $('#searchTable').DataTable({
+                    select: true,
+                    data: data.data,
+                    "columns": [
+                        { "data": "last_name"},
+                        { "data": "first_name"},
+                        { "data": "model"},
+                        { "data": "license"},
+                    ]
+                });
+/*
 				search_result_row.innerHTML = ""
 				vehicles = data.data
 				for (i = 0; i < vehicles.length; i++){
@@ -30,8 +50,9 @@ $(document).ready(()=>{
 					newresult = document.createElement("tr");
 					newresult.id = vehicles[i].cust_id + "_" + vehicles[i].vehicle_id
 					newresult.className = "table-light"
-
+                    
 					lname = document.createElement("td");
+                    lname.scope = "row";
 					lname.innerHTML = vehicles[i].last_name
 					newresult.appendChild(lname);
 
@@ -58,7 +79,8 @@ $(document).ready(()=>{
 						selected_id = this.id
 					}
 				}
-			}
+*/
+            }
 		})
 	}
 

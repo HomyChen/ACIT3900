@@ -20,12 +20,13 @@ Thing to note: use margin to give spacing instead of position stuff;
 }
 
 #search_result{
-	height: 70vh;
+	
 	width: 83%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: white;
+	background-color: darkgray;
 	margin-bottom: 15px;
+    overflow: auto;
 }
 
 
@@ -51,6 +52,7 @@ Thing to note: use margin to give spacing instead of position stuff;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 30px;
+    
 }
 
 #title_ncbut{
@@ -66,4 +68,14 @@ Thing to note: use margin to give spacing instead of position stuff;
 #title{
 	text-align: center;
 	margin-bottom: 15px;
+}
+
+/* Search Table */
+
+#searchTable {
+    background-color: white;
+}
+
+#searchTable_filter {
+    visibility: hidden;
 }
