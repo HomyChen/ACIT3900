@@ -5,16 +5,17 @@ Thing to note: use margin to give spacing instead of position stuff;
 
 #searchBody {
     background-color: white;
-    width: 100vw;
+    width: 97vw;
     height: 100vh;
     display: block;
+    
 }
 
 #main_div{
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	margin: auto;
+	/*margin: 10px 10px 10px 10px;*/
 	height: auto;
 	background-color: darkgray;
     border-radius: 7px;

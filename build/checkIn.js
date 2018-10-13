@@ -7,9 +7,9 @@ $(document).ready(function(){
     
     searchBut.onclick = ()=>{
         searchBody.style.display = 'block';
-        searchBody.style.width = '100vw';
+        
         containerDiv.style.display = 'none'; 
-        containerDiv.style.width = '0px';
+        
 	}
     
 });

@@ -19,8 +19,7 @@ $(document).ready(()=>{
 	ncbut.onclick = ()=>{
         searchBody.style.display = 'none';
         containerDiv.style.display = 'block';
-        searchBody.style.width = '0px';
-        containerDiv.style.width = '100vw';
+        
 	}
 
 	/*Search Button*/
