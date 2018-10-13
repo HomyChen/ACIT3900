@@ -6,18 +6,21 @@ $(document).ready(()=>{
 	search_result_row = document.getElementById("search_result_row")
 	submit_button = document.getElementById("submit_button")
 
-    /*
+    
     $('#searchTable').DataTable( {
         select: true
     } );
-    */
+    
 	var selected_id = null
-
+    
+    searchBody = document.getElementById("searchBody")
+    
 	ncbut.onclick = ()=>{
-		window.location.assign("/")
+        window.location.assign("/")  
 	}
 
 	/*Search Button*/
+    
     
     
     
@@ -42,60 +45,13 @@ $(document).ready(()=>{
                         { "data": "license"},
                     ]
                 });
-/*
-				search_result_row.innerHTML = ""
-				vehicles = data.data
-				for (i = 0; i < vehicles.length; i++){
-
-					newresult = document.createElement("tr");
-					newresult.id = vehicles[i].cust_id + "_" + vehicles[i].vehicle_id
-					newresult.className = "table-light"
-                    
-					lname = document.createElement("td");
-                    lname.scope = "row";
-					lname.innerHTML = vehicles[i].last_name
-					newresult.appendChild(lname);
-
-					fname = document.createElement("td");
-					fname.innerHTML = vehicles[i].first_name
-					newresult.appendChild(fname);
-
-					vmod = document.createElement("td");
-					vmod.innerHTML = vehicles[i].model
-					newresult.appendChild(vmod);
-
-					license = document.createElement("td");
-					license.innerHTML = vehicles[i].license
-					newresult.appendChild(license);
-
-					search_result_row.appendChild(newresult);
-
-					newresult.onclick = function(){
-						var x = document.getElementsByClassName('table-dark')
-						if(x[0] !== undefined ){
-							x[0].className = "table-light"
-						}
-						this.className = "table-dark"
-						selected_id = this.id
-					}
-				}
-*/
             }
 		})
 	}
 
 	/*Submit Button*/
 	submit_button.onclick = () =>{
-		$.ajax({
-			url: '/submit',
-			type: 'post',
-			data: {
-				selectedID: selected_id
-			},
-			success: (data) => {
-				window.location.assign("/")
-			}
-		})
+        window.location.assign("/")   
 	}
 
 })

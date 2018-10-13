@@ -50,7 +50,7 @@ app.use("/data",dbFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{
-	dbfun.getExactSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
+	dbfun.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
 		response.send({status: 'OK', data: result})
 	})
 });

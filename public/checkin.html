@@ -12,12 +12,25 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <!-- DataTables API -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.7/css/select.bootstrap.min.css">
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+        
+        <!-- Own Scripts -->
         <script src="/scripts/getmenu.js"></script>
         <script src="/scripts/checkInSubmit.js"></script>
+        <script src="/scripts/checkIn.js"></script>
+        <!-- <script src="/scripts/search_overlay.js"></script> -->
+        
     </head>
     
-    <body>
-
+<body>
+    <div id="searchPosition"></div>    
 
     <div class="container-fluid" id="container">
         <div class="row" id="firstRow">
@@ -28,7 +41,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <button id="searchBut" type="button" class="btn btn-primary btn-lg">SEARCH</button>
+                    <button id="searchBut" type="button" class="btn btn-primary btn-lg">EXISTING CUSTOMER</button>
                     <form class="form" id="customerInfo">
                         <div id="boxHeader">Customer Information</div>
                         <div class="form-group row">

@@ -7,6 +7,7 @@ const pgpool = new Pool({
     connectionString: dbURL,
 });
 
+/*
 var getSearchData = (searchQuery, searchType) => {
     return new Promise((resolve, reject) => {
     	if (searchType == 'last_name'){
@@ -59,6 +60,40 @@ var getExactSearchData = (searchQuery, searchType) => {
             })
         } else if (searchType == 'VIN'){
             pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE vin = $1', [searchQuery] , (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res.rows)
+                }
+            })
+        } else {
+            reject('Invalid searchType')
+        }
+    })
+}
+*/
+
+/* Changed Functions -Homy Oct 12, 2018*/
+var getSearchData = (searchQuery, searchType) => {
+    return new Promise((resolve, reject) => {
+    	if (searchType == 'last_name'){
+    		pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE last_name LIKE $1 union select customer.cust_id AS cust_id, null as vehicle_id, last_name, first_name, null as model, null as license from customer where last_name like $1', [searchQuery + '%'] , (err, res) => {
+	            if (err) {
+	                reject(err)
+	            } else {
+	                resolve(res.rows)
+	            }
+	        })
+    	} else if (searchType == 'license_number'){
+            pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE license LIKE $1', [searchQuery + '%'] , (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res.rows)
+                }
+            })
+        } else if (searchType == 'VIN'){
+            pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE vin LIKE $1', [searchQuery + '%'] , (err, res) => {
                 if (err) {
                     reject(err)
                 } else {

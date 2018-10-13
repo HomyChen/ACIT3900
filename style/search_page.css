@@ -1,6 +1,16 @@
 /*
 Thing to note: use margin to give spacing instead of position stuff;
 */
+
+/*
+#searchBody {
+    background-color: white;
+    z-index: 9999;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+*/
 #main_div{
 	position: absolute;
 	left: 0px;
