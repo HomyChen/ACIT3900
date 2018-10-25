@@ -77,7 +77,7 @@ var getExactSearchData = (searchQuery, searchType) => {
 var getSearchData = (searchQuery, searchType) => {
     return new Promise((resolve, reject) => {
     	if (searchType == 'last_name'){
-    		pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE last_name LIKE $1 union select customer.cust_id AS cust_id, null as vehicle_id, last_name, first_name, null as model, null as license from customer where last_name like $1', [searchQuery + '%'] , (err, res) => {
+    		pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE last_name LIKE $1', [searchQuery + '%'] , (err, res) => {
 	            if (err) {
 	                reject(err)
 	            } else {
@@ -85,7 +85,7 @@ var getSearchData = (searchQuery, searchType) => {
 	            }
 	        })
     	} else if (searchType == 'license_number'){
-            pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE license LIKE $1', [searchQuery + '%'] , (err, res) => {
+            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE license LIKE $1', [searchQuery + '%'] , (err, res) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -93,7 +93,7 @@ var getSearchData = (searchQuery, searchType) => {
                 }
             })
         } else if (searchType == 'VIN'){
-            pgpool.query('SELECT customer.cust_id AS cust_id, vehicle_id, cust_id, vehicle_id, last_name, first_name, model, license FROM customer RIGHT JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE vin LIKE $1', [searchQuery + '%'] , (err, res) => {
+            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE vin LIKE $1', [searchQuery + '%'] , (err, res) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -108,5 +108,5 @@ var getSearchData = (searchQuery, searchType) => {
 
 module.exports = {
 	getSearchData,
-    getExactSearchData
+    //getExactSearchData
 }

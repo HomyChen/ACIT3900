@@ -52,7 +52,9 @@ app.use("/data",dbFunctions);
 app.post("/search", (request,response)=>{
 	dbfun.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
 		response.send({status: 'OK', data: result})
-	})
+	}).catch((result)=>{
+        console.log(result);
+    });
 });
 
 server.listen(10000, function(err){
