@@ -15,21 +15,30 @@ const server = require("http").createServer(app);
 //create a socket server with the new server
 var io = require("socket.io")(server);
 
-//postgres
-const pg = require("pg");
+//database
+var dbFunctions = require("./routes/dbFunctions");
+var roFunctions = require("./routes/roFunctions");
 
-//dburl
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:password@localhost:11000/databasename";
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.use("/scripts", exp.static("build"));
-
 app.use("/css", exp.static("style"));
+app.use("/pages",exp.static("public"))
+
 app.use(bodyParser.urlencoded({
     extended:true
 }));
 app.get("/", function(req, resp){
     resp.sendFile(pF+"/checkin.html")
 });
+
+app.use("/data",dbFunctions);
+app.use("/rosearch", roFunctions);
 
 //use sessions
 /*app.use(session({
