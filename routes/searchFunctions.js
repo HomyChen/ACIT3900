@@ -85,7 +85,7 @@ var getSearchData = (searchQuery, searchType) => {
 	            }
 	        })
     	} else if (searchType == 'license_number'){
-            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE license LIKE $1', [searchQuery + '%'] , (err, res) => {
+            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE license_plate LIKE $1', [searchQuery + '%'] , (err, res) => {
                 if (err) {
                     reject(err)
                 } else {

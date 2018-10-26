@@ -39,44 +39,84 @@ $(document).ready(function(){
     var numOfUnCommonRequests = 0;
     var numOfCommonRequests = 0;
     var requestsPackaged;
+    
+    /*------Used for existing customer ID // Vehicle ID ----------------------------------*/
+    var cust_id = null;
+    var vehicle_id = null;
+    /*-----------------------------------------------------------------------------------*/
 
+    /*------Used for existing customer ID // Vehicle ID ----------------------------------*/
+    var homephoneverif = true;
+    var cellphoneverif = true;
+    var postalcodeverif = true;
+    var licenseverif = true;
+    var yearverif = true;
+    var odoverif = true;
+    var vinverif =  false;
+    /*-----------------------------------------------------------------------------------*/
 
     getCommonRequests();
 
     submitButton.onclick = function () {
-        packageRequests();
-        $.ajax({
-            url: "/data/insertCustomer",
-            type: "post",
-            data: {
-                lastName: lastNameInput.value,
-                firstName: firstNameInput.value,
-                homePhone: homePhoneInput.value,
-                cellPhone: cellPhoneInput.value,
-                street: streetInput.value,
-                city: cityInput.value,
-                postalCode: postalCodeInput.value,
-                dataGram: {
-                    vin: vinInput.value,
-                    year: yearInput.value,
-                    make: makeInput.value,
-                    model: modelInput.value,
-                    license: licenseInput.value,
-                    odometer: odoInput.value,
-                    vehicleNotes: vehicleNotesInput.value
-                },
-                requests: requestsPackaged,
+        
+        var commonTasksSelect = document.getElementById("requestsDropdown");
+        validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
+        console.log("data validation :"+validate.status);
+        if (validate.status == true) {
+            console.log("passed line 66");
+            if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
+                console.log("passed line 68");
+                packageRequests();
+                console.log("packages have been requested");
+                $.ajax({
+                    url: "/data/insertCustomer",
+                    type: "post",
+                    data: {
+                        lastName: lastNameInput.value,
+                        firstName: firstNameInput.value,
+                        homePhone: homePhoneInput.value,
+                        cellPhone: cellPhoneInput.value,
+                        street: streetInput.value,
+                        city: cityInput.value,
+                        postalCode: postalCodeInput.value,
+                        dataGram: {
+                            vin: vinInput.value,
+                            year: yearInput.value,
+                            make: makeInput.value,
+                            model: modelInput.value,
+                            license: licenseInput.value,
+                            odometer: odoInput.value,
+                            vehicleNotes: vehicleNotesInput.value
+                        },
+                        requests: requestsPackaged,
 
-            },
-            success: function (data) {
-                if(data.status==1){
-                    alert("Error")
+                    },
+                    success: function (data) {
+                        if(data.status==1){
+                            alert("Error")
+                        }
+                        else {
+                            console.log(data)
+                        }
+                    }
+                })
+        
+            } else {
+                    alert("Please correctly fill in the yellow boxes")
+                }           
+            } else {
+                if (validate.error.includes("Last Name Error")) {
+                    lastNameInput.style.borderColor = 'red'
                 }
-                else {
-                    console.log(data)
+                if (validate.error.includes("VIN Error")) {
+                    vinInput.style.borderColor = 'red'
+                }
+                if (validate.error.includes("No Request")) {
+                    commonTasksSelect.style.borderColor = 'red'
+                    otherSerTextArea.style.borderColor = 'red'
                 }
             }
-        })
+        
     }
 
 
@@ -151,4 +191,106 @@ $(document).ready(function(){
             }
         });
     }
+    
+    /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/
+
+    vinInput.onclick = () => {
+        vinInput.style.borderColor = '#ccc';
+    }
+
+    lastNameInput.onclick = () => {
+        lastNameInput.style.borderColor = '#ccc';
+    }
+    otherSerTextArea.onclick = () => {
+        otherSerTextArea.style.borderColor = 'darkgrey';
+    }
+
+    setTimeout(() => {
+        document.getElementById("requestsDropdown").onclick = () => {
+            document.getElementById("requestsDropdown").style.borderColor = 'darkgrey';
+        }
+    }, 1000)
+
+    homePhoneInput.addEventListener('focusout', function(event){
+        var validate = phone_validator(homePhoneInput.value)
+        if(validate.status){
+            homePhoneInput.style.borderColor = 'darkgrey'
+            homePhoneInput.value = validate.repnum
+            homephoneverif = true
+        } else {
+            homePhoneInput.style.borderColor = 'yellow'
+            homephoneverif = false
+        }
+    })
+
+    cellPhoneInput.addEventListener('focusout', function(event){
+        var validate = phone_validator(cellPhoneInput.value)
+        if(validate.status){
+            cellPhoneInput.style.borderColor = 'darkgrey'
+            cellPhoneInput.value = validate.repnum
+            cellphoneverif = true
+        } else {
+            cellPhoneInput.style.borderColor = 'yellow'
+            cellphoneverif = false
+        }
+    })
+
+    postalCodeInput.addEventListener('focusout', function(event){
+        var validate = postal_code_validator(postalCodeInput.value)
+        if(validate.status){
+            postalCodeInput.style.borderColor = 'darkgrey'
+            postalCodeInput.value = validate.reppost
+            postalcodeverif = true
+        } else {
+            postalCodeInput.style.borderColor = 'yellow'
+            postalcodeverif = false
+        }
+    })
+
+    licenseInput.addEventListener('focusout', function(event){
+        var validate = license_validator(licenseInput.value)
+        if(validate.status){
+            licenseInput.style.borderColor = 'darkgrey'
+            licenseInput.value = validate.replice
+            licenseverif = true
+        } else {
+            licenseInput.style.borderColor = 'yellow'
+            licenseverif = false
+        }
+    })
+
+    vinInput.addEventListener('focusout', function(event){
+        var validate = vin_validator(vinInput.value)
+        if(validate.status){
+            vinInput.style.borderColor = 'darkgrey'
+            vinInput.value = validate.repvin
+            vinverif = true
+        } else {
+            vinInput.style.borderColor = 'yellow'
+            vinverif = false
+        }
+    })
+
+    yearInput.addEventListener('focusout', function(event){
+        var validate = year_validator(yearInput.value)
+        if(validate){
+            yearInput.style.borderColor = 'darkgrey'
+            yearverif = true
+        } else {
+            yearInput.style.borderColor = 'yellow'
+            yearverif = false
+        }
+    })
+
+    odoInput.addEventListener('focusout', function(event){
+        var validate = odo_validator(odoInput.value)
+        if(validate){
+            odoInput.style.borderColor = 'darkgrey'
+            odoverif = true
+        } else {
+            odoInput.style.borderColor = 'yellow'
+            odoverif = false
+        }
+    })
+    /*---------------------------------------------------------------------------------------------------------------------------------*/
 });
