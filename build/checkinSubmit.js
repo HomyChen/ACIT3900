@@ -61,11 +61,8 @@ $(document).ready(function(){
         
         var commonTasksSelect = document.getElementById("requestsDropdown");
         validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
-        console.log("data validation :"+validate.status);
         if (validate.status == "true") {
-            console.log("passed line 66");
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
-                console.log("passed line 68");
                 packageRequests();
                 console.log("packages have been requested");
                 $.ajax({
