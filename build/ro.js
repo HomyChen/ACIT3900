@@ -17,6 +17,17 @@ $(document).ready(function() {
     var roPopup = document.getElementById("roPopup");
     var popupContent = document.getElementById("popupContent");
     var popupClose = document.getElementsByClassName("close")[0];
+    var roContainer = document.getElementById("roContainer");
+    
+    var roNum = document.getElementById("roNum");
+    var roCustName = document.getElementById("roCustName");
+    var roTel = document.getElementById("roTel");
+    var roCell = document.getElementById("roCell");
+    var roVIN = document.getElementById("roVIN");
+    var roLicense = document.getElementById("roLicense");
+    var roYear = document.getElementById("roYear");
+    var roMake = document.getElementById("roMake");
+    var roModel = document.getElementById("roModel");
     
     searchROBut.onclick = function() {
     console.log("search button clicked");
@@ -57,11 +68,19 @@ $(document).ready(function() {
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
                     var rowData = resultsTable.rows( indexes ).data()[0];
                     console.log(rowData);
-                    roDetails.innerHTML="";
-                    roDetails.innerHTML="Repair Order Details'<br>" + rowData.first_name + "<br>"
+                    //roDetails.innerHTML="";
+                    //roDetails.innerHTML="Repair Order Details'<br>" + rowData.first_name + "<br>"
                     
                     roPopup.style.display = "block";
-                    //JSON.stringify( rowData )
+                    roNum.innerHTML = rowData.ro_id;
+                    roCustName.innerHTML = rowData.last_name + ", " + rowData.first_name;
+                    roTel.innerHTML = rowData.home_phone;
+                    roCell.innerHTML = rowData.cell_phone;
+                    roVIN.innerHTML = rowData.vin;
+                    roLicense.innerHTML = rowData.license;
+                    roMake.innerHTML = rowData.make;
+                    roModel.innerHTML = rowData.model;
+                    
                 });
                 
             
@@ -82,7 +101,7 @@ $(document).ready(function() {
     }
     
     window.onclick = function(event) {
-        if (event.target == roPopup) {
+        if (event.target == roContainer) {
             roPopup.style.display = "none";
     }
 }
