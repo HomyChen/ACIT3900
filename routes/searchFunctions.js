@@ -77,7 +77,7 @@ var getExactSearchData = (searchQuery, searchType) => {
 var getSearchData = (searchQuery, searchType) => {
     return new Promise((resolve, reject) => {
     	if (searchType == 'last_name'){
-    		pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE last_name LIKE $1', [searchQuery + '%'] , (err, res) => {
+    		pgpool.query('SELECT * FROM customer WHERE last_name LIKE $1', [searchQuery + '%'] , (err, res) => {
 	            if (err) {
 	                reject(err)
 	            } else {
