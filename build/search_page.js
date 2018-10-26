@@ -108,7 +108,7 @@ $(document).ready(()=>{
                             { "data": "last_name"},
                             { "data": "first_name"},
                             { "data": "model"},
-                            { "data": "license"},
+                            { "data": "license_plate"},
                             { "data": "vin"},
                         ]
                     });
@@ -130,7 +130,7 @@ $(document).ready(()=>{
                                 yearInput.value = tdata.year;
                                 makeInput.value = tdata.make;
                                 modelInput.value = tdata.model;
-                                licenseInput.value = tdata.license;
+                                licenseInput.value = tdata.license_plate;
 
                                 //Bring back to check-in form
                                 searchBody.style.display = 'none';
@@ -205,7 +205,7 @@ $(document).ready(()=>{
                                 yearInput.value = tdata.year;
                                 makeInput.value = tdata.make;
                                 modelInput.value = tdata.model;
-                                licenseInput.value = tdata.license;
+                                licenseInput.value = tdata.license_plate;
 
                                 //Bring back to check-in form
                                 searchBody.style.display = 'none';

@@ -12,6 +12,7 @@ const bodyParser = require("body-parser");
 //defining routed function files -Homy
 const dbfun = require('./routes/searchFunctions.js')
 var dbFunctions = require("./routes/dbFunctions");
+var roFunctions = require("./routes/roFunctions");
 
 var pF = path.resolve(__dirname, "public");
 var app = exp();
@@ -47,6 +48,7 @@ app.get("/s", function(req, resp){
 });
 
 app.use("/data",dbFunctions);
+app.use("/rosearch", roFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{

@@ -44,42 +44,41 @@ $(document).ready(function(){
     getCommonRequests();
 
     submitButton.onclick = function () {
-
         packageRequests();
-
         $.ajax({
-            url:"/data/insertCustomer",
-            type:"post",
-            data:{
-                lastName:lastNameInput.value,
-                firstName:firstNameInput.value,
-                homePhone:homePhoneInput.value,
-                cellPhone:cellPhoneInput.value,
-                street:streetInput.value,
-                city:cityInput.value,
-                postalCode:postalCodeInput.value,
-                dataGram:{
-                    vin:vinInput.value,
-                    year:yearInput.value,
-                    make:makeInput.value,
-                    model:modelInput.value,
-                    license:licenseInput.value,
-                    odometer:odoInput.value,
-                    vehicleNotes:vehicleNotesInput.value
+            url: "/data/insertCustomer",
+            type: "post",
+            data: {
+                lastName: lastNameInput.value,
+                firstName: firstNameInput.value,
+                homePhone: homePhoneInput.value,
+                cellPhone: cellPhoneInput.value,
+                street: streetInput.value,
+                city: cityInput.value,
+                postalCode: postalCodeInput.value,
+                dataGram: {
+                    vin: vinInput.value,
+                    year: yearInput.value,
+                    make: makeInput.value,
+                    model: modelInput.value,
+                    license: licenseInput.value,
+                    odometer: odoInput.value,
+                    vehicleNotes: vehicleNotesInput.value
                 },
-                requests:requestsPackaged,
+                requests: requestsPackaged,
 
             },
-            success:function (data) {
-                if (data.status == 1){
-                    console.log("added data to DB. File: checkInSubmit line 58");
+            success: function (data) {
+                if(data.status==1){
+                    alert("Error")
                 }
-                else{
-                    alert("error");
+                else {
+                    console.log(data)
                 }
             }
         })
     }
+
 
     serviceReqBtn.onclick = function () {
         // adding service requests to the table dynamically
@@ -119,22 +118,28 @@ $(document).ready(function(){
         otherTBody.appendChild(tr);
     };
 
-    function packageRequests() {
-        // this is where when submit is hit all data in table is packaged up
-        var i,z;
-        var obj = {commonRequestsTotal: numOfCommonRequests, commonRequests: [], otherReqTotal: numOfUnCommonRequests, otherRequests: []}; // not sure if there is a better way to do this?
+    let packageRequests = () => {
+        return new Promise((resolve) =>{
+            // this is where when submit is hit all data in table is packaged up
+            var i, z;
+            var obj = {
+                commonRequestsTotal: numOfCommonRequests,
+                commonRequests: [],
+                otherReqTotal: numOfUnCommonRequests,
+                otherRequests: []
+            }; // not sure if there is dbFunc better way to do this?
 
-        for (i = 0; i < numOfCommonRequests; i++) {
-            obj.commonRequests.push(tBody.rows[i].childNodes[1].title); // cant get value have to use innerHTML
-        }
+            for (i = 0; i < numOfCommonRequests; i++) {
+                obj.commonRequests.push(tBody.rows[i].childNodes[1].title); // cant get value have to use innerHTML
+            }
 
-        console.log(numOfUnCommonRequests);
-        for (z = 0; z < numOfUnCommonRequests; z++) {
-            obj.otherRequests.push(otherTBody.rows[z].childNodes[1].innerHTML);
-        }
+            for (z = 0; z < numOfUnCommonRequests; z++) {
+                obj.otherRequests.push(otherTBody.rows[z].childNodes[1].innerHTML);
+            }
 
-        requestsPackaged = obj;
-        console.log(requestsPackaged);
+            requestsPackaged = obj;
+            resolve();
+        })
     }
 
     function getCommonRequests() {
@@ -146,7 +151,4 @@ $(document).ready(function(){
             }
         });
     }
-
-
-
 });
