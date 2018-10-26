@@ -56,7 +56,7 @@ $(document).ready(function() {
                     "autoWidth": false,
                     "columns": [
                         {"data":"ro_id"},
-                        {"data":"license"},
+                        {"data":"license_plate"},
                         {"data":"last_name"},
                         {"data":"first_name"},
                         {"data":"status"},
@@ -77,10 +77,10 @@ $(document).ready(function() {
                     roTel.innerHTML = rowData.home_phone;
                     roCell.innerHTML = rowData.cell_phone;
                     roVIN.innerHTML = rowData.vin;
-                    roLicense.innerHTML = rowData.license;
+                    roLicense.innerHTML = rowData.license_plate;
                     roMake.innerHTML = rowData.make;
                     roModel.innerHTML = rowData.model;
-                    
+                    roYear.innerHTML = rowData.year;
                 });
                 
             

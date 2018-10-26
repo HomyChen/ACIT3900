@@ -1,16 +1,15 @@
 $(document).ready(function(){
     console.log("ready");
     
-    getMenu();
+    getSearchPage();
     
-    var menuPosition = document.getElementById("menuPosition");
     
-    function getMenu() {
+    function getSearchPage() {
         $.ajax({
-            url:"/pages/menu.html",
+            url:"/pages/search.html",
             dataType: "html",
             success:function (resp) {
-                $(menuPosition).html(resp);
+                $('#searchPosition').html(resp);
             }
         });
     }

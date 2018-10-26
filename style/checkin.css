@@ -18,8 +18,9 @@ body {
 }
 
 #container {
-    
+    display: none;
     padding: 0, 0, 0, 0;
+    
 }
 
 .form {
