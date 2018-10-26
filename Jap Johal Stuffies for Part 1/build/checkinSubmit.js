@@ -45,6 +45,16 @@ $(document).ready(function() {
     var vehicle_id = null;
     /*-----------------------------------------------------------------------------------*/
 
+    /*------Used for existing customer ID // Vehicle ID ----------------------------------*/
+    var homephoneverif = true;
+    var cellphoneverif = true;
+    var postalcodeverif = true;
+    var licenseverif = true;
+    var yearverif = true;
+    var odoverif = true;
+    var vinverif =  false;
+    /*-----------------------------------------------------------------------------------*/
+
     getCommonRequests();
 
     /*------ This is where the major changes happen-----------------------------------------------------*/
@@ -52,6 +62,8 @@ $(document).ready(function() {
         var commonTasksSelect = document.getElementById("requestsDropdown");
         validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
         if (validate.status === true) {
+
+            if (homephoneverif, cellphoneverif, postalcodeverif, licenseverif, yearverif, odoverif, vinverif){
 
             /*------- Old Code, Change If Required--------------------------------------------------------------*/
             packageRequests();
@@ -89,6 +101,10 @@ $(document).ready(function() {
             })
 
             /*------- End of Old Codes--------------------------------------------------------------------------------*/
+
+            } else {
+                alert("Please correctly fill in the yellow boxes")
+            }           
         } else {
             if (validate.error.includes("Last Name Error")) {
                 lastNameInput.style.borderColor = 'red'
@@ -97,7 +113,6 @@ $(document).ready(function() {
                 vinInput.style.borderColor = 'red'
             }
             if (validate.error.includes("No Request")) {
-
                 commonTasksSelect.style.borderColor = 'red'
                 otherSerTextArea.style.borderColor = 'red'
             }
@@ -183,11 +198,93 @@ $(document).ready(function() {
     otherSerTextArea.onclick = () => {
         otherSerTextArea.style.borderColor = 'darkgrey';
     }
+
     setTimeout(() => {
         document.getElementById("requestsDropdown").onclick = () => {
             document.getElementById("requestsDropdown").style.borderColor = 'darkgrey';
         }
     }, 1000)
 
+    homePhoneInput.addEventListener('focusout', function(event){
+        var validate = phone_validator(homePhoneInput.value)
+        if(validate.status){
+            homePhoneInput.style.borderColor = 'darkgrey'
+            homePhoneInput.value = validate.repnum
+            homephoneverif = true
+        } else {
+            homePhoneInput.style.borderColor = 'yellow'
+            homephoneverif = false
+        }
+    })
+
+    cellPhoneInput.addEventListener('focusout', function(event){
+        var validate = phone_validator(cellPhoneInput.value)
+        if(validate.status){
+            cellPhoneInput.style.borderColor = 'darkgrey'
+            cellPhoneInput.value = validate.repnum
+            cellphoneverif = true
+        } else {
+            cellPhoneInput.style.borderColor = 'yellow'
+            cellphoneverif = false
+        }
+    })
+
+    postalCodeInput.addEventListener('focusout', function(event){
+        var validate = postal_code_validator(postalCodeInput.value)
+        if(validate.status){
+            postalCodeInput.style.borderColor = 'darkgrey'
+            postalCodeInput.value = validate.reppost
+            postalcodeverif = true
+        } else {
+            postalCodeInput.style.borderColor = 'yellow'
+            postalcodeverif = false
+        }
+    })
+
+    licenseInput.addEventListener('focusout', function(event){
+        var validate = license_validator(licenseInput.value)
+        if(validate.status){
+            licenseInput.style.borderColor = 'darkgrey'
+            licenseInput.value = validate.replice
+            licenseverif = true
+        } else {
+            licenseInput.style.borderColor = 'yellow'
+            licenseverif = false
+        }
+    })
+
+    vinInput.addEventListener('focusout', function(event){
+        var validate = vin_validator(vinInput.value)
+        if(validate.status){
+            vinInput.style.borderColor = 'darkgrey'
+            vinInput.value = validate.repvin
+            vinverif = true
+        } else {
+            vinInput.style.borderColor = 'yellow'
+            vinverif = false
+        }
+    })
+
+    yearInput.addEventListener('focusout', function(event){
+        var validate = year_validator(yearInput.value)
+        if(validate){
+            yearInput.style.borderColor = 'darkgrey'
+            yearverif = true
+        } else {
+            yearInput.style.borderColor = 'yellow'
+            yearverif = false
+        }
+    })
+
+    odoInput.addEventListener('focusout', function(event){
+        var validate = odo_validator(odoInput.value)
+        if(validate){
+            odoInput.style.borderColor = 'darkgrey'
+            odoverif = true
+        } else {
+            odoInput.style.borderColor = 'yellow'
+            odoverif = false
+        }
+    })
     /*---------------------------------------------------------------------------------------------------------------------------------*/
 });

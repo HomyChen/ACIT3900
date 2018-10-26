@@ -15,6 +15,7 @@
         <script src="/scripts/getmenu.js"></script>
         <script src="/scripts/checkInSubmit.js"></script>
         <script src="/scripts/requiredFields.js"></script>
+        <script src="/scripts/rejexValidator.js"></script>
     </head>
     
     <body>
@@ -35,7 +36,7 @@
                         <div class="form-group row">
                             <label for="lnInp" class="col-sm-3 col-form-label">Last Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="lnInp" required placeholder="Last Name">
+                                <input type="text" class="form-control" id="lnInp" required placeholder="Last Name or Company Name">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -47,13 +48,13 @@
                         <div class="form-group row">
                             <label for="hpInp" class="col-sm-3 col-form-label">Home Phone</label>
                             <div class="col-sm-9">
-                                <input type="tel" class="form-control" id="hpInp" placeholder="Home Phone">
+                                <input type="tel" class="form-control" id="hpInp" placeholder="e.g 6041231234 or 604 123 1234">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="cpInp" class="col-sm-3 col-form-label">Cell Phone</label>
                             <div class="col-sm-9">
-                                <input type="tel" class="form-control" id="cpInp" placeholder="Cell Phone">
+                                <input type="tel" class="form-control" id="cpInp" placeholder="e.g 6041231234 or 604 123 1234">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -71,7 +72,7 @@
                         <div class="form-group row">
                             <label for="pcInp" class="col-sm-3 col-form-label">Postal Code</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="pcInp" placeholder="Postal Code">
+                                <input type="text" class="form-control" id="pcInp" placeholder="e.g A1A 1A1 or A1A1A1">
                             </div>
                         </div>
                     </form>
@@ -82,13 +83,13 @@
                         <div class="form-group row">
                             <label for="vinInp" class="col-sm-3 col-form-label">VIN</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="vinInp" placeholder="VIN">
+                                <input type="text" class="form-control" id="vinInp" placeholder="e.g 4S4BP60C787362794">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="yrInp" class="col-sm-3 col-form-label">Year</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="yrInp" placeholder="Year">
+                                <input type="number" class="form-control" id="yrInp" placeholder="e.g 1989">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -106,7 +107,7 @@
                         <div class="form-group row">
                             <label for="lpInp" class="col-sm-3 col-form-label">License Plate</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="lpInp" placeholder="License Plate">
+                                <input type="text" class="form-control" id="lpInp" placeholder="e.g 111aaa or EBR123">
                             </div>
                         </div>
                         <div class="form-group row">

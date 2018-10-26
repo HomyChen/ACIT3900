@@ -1,0 +1,6 @@
+Phone Numbers auto-add dashes also check if they're all numbers 10 digits
+Number fields should be able to convert to format (***) ***-****
+Year 4 characters also numbers
+VIN must have 17 mixed
+Postal Code 6 characters mixed
+License 6 characters mixed
