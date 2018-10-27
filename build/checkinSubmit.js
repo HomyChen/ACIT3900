@@ -69,6 +69,8 @@ $(document).ready(function(){
         if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
                 packageRequests();
+
+
                 $.ajax({
                     url: "/data/insertCustomer",
                     type: "post",
@@ -192,6 +194,17 @@ $(document).ready(function(){
                 divToAppendCommonRequests.innerHTML = resp;
             }
         });
+
+        setTimeout(() => {
+            $.ajax({
+                url:"/getVariables",
+                type:"post",
+                success:function (data) {
+                    console.log(data)
+                }
+            })
+        }, 5000)
+
     }
     
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/

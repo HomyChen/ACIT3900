@@ -11,6 +11,7 @@ const pg = require('pg');
 var dbFunc = require("./createRepairOrderSec1");
 
 router.post("/insertCustomer",function (req,resp) {
+
     doInserts(req).then(data => {
         console.log(data);
         if(data == null){

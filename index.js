@@ -70,6 +70,12 @@ app.post("/setVariables",function (req,resp) {
     resp.send("Successfully set status to:"+ req.body.status);
 })
 
+app.post("/getVariables",function (req,resp) {
+    console.log("b");
+    console.log(req.session.status);
+    resp.send(req.session.status);
+})
+
 server.listen(10000, function(err){
     if(err){
         console.log(err);
