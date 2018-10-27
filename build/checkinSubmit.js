@@ -54,17 +54,21 @@ $(document).ready(function(){
     var odoverif = true;
     var vinverif =  false;
     /*-----------------------------------------------------------------------------------*/
-
     getCommonRequests();
 
     submitButton.onclick = function () {
+        var currentDate = new Date();
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        var monthDateYear  = (month+1) + "/" + date + "/" + year;
+
         
         var commonTasksSelect = document.getElementById("requestsDropdown");
         validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
         if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
                 packageRequests();
-                console.log("packages have been requested");
                 $.ajax({
                     url: "/data/insertCustomer",
                     type: "post",
@@ -76,6 +80,7 @@ $(document).ready(function(){
                         street: streetInput.value,
                         city: cityInput.value,
                         postalCode: postalCodeInput.value,
+                        date: monthDateYear,
                         dataGram: {
                             vin: vinInput.value,
                             year: yearInput.value,
@@ -290,4 +295,6 @@ $(document).ready(function(){
         }
     })
     /*---------------------------------------------------------------------------------------------------------------------------------*/
+
 });
+

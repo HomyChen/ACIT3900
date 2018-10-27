@@ -1,12 +1,12 @@
 $(document).ready(()=>{
-	ncbut = document.getElementById("ncbut")
-	search_button = document.getElementById("search_button")
-	query_category = document.getElementById("query_category")
-	query_search = document.getElementById("query_search")
-	search_result_row = document.getElementById("search_result_row")
-	submit_button = document.getElementById("submit_button")
-    searchBody = document.getElementById("searchBody")
-    containerDiv = document.getElementById("container")
+	var ncbut = document.getElementById("ncbut")
+	var search_button = document.getElementById("search_button")
+	var query_category = document.getElementById("query_category")
+	var query_search = document.getElementById("query_search")
+	var search_result_row = document.getElementById("search_result_row")
+	var submit_button = document.getElementById("submit_button")
+    var searchBody = document.getElementById("searchBody")
+    var containerDiv = document.getElementById("container")
     
     // input of user Info
     var lastNameInput       = document.getElementById("lnInp");
@@ -30,7 +30,7 @@ $(document).ready(()=>{
     //Search Table
     var searchTable = document.getElementById("searchTable");
     var searchResult = document.getElementById("search_result");
-    
+
     /*var searchTable = $('#searchTable').DataTable( {
         select: true
     } );
@@ -116,6 +116,18 @@ $(document).ready(()=>{
                         if (type === 'row') {
                             var tdata = sTable.rows(indexes).data()[0];
                             submit_button.addEventListener("click", function(){
+                                console.log("ajaxing");
+                                $.ajax({
+                                    url:"./setVariables",
+                                    type:"post",
+                                    data:{
+                                        status:1,
+                                        info:[1,1]
+                                    },
+                                    success:function (resp) {
+                                        console.log(resp);
+                                    }
+                                })
 
                                 //Autofill Customer and vehicle info
                                 lastNameInput.value = tdata.last_name;

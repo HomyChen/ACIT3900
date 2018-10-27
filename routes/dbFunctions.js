@@ -18,7 +18,9 @@ router.post("/insertCustomer",function (req,resp) {
                 status:1
             })
         }
+        req.session.homy = "homy"
         resp.send(data)
+        console.log(req.session.homy)
     });
 });
 
@@ -27,7 +29,7 @@ async function doInserts(req) {
     dbFunc.connectToPool()
     // these are necessary under all circumstances
     const insertCustomerInfo     = await dbFunc.insertCustomer(req).catch(err => console.log(err));
-    const insertVehicleInfo      = await dbFunc.insertVehicles([req.body.dataGram, insertCustomerInfo.customerID]).catch(err => console.log(err))
+    const insertVehicleInfo      = await dbFunc.insertVehicles([req.body.dataGram, insertCustomerInfo.customerID,req.body.date]).catch(err => console.log(err))
     const createRepairOrder    = await dbFunc.createWorkOrder([req.body.dataGram, insertVehicleInfo]);
     // we are adding rows to the repair order based on what info is passed to us
     // Basically on first IF we are going there if their arent any otherServiceReq

@@ -6,6 +6,8 @@ const exp = require("express");
 const port = process.env.PORT || 10000;
 const path = require("path");
 const bodyParser = require("body-parser");
+const expressSession = require("express-session");
+
 
 // had to change button Id of second add button for the other request option
 
@@ -28,6 +30,12 @@ app.use(function(req, res, next){
     next();
 });
 
+app.use(expressSession({
+    secret:"HIGJLCPJOPUD",
+    resave: true,
+    saveUninitialized:true
+}));
+
 app.use("/scripts", exp.static("build"));
 app.use("/css", exp.static("style"));
 app.use("/pages",exp.static("public"))
@@ -43,10 +51,6 @@ app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
 
-app.get("/s", function(req, resp){
-    resp.sendFile(pF+"/search.html")
-});
-
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
 
@@ -58,6 +62,13 @@ app.post("/search", (request,response)=>{
         console.log(result);
     });
 });
+
+app.post("/setVariables",function (req,resp) {
+    console.log(req.body);
+    req.session.status = req.body;
+    console.log(req.session.status);
+    resp.send("Successfully set status to:"+ req.body.status);
+})
 
 server.listen(10000, function(err){
     if(err){
