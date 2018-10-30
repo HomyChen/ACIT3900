@@ -64,10 +64,14 @@ app.post("/search", (request,response)=>{
 });
 
 app.post("/setVariables",function (req,resp) {
+    //req.session.status in index.js determines the scenario:
+    //Status 0: New Customer, New Vehicle
+    //Status 1: Old Customer, New Vehicle
+    //Status 2: Old Customer, Old Vehicle
     console.log(req.body);
     req.session.status = req.body;
     console.log(req.session.status);
-    resp.send("Successfully set status to:"+ req.body.status);
+    resp.send(req.body.status);
 })
 
 app.post("/getVariables",function (req,resp) {

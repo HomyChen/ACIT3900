@@ -1,12 +1,14 @@
 $(document).ready(()=>{
-	var ncbut = document.getElementById("ncbut")
-	var search_button = document.getElementById("search_button")
-	var query_category = document.getElementById("query_category")
-	var query_search = document.getElementById("query_search")
-	var search_result_row = document.getElementById("search_result_row")
-	var submit_button = document.getElementById("submit_button")
-    var searchBody = document.getElementById("searchBody")
-    var containerDiv = document.getElementById("container")
+	var ncbut = document.getElementById("ncbut");
+	var search_button = document.getElementById("search_button");
+	var query_category = document.getElementById("query_category");
+	var query_search = document.getElementById("query_search");
+	var search_result_row = document.getElementById("search_result_row");
+	var submit_button_cust_only = document.getElementById("submit_button_cust_only");
+    var submit_button_cust_vehicle = document.getElementById("submit_button_cust_vehicle");
+    var searchBody = document.getElementById("searchBody");
+    var containerDiv = document.getElementById("container");
+    var searchPageBut = document.getElementById("searchBut");
     
     // input of user Info
     var lastNameInput       = document.getElementById("lnInp");
@@ -30,18 +32,144 @@ $(document).ready(()=>{
     //Search Table
     var searchTable = document.getElementById("searchTable");
     var searchResult = document.getElementById("search_result");
+    
+    //Set status in session to 0 when page loads 
+    //req.session.status in index.js determines the scenario:
+    //Status 0: New Customer, New Vehicle
+    //Status 1: Old Customer, New Vehicle
+    //Status 2: Old Customer, Old Vehicle
+    ajaxSetVariables(0);
+    
+    //Brings up search page when "Existing Customer" button is pressed. Makes the check-in page content invisible.
+    searchPageBut.onclick = ()=>{
+        makeSearchVisible();
+	}
 
-    /*var searchTable = $('#searchTable').DataTable( {
-        select: true
-    } );
-    
-    */
-    
-	var selected_id = null
-
-    
+    //Makes "New Customer" button clear the fields if they are filled
 	ncbut.onclick = ()=>{
-        //Clear forms if they are filled
+        ajaxSetVariables(0);
+        clearCustomer();
+        clearVehicle();
+        makeCheckInVisible();
+	}
+
+	/*Search Page Search Button*/
+
+	search_button.addEventListener('click', function(){
+        //Turn search button to display loading
+        search_button.innerHTML = 'LOADING...';
+        
+        //Ajax call to send what type of search it is and what is being searched
+        $.ajax({
+            url: '/search',
+            type: 'post',
+            data: {
+                searchQuery: query_search.value,
+                searchType: query_category.value
+            },
+            success: (data) => {
+                //Turn search button back
+                search_button.innerHTML = 'Search';
+                
+                //Initialize Datatable
+                var sTable = $('#searchTable').DataTable({
+                        destroy: true,
+                        select: {
+                            style: 'single'
+                        },
+                        data: data.data,
+                        "columns": [
+                            { "data": "last_name"},
+                            { "data": "first_name"},
+                            { "data": "cell_phone"},
+                            { "data": "model"},
+                            { "data": "license_plate"},
+                            { "data": "vin"},
+                        ]
+                    });
+                
+                //Add function for selecting rows on tabl
+                sTable.on( 'select', function ( e, dt, type, indexes ) {
+                    if (type === 'row') {
+                        var tdata = sTable.rows(indexes).data()[0];
+                        submit_button_cust_vehicle.addEventListener("click", function(){  
+                            
+                            //Set status to 2: Old Customer, Old Vehicle
+                            ajaxSetVariables(2); 
+                            //Autofill both customer and vehicle forms
+                            autofillCustomer(tdata);
+                            autofillVehicle(tdata);
+                            
+                            //Bring back to check-in form
+                            makeCheckInVisible();
+                        });
+                        submit_button_cust_only.addEventListener("click", function(){
+                            
+                            //Set status to 1: Old Customer, New Vehicle
+                            ajaxSetVariables(1);
+                            
+                            //Autofill only customer form, clear vehicle form
+                            autofillCustomer(tdata);
+                            clearVehicle();
+                            
+                            //Bring back to check-in form
+                            makeCheckInVisible();
+                        });
+                    }
+                } );
+
+            }
+        });
+    });
+    
+    function ajaxSetVariables(status){
+        $.ajax({
+            url:"./setVariables",
+            type:"post",
+            data:{
+                status:status,
+                info:[1,1]
+            },
+            success:function (resp) {
+                console.log('Status set to '+resp);
+            }
+        });
+    }
+
+    function makeCheckInVisible(){
+        //Makes Check-in Page visible and Search Page invisible
+        searchBody.style.display = 'none';
+        containerDiv.style.display = 'block';
+    }
+    
+    function makeSearchVisible(){
+        //Makes Search Page Visible and Check-in page invisible
+        searchBody.style.display = 'block';
+        containerDiv.style.display = 'none'; 
+    }
+    
+    function autofillCustomer(data){
+        //Autofill Customer info
+        lastNameInput.value = data.last_name;
+        firstNameInput.value = data.first_name;
+        homePhoneInput.value = data.home_phone;
+        cellPhoneInput.value = data.cell_phone;
+        streetInput.value = data.street;
+        cityInput.value = data.city;
+        postalCodeInput.value = data.postal_code;
+    }
+    
+    function autofillVehicle(data){
+        //Autofill vehicle info
+        vinInput.value = data.vin;
+        yearInput.value = data.year;
+        makeInput.value = data.make;
+        modelInput.value = data.model;
+        licenseInput.value = data.license_plate;
+    }
+    
+    function clearCustomer(){
+        //Clears Customer info
         lastNameInput.value = "";
         firstNameInput.value = "";
         homePhoneInput.value = "";
@@ -49,191 +177,14 @@ $(document).ready(()=>{
         streetInput.value = "";
         cityInput.value = "";
         postalCodeInput.value = "";
-
+    }
+    
+    function clearVehicle(){
+        //Clears vehicle info
         vinInput.value = "";
         yearInput.value = "";
         makeInput.value = "";
         modelInput.value = "";
         licenseInput.value = "";
-        
-        searchBody.style.display = 'none';
-        containerDiv.style.display = 'block';
-        
-	}
-
-	/*Search Button*/
-    
-    
-    
-    
-	search_button.addEventListener('click', function(){
-        if(query_category.value == "license_number"){
-            submit_button.innerHTML = 'Select Vehicle';
-            search_button.innerHTML = 'LOADING...';
-            $.ajax({
-                url: '/search',
-                type: 'post',
-                data: {
-                    searchQuery: query_search.value,
-                    searchType: query_category.value
-                },
-                success: (data) => {
-                    search_button.innerHTML = 'Search';
-                    var sTable = $('#searchTable').DataTable({
-                        'initComplete': function(settings){
-                              var api = new $.fn.dataTable.Api(settings);
-
-                              api.columns().header().each(function(column){
-                                 if($(column).text() === 'Street'){
-                                    $(column).text("Model");
-                                 }
-                              });
-                            api.columns().header().each(function(column){
-                                 if($(column).text() === 'City'){
-                                    $(column).text("License Plate #");
-                                 }
-                              });
-                            api.columns().header().each(function(column){
-                                 if($(column).text() === 'Cell Phone'){
-                                    $(column).text("VIN");
-                                 }
-                              });
-                           },
-                        destroy: true,
-                        select: {
-                            style: 'single'
-                        },
-                        data: data.data,
-                        "columns": [
-                            { "data": "last_name"},
-                            { "data": "first_name"},
-                            { "data": "model"},
-                            { "data": "license_plate"},
-                            { "data": "vin"},
-                        ]
-                    });
-                    sTable.on( 'select', function ( e, dt, type, indexes ) {
-                        if (type === 'row') {
-                            var tdata = sTable.rows(indexes).data()[0];
-                            submit_button.addEventListener("click", function(){
-                                console.log("ajaxing");
-                                $.ajax({
-                                    url:"./setVariables",
-                                    type:"post",
-                                    data:{
-                                        status:1,
-                                        info:[1,1]
-                                    },
-                                    success:function (resp) {
-                                        console.log(resp);
-                                    }
-                                })
-
-                                //Autofill Customer and vehicle info
-                                lastNameInput.value = tdata.last_name;
-                                firstNameInput.value = tdata.first_name;
-                                homePhoneInput.value = tdata.home_phone;
-                                cellPhoneInput.value = tdata.cell_phone;
-                                streetInput.value = tdata.street;
-                                cityInput.value = tdata.city;
-                                postalCodeInput.value = tdata.postal_code;
-
-                                vinInput.value = tdata.vin;
-                                yearInput.value = tdata.year;
-                                makeInput.value = tdata.make;
-                                modelInput.value = tdata.model;
-                                licenseInput.value = tdata.license_plate;
-
-                                //Bring back to check-in form
-                                searchBody.style.display = 'none';
-                                containerDiv.style.display = 'block';
-                            });
-                        }
-                    } );
-
-                }
-            });
-        }else if(query_category.value == "last_name"){
-            submit_button.innerHTML = 'Select Customer';
-            search_button.innerHTML = 'LOADING...';
-            $.ajax({
-                url: '/search',
-                type: 'post',
-                data: {
-                    searchQuery: query_search.value,
-                    searchType: query_category.value
-                },
-                success: (data) => {
-                    search_button.innerHTML = 'Search';
-                    console.log(data.data);
-                    var sTable = $('#searchTable').DataTable({
-                        'initComplete': function(settings){
-                              var api = new $.fn.dataTable.Api(settings);
-
-                              api.columns().header().each(function(column){
-                                 if($(column).text() === 'Model'){
-                                    $(column).text("Street");
-                                 }
-                              });
-                            api.columns().header().each(function(column){
-                                 if($(column).text() === 'License Plate #'){
-                                    $(column).text("City");
-                                 }
-                              });
-                            api.columns().header().each(function(column){
-                                 if($(column).text() === 'VIN'){
-                                    $(column).text("Cell Phone");
-                                 }
-                              });
-                           },
-                        destroy: true,
-                        select: {
-                            style: 'single'
-                        },
-                        data: data.data,
-                        "columns": [
-                            { "data": "last_name"},
-                            { "data": "first_name"},
-                            { "data": "street"},
-                            { "data": "city"},
-                            { "data": "cell_phone"},
-                        ]
-                    });
-                    sTable.on( 'select', function ( e, dt, type, indexes ) {
-                        if (type === 'row') {
-                            var tdata = sTable.rows(indexes).data()[0];
-                            submit_button.addEventListener("click", function(){
-
-                                //Autofill Customer and vehicle info
-                                lastNameInput.value = tdata.last_name;
-                                firstNameInput.value = tdata.first_name;
-                                homePhoneInput.value = tdata.home_phone;
-                                cellPhoneInput.value = tdata.cell_phone;
-                                streetInput.value = tdata.street;
-                                cityInput.value = tdata.city;
-                                postalCodeInput.value = tdata.postal_code;
-
-                                vinInput.value = tdata.vin;
-                                yearInput.value = tdata.year;
-                                makeInput.value = tdata.make;
-                                modelInput.value = tdata.model;
-                                licenseInput.value = tdata.license_plate;
-
-                                //Bring back to check-in form
-                                searchBody.style.display = 'none';
-                                containerDiv.style.display = 'block';
-                            });
-                        }
-                    } );
-
-                }
-            });
-        }
-    });
-
-	/*Submit Button
-	submit_button.onclick = () =>{
-        window.location.assign("/")   
-	}
-    */
+    }
 })
