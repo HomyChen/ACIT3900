@@ -10,13 +10,21 @@ const pgpool = new Pool({
 /* Changed Functions -Homy Oct 30, 2018*/
 var getSearchData = (searchQuery, searchType) => {
     return new Promise((resolve, reject) => {
-    	pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE '+searchType+' LIKE $1', [searchQuery + '%'] , (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res.rows)
-            }
-        })
+        var searchRegex = /[a-zA-Z0-9 ]/
+        if(searchRegex.test(searchQuery) || searchQuery == ''){
+            console.log("Search Regex Passed");
+            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE '+searchType+' LIKE $1', [searchQuery + '%'] , (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve({status: "success", data: res.rows})
+                }
+            })
+        }else{
+            console.log("Search Regex Failed");
+            reject({status: "fail"});
+        }
+    	
     })
 }
 

@@ -12,7 +12,7 @@ const expressSession = require("express-session");
 // had to change button Id of second add button for the other request option
 
 //defining routed function files -Homy
-const dbfun = require('./routes/searchFunctions.js')
+const seaFunctions = require('./routes/searchFunctions.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
 
@@ -53,13 +53,14 @@ app.get("/orders", function(req, resp){
 
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
+//app.use("/cisearch", seaFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{
-	dbfun.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
-		response.send({status: 'OK', data: result})
+	seaFunctions.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
+		response.send(result);
 	}).catch((result)=>{
-        console.log(result);
+        response.send(result);
     });
 });
 

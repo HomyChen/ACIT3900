@@ -67,56 +67,72 @@ $(document).ready(()=>{
                 searchQuery: query_search.value,
                 searchType: query_category.value
             },
-            success: (data) => {
-                //Turn search button back
-                search_button.innerHTML = 'Search';
-                
-                //Initialize Datatable
-                var sTable = $('#searchTable').DataTable({
-                        destroy: true,
-                        select: {
-                            style: 'single'
-                        },
-                        data: data.data,
-                        "columns": [
-                            { "data": "last_name"},
-                            { "data": "first_name"},
-                            { "data": "cell_phone"},
-                            { "data": "model"},
-                            { "data": "license_plate"},
-                            { "data": "vin"},
-                        ]
-                    });
-                
-                //Add function for selecting rows on tabl
-                sTable.on( 'select', function ( e, dt, type, indexes ) {
-                    if (type === 'row') {
-                        var tdata = sTable.rows(indexes).data()[0];
-                        submit_button_cust_vehicle.addEventListener("click", function(){  
-                            
-                            //Set status to 2: Old Customer, Old Vehicle
-                            ajaxSetVariables(2); 
-                            //Autofill both customer and vehicle forms
-                            autofillCustomer(tdata);
-                            autofillVehicle(tdata);
-                            
-                            //Bring back to check-in form
-                            makeCheckInVisible();
+            success: (result) => {
+                if(result.status == "success"){
+                    //Turn search button back
+                    search_button.innerHTML = 'Search';
+
+                    //Initialize DataTables
+                    var sTable = $('#searchTable').DataTable({
+                            destroy: true,
+                            select: {
+                                style: 'single'
+                            },
+                            data: result.data,
+                            "columns": [
+                                { "data": "last_name"},
+                                { "data": "first_name"},
+                                { "data": "cell_phone"},
+                                { "data": "model"},
+                                { "data": "license_plate"},
+                                { "data": "vin"},
+                            ]
                         });
-                        submit_button_cust_only.addEventListener("click", function(){
+
+                    //Add function for selecting rows on tabl
+                    sTable.on( 'select', function ( e, dt, type, indexes ) {
+                        if (type === 'row') {
                             
-                            //Set status to 1: Old Customer, New Vehicle
-                            ajaxSetVariables(1);
+                            //Define a focusout event so that the autofill will get past the validator without clicking on the vin input and then clicking elsewhere
+                            var focusout = new Event('focusout');
                             
-                            //Autofill only customer form, clear vehicle form
-                            autofillCustomer(tdata);
-                            clearVehicle();
-                            
-                            //Bring back to check-in form
-                            makeCheckInVisible();
-                        });
-                    }
-                } );
+                            var tdata = sTable.rows(indexes).data()[0];
+                            submit_button_cust_vehicle.addEventListener("click", function(){  
+
+                                //Set status to 2: Old Customer, Old Vehicle
+                                ajaxSetVariables(2); 
+                                //Autofill both customer and vehicle forms
+                                autofillCustomer(tdata);
+                                autofillVehicle(tdata);
+
+                                //Bring back to check-in form
+                                makeCheckInVisible();
+                                
+                                //Trigger focusout event on vinInput to get past validator on submit button
+                                vinInput.dispatchEvent(focusout);
+                            });
+                            submit_button_cust_only.addEventListener("click", function(){
+
+                                //Set status to 1: Old Customer, New Vehicle
+                                ajaxSetVariables(1);
+
+                                //Autofill only customer form, clear vehicle form
+                                autofillCustomer(tdata);
+                                clearVehicle();
+
+                                //Bring back to check-in form
+                                makeCheckInVisible();
+                                
+                                //Trigger focusout event on vinInput to get past validator on submit button
+                                vinInput.dispatchEvent(focusout);
+                            });
+                        }
+                    } );
+                }else if(result.status == "fail"){
+                    search_button.innerHTML = 'Search';
+                    alert("Search cannot contain special characters");
+                }
+                
 
             }
         });
