@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<style>
+		#right_side_1 {
+			right: 0px;
+			position: absolute;
+			width: 35%;
+		}
+		#left_side_1 {
+			position: absolute;
+			left: 0px;
+		}
+		#right_side_2{
+			position: absolute;
+			right: 0px;
+			width: 35%;
+		}
+		#info_div{
+			top: 70px;
+			position: absolute;
+			width: 98%;
+			border-bottom: 4px double;
+			height: 110px;
+		}
+		#main_order{
+			top: 60px;
+			position: absolute;
+		}
+		.work_order{
+			margin-bottom: 25px;
+		}
+		.work_order_skip{
+			margin-bottom: 100px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="pageHeader-first">
+			<div id="right_side_1">
+				<div>Repair Order: {{repair_order}}</div>
+				<div>Promised Time: {{promised_time}}</div>
+			</div>
+
+			<div id="info_div">
+				<div id="left_side_1">
+					<div>Customer Name: {{last_name}}, {{first_name}}</div>
+					<div>Home Phone Number: {{home_phone}}</div>
+					<div>Cell Phone Number: {{cell_phone}}</div>
+				</div>
+
+				<div id="right_side_2">
+					<div>VIN: {{vin}}</div>
+					<div>Year: {{year}}</div>
+					<div>Make: {{make}}</div>
+					<div>Model: {{model}}</div>
+					<div>License Plate: {{license_plate}}</div>
+				</div>
+			
+			</div>
+		</div>
+		<div id="pageHeader">
+			<div id="right_side_1">
+				<div>Repair Order: {{repair_order}}</div>
+				<div>Promised Time: {{promised_time}}</div>
+			</div>
+		</div>
+		<div id="main_order">
+			<div>Work Requested:</div>
+			{{#each work_task}}
+			<div class={{setStack @index}}>
+				[_]{{this.task_name}}<br>
+				_________________________________________________________________________________________________
+				_________________________________________________________________________________________________
+				_________________________________________________________________________________________________
+				_________________________________________________________________________________________________
+			</div>
+			{{/each}}
+		</div>
+		<div id="pageFooter">Sponsored by: BCIT</div>
+		<div id="pageFooter-last">
+			<div>Mileage Out: _______________________________</div>
+			<div>If Wheels Removed/Wheels Torqued</div>
+			<div>To:________________ By:______________________</div>	
+		</div>
+		
+	</body>
+</html>

@@ -9,7 +9,7 @@ const pg = require('pg');
 const config = {
     user: 'postgres',
     database: 'sot',
-    password: 'password',
+    password: 'thegreatpass',
     port: 5432
 };
 
