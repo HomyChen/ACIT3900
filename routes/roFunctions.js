@@ -31,9 +31,21 @@ router.post("/AroSearch", function (req,resp){
     console.log(searchBy);
     console.log(roStatus);
     
-    var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + '= $1';
+    if(searchBy == "ro_id"){
+        var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
+        
+        var data = [roSearchWord, roStatus];
+        
+    }else{
+        var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1' + ' AND status=$2';
+        
+        var data = [roSearchWord + '%', roStatus];
+    }
     
-    var data = [req.body.roSearchWord];
+    
+    
+    console.log(roQuery);
+    console.log(data);
     
     pool.connect(function (err, client, done){
         if (err) {
@@ -77,5 +89,38 @@ router.post("/AroSearch", function (req,resp){
     })
 });
 
+
+router.post("/taskSearch", function (req,resp){
+    console.log("taskSearch ajax");
+    
+    var roID = req.body.roID;
+    
+    console.log(roID);
+    
+    var data = [roID];
+    
+    var taskQuery = 'SELECT task_name, comments, worktask_id FROM repair_tasks rt INNER JOIN task t ON rt.task_id = t.task_id WHERE ro_id = $1';
+    
+    pool.connect(function (err, client, done){
+        if (err) {
+            console.log("(taskSearch - Unable to connect to the database: " + err );
+        }
+        else{
+            console.log("taskSearch - Successfully login to database!")
+        }
+        
+        client.query(taskQuery, data, function(err, result){
+            done();
+            if(err){
+                console.log(err.message);
+                resp.send(null);
+            }
+            else{
+                console.log(result.rows);
+                resp.send(result.rows);
+            }
+        })
+    })
+});
 
 module.exports = router;
