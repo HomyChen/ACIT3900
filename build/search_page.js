@@ -56,6 +56,7 @@ $(document).ready(()=>{
 	/*Search Page Search Button*/
 
 	search_button.addEventListener('click', function(){
+        
         //Turn search button to display loading
         search_button.innerHTML = 'LOADING...';
         
@@ -69,6 +70,7 @@ $(document).ready(()=>{
             },
             success: (result) => {
                 if(result.status == "success"){
+                    
                     //Turn search button back
                     search_button.innerHTML = 'Search';
 
@@ -97,10 +99,13 @@ $(document).ready(()=>{
                             var focusout = new Event('focusout');
                             
                             var tdata = sTable.rows(indexes).data()[0];
+                            
+                            //Submit button for choosing old customer and old vehicle
                             submit_button_cust_vehicle.addEventListener("click", function(){  
 
                                 //Set status to 2: Old Customer, Old Vehicle
                                 ajaxSetVariables(2); 
+                                
                                 //Autofill both customer and vehicle forms
                                 autofillCustomer(tdata);
                                 autofillVehicle(tdata);
@@ -111,6 +116,8 @@ $(document).ready(()=>{
                                 //Trigger focusout event on vinInput to get past validator on submit button
                                 vinInput.dispatchEvent(focusout);
                             });
+                            
+                            //Submit button for choosing customer only
                             submit_button_cust_only.addEventListener("click", function(){
 
                                 //Set status to 1: Old Customer, New Vehicle
@@ -129,7 +136,11 @@ $(document).ready(()=>{
                         }
                     } );
                 }else if(result.status == "fail"){
+                    
+                    //Turn search button back
                     search_button.innerHTML = 'Search';
+                    
+                    //Alert the user that their search cannot contain special characters
                     alert("Search cannot contain special characters");
                 }
                 
@@ -138,6 +149,7 @@ $(document).ready(()=>{
         });
     });
     
+    //Ajax function to set the req.session.status variable depending on the scenario
     function ajaxSetVariables(status){
         $.ajax({
             url:"./setVariables",
@@ -152,20 +164,20 @@ $(document).ready(()=>{
         });
     }
 
+    //Makes Check-in Page visible and Search Page invisible
     function makeCheckInVisible(){
-        //Makes Check-in Page visible and Search Page invisible
         searchBody.style.display = 'none';
         containerDiv.style.display = 'block';
     }
     
+    //Makes Search Page Visible and Check-in page invisible
     function makeSearchVisible(){
-        //Makes Search Page Visible and Check-in page invisible
         searchBody.style.display = 'block';
         containerDiv.style.display = 'none'; 
     }
     
+    //Autofill Customer info
     function autofillCustomer(data){
-        //Autofill Customer info
         lastNameInput.value = data.last_name;
         firstNameInput.value = data.first_name;
         homePhoneInput.value = data.home_phone;
@@ -175,8 +187,8 @@ $(document).ready(()=>{
         postalCodeInput.value = data.postal_code;
     }
     
+    //Autofill vehicle info
     function autofillVehicle(data){
-        //Autofill vehicle info
         vinInput.value = data.vin;
         yearInput.value = data.year;
         makeInput.value = data.make;
@@ -184,8 +196,8 @@ $(document).ready(()=>{
         licenseInput.value = data.license_plate;
     }
     
+    //Clears Customer info
     function clearCustomer(){
-        //Clears Customer info
         lastNameInput.value = "";
         firstNameInput.value = "";
         homePhoneInput.value = "";
@@ -195,12 +207,13 @@ $(document).ready(()=>{
         postalCodeInput.value = "";
     }
     
+    //Clears vehicle info
     function clearVehicle(){
-        //Clears vehicle info
         vinInput.value = "";
         yearInput.value = "";
         makeInput.value = "";
         modelInput.value = "";
         licenseInput.value = "";
+        odoInput.value = "";
     }
 })

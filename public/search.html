@@ -13,32 +13,36 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/scripts/search_page.js"></script>
+    <!-- Own Scripts -->    
+    <script type="text/javascript" src="/scripts/search_page.js"></script>
+    <script src="/scripts/getmenu.js"></script>
 
 </head>
 
 <body >
     
     <div class="container" id="searchBody">
-
+        <div class="row" id="firstRow">
+            <!--<div id="logoDiv"></div>-->
+            <div id="menuPosition"></div>
+        </div>
     <div class="row">
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div id="title_ncbut">
-
                 <div class="row">
-
-                <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
-
-                <h2 id="title" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        		Search for Existing Customer / Vehicles
-        		</h2>
-                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-primary">
-                    New Customer
-                </button>
-
+                    <h2 id="title" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    Search for Existing Customers / Vehicles
+                    </h2>    
                 </div>
+            </div>
+            <div class="row">
+                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-primary">
+                NEW CUSTOMER CHECK IN
+                </button>
+                <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
+                <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
             </div>
         </div>
     </div>

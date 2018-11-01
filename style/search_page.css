@@ -66,17 +66,19 @@ Thing to note: use margin to give spacing instead of position stuff;
 }
 
 #title_ncbut{
-	margin-bottom: 15px;
-	margin-top: 50px;
+	margin-bottom: 40px;
+	margin-top: 40px;
 }
 
 #ncbut{
 	height:50px;
 	font-weight: bold;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 #title{
 	text-align: center;
+    margin-top: 20px;
 	margin-bottom: 15px;
 }
 
