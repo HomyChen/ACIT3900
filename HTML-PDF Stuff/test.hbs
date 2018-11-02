@@ -25,12 +25,17 @@
 		#main_order{
 			top: 60px;
 			position: absolute;
+			width: 97%;
 		}
 		.work_order{
 			margin-bottom: 25px;
 		}
 		.work_order_skip{
 			margin-bottom: 100px;
+		}
+		.text_field{
+			width: 100%;
+			margin-top: 25px;
 		}
 		</style>
 	</head>
@@ -70,9 +75,9 @@
 			<div class={{setStack @index}}>
 				[_]{{this.task_name}}<br>
 				<hr class="text_field">
-				<hr>
-				<hr>
-				<hr>
+				<hr class="text_field">
+				<hr class="text_field">
+				<hr class="text_field">
 			</div>
 			{{/each}}
 		</div>
