@@ -70,16 +70,22 @@ app.post("/setVariables",function (req,resp) {
     //Status 1: Old Customer, New Vehicle
     //Status 2: Old Customer, Old Vehicle
     console.log(req.body);
-    req.session.status = req.body;
-    console.log(req.session.status);
-    resp.send(req.body.status);
+    req.session.status = req.body.status;
+    req.session.vehicle_id = req.body.vehicle_id;
+    req.session.cust_id = req.body.cust_id;
+    console.log(req.session.status, req.session.vehicle_id, req.session.cust_id);
+    resp.send({
+        status: req.session.status,
+        vehicle_id : req.session.vehicle_id,
+        cust_id : req.session.cust_id
+    });
 })
 
 app.post("/getVariables",function (req,resp) {
     resp.send({
-        status: 3,
-        cust_id:2,
-        vehicleId:1
+        status: req.session.status,
+        cust_id: req.session.cust_id,
+        vehicle_id: req.session.vehicle_id
     });
 })
 

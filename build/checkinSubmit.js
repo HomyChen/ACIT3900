@@ -68,13 +68,13 @@ $(document).ready(function(){
                 packageRequests();
                 let result =  await getVariables();
                 switch (result.status){
-                    case 1:
+                    case '0':
                         newCustomerNewVehicle();
                         break;
-                    case 2:
+                    case '1':
                         oldCustomerNewVehicle(result);
                         break;
-                    case 3:
+                    case '2':
                         oldCustomerOldVehicle(result);
                         break;
                 }
