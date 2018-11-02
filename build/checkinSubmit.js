@@ -56,58 +56,32 @@ $(document).ready(function(){
     /*-----------------------------------------------------------------------------------*/
     getCommonRequests();
 
-    submitButton.onclick = function () {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = (month+1) + "/" + date + "/" + year;
 
-        
+    submitButton.addEventListener("click", submitButtonClick);
+
+    async function submitButtonClick() {
+
         var commonTasksSelect = document.getElementById("requestsDropdown");
-        validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
+        var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
         if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
                 packageRequests();
+                let result =  await getVariables();
+                switch (result.status){
+                    case 1:
+                        newCustomerNewVehicle();
+                        break;
+                    case 2:
+                        oldCustomerNewVehicle(result);
+                        break;
+                    case 3:
+                        oldCustomerOldVehicle(result);
+                        break;
+                }
 
-
-                $.ajax({
-                    url: "/data/insertCustomer",
-                    type: "post",
-                    data: {
-                        lastName: lastNameInput.value,
-                        firstName: firstNameInput.value,
-                        homePhone: homePhoneInput.value,
-                        cellPhone: cellPhoneInput.value,
-                        street: streetInput.value,
-                        city: cityInput.value,
-                        postalCode: postalCodeInput.value,
-                        date: monthDateYear,
-                        dataGram: {
-                            vin: vinInput.value,
-                            year: yearInput.value,
-                            make: makeInput.value,
-                            model: modelInput.value,
-                            license: licenseInput.value,
-                            odometer: odoInput.value,
-                            vehicleNotes: vehicleNotesInput.value
-                        },
-                        requests: requestsPackaged,
-
-                    },
-                    success: function (data) {
-                        if(data.status==1){
-                            alert("Error")
-                        }
-                        else {
-                            console.log(data)
-                        }
-                    }
-                })
-        
             } else {
                     alert("Please correctly fill in the yellow boxes")
-                }           
+                }
             } else {
                 if (validate.error.includes("Last Name Error")) {
                     lastNameInput.style.borderColor = 'red'
@@ -120,7 +94,7 @@ $(document).ready(function(){
                     otherSerTextArea.style.borderColor = 'red'
                 }
             }
-        
+
     }
 
 
@@ -194,16 +168,136 @@ $(document).ready(function(){
                 divToAppendCommonRequests.innerHTML = resp;
             }
         });
+    }
 
-        setTimeout(() => {
+    function getVariables() {
+        return new Promise((resolve,reject) =>
+        {
             $.ajax({
-                url:"/getVariables",
-                type:"post",
-                success:function (data) {
-                    console.log(data)
+                url: "/getVariables",
+                type: "post",
+                success: function (data) {
+                    resolve (data);
                 }
             })
-        }, 5000)
+        })
+
+    }
+
+    function newCustomerNewVehicle() {
+
+        var currentDate = new Date();
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+
+        $.ajax({
+            url: "/data/insertCustomer",
+            type: "post",
+            data: {
+                lastName: lastNameInput.value,
+                firstName: firstNameInput.value,
+                homePhone: homePhoneInput.value,
+                cellPhone: cellPhoneInput.value,
+                street: streetInput.value,
+                city: cityInput.value,
+                postalCode: postalCodeInput.value,
+                date: monthDateYear,
+                dataGram: {
+                    vin: vinInput.value,
+                    year: yearInput.value,
+                    make: makeInput.value,
+                    model: modelInput.value,
+                    license: licenseInput.value,
+                    odometer: odoInput.value,
+                    vehicleNotes: vehicleNotesInput.value
+                },
+                requests: requestsPackaged,
+
+            },
+            success: function (data) {
+                if(data.status==1){
+                    alert("Error")
+                }
+                else {
+                    console.log(data)
+                }
+            }
+        })
+    }
+
+    function oldCustomerNewVehicle(request) {
+        var currentDate = new Date();
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+
+        $.ajax({
+            url: "/data/insertOldCustNewVehicle",
+            type: "post",
+            data: {
+                customerId: request.cust_id,
+                date:monthDateYear,
+                dataGram: {
+                    vin: vinInput.value,
+                    year: yearInput.value,
+                    make: makeInput.value,
+                    model: modelInput.value,
+                    license: licenseInput.value,
+                    odometer: odoInput.value,
+                    vehicleNotes: vehicleNotesInput.value
+                },
+                requests: requestsPackaged,
+            },
+            success: function (data) {
+                if(data.status==1){
+                    alert("Error")
+                }
+                else {
+                    console.log(data);
+                }
+            }
+        })
+
+    }
+
+    function oldCustomerOldVehicle(result) {
+
+        var currentDate = new Date();
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+
+        $.ajax({
+            url: "/data/insertOldCustomerOldVehicle",
+            type: "post",
+            data: {
+                customerId: result.cust_id,
+                vehicleId: result.vehicleId,
+                date:monthDateYear,
+                dataGram: {
+                    vin: vinInput.value,
+                    year: yearInput.value,
+                    make: makeInput.value,
+                    model: modelInput.value,
+                    license: licenseInput.value,
+                    odometer: odoInput.value,
+                    vehicleNotes: vehicleNotesInput.value
+                },
+                requests: requestsPackaged,
+            },
+            success: function (data) {
+                if(data.status==1){
+                    alert("Error")
+                }
+                else {
+                    console.log(data);
+                }
+            }
+        })
 
     }
     
@@ -216,6 +310,7 @@ $(document).ready(function(){
     lastNameInput.onclick = () => {
         lastNameInput.style.borderColor = '#ccc';
     }
+
     otherSerTextArea.onclick = () => {
         otherSerTextArea.style.borderColor = 'darkgrey';
     }

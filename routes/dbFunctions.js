@@ -12,48 +12,118 @@ var dbFunc = require("./createRepairOrderSec1");
 
 router.post("/insertCustomer",function (req,resp) {
 
-    doInserts(req).then(data => {
-        console.log(data);
+    doInsertsNewCustomerNewVehicle(req).then(data => {
+
         if(data == null){
             resp.send({
                 status:1
             })
         }
-        req.session.homy = "homy"
+        console.log("NewCusNewVehicle:");
+        console.log(data);
         resp.send(data)
-        console.log(req.session.homy)
     });
 });
 
+router.post("/insertOldCustNewVehicle", function(req,resp) {
+    doInsertOldCustomerNewVehicle(req)
+        .then(respp => {
+            resp.send(respp);
+        })
+})
 
-async function doInserts(req) {
-    dbFunc.connectToPool()
-    // these are necessary under all circumstances
-    const insertCustomerInfo     = await dbFunc.insertCustomer(req).catch(err => console.log(err));
-    const insertVehicleInfo      = await dbFunc.insertVehicles([req.body.dataGram, insertCustomerInfo.customerID,req.body.date]).catch(err => console.log(err))
-    const createRepairOrder    = await dbFunc.createWorkOrder([req.body.dataGram, insertVehicleInfo]);
-    // we are adding rows to the repair order based on what info is passed to us
-    // Basically on first IF we are going there if their arent any otherServiceReq
-    // then second IF is if we have unCommonReq and some commonRequests
-    // second else we go there if and only if we have only otherServiceRequests
-    try {
+router.post("/insertOldCustomerOldVehicle",function (req,resp) {
+   doInsertOldCustomerOldVehicle(req)
+       .then(response => resp.send(response))
+})
+
+async function doInsertOldCustomerNewVehicle(req) {
+    dbFunc.connectToPool();
+    const insertVehicleInfo = await dbFunc.insertVehicles([req.body.dataGram, {cust_id:req.body.customerId}, req.body.date]).catch(err =>console.log(err));
+    const createRepairOrder = await dbFunc.createRepairOrder([req.body.dataGram, insertVehicleInfo, req.body.date]);
+
+    if (req.body.requests.otherReqTotal == 0) {
+        // if there are only commonWorkTasks create entries in repair order
+        return await insertWithOnlyCommonTasks(req.body.requests.commonRequests, createRepairOrder);
+    }
+    else {
+
+        if (req.body.requests.commonRequestsTotal != 0) {
+            // if there are common and uncommon work tasks insert them to DB
+            return (insertCommonUnCommonWorkTasks(req, createRepairOrder))
+        }
+        else {
+            // if there are only unCommon work tasks come here
+            return (insertOnlyUnCommonWorkTasks(req, createRepairOrder))
+        }
+    }
+}
+
+async function doInsertsNewCustomerNewVehicle(req) {
+    try{
+        dbFunc.connectToPool()
+        // these are necessary under all circumstances
+        const insertCustomerInfo = await dbFunc.insertCustomer(req);
+        const insertVehicleInfo = await dbFunc.insertVehicles([req.body.dataGram, insertCustomerInfo.customerID, req.body.date])
+        const createRepairOrder = await dbFunc.createRepairOrder([req.body.dataGram, insertVehicleInfo,req.body.date]);
+        // we are adding rows to the repair order based on what info is passed to us
+        // Basically on first IF we are going there if their arent any otherServiceReq
+        // then second IF is if we have unCommonReq and some commonRequests
+        // second else we go there if and only if we have only otherServiceRequests
+
         if (req.body.requests.otherReqTotal == 0) {
             // if there are only commonWorkTasks create entries in repair order
-            return  await insertWithOnlyCommonTasks(req.body.requests.commonRequests, createRepairOrder);
+            return await insertWithOnlyCommonTasks(req.body.requests.commonRequests, createRepairOrder);
         }
         else {
 
             if (req.body.requests.commonRequestsTotal != 0) {
                 // if there are common and uncommon work tasks insert them to DB
-                return insertCommonUnCommonWorkTasks(req,createRepairOrder)
+                return insertCommonUnCommonWorkTasks(req, createRepairOrder)
             }
             else {
                 // if there are only unCommon work tasks come here
-                return insertOnlyUnCommonWorkTasks(req,createRepairOrder)
+                return insertOnlyUnCommonWorkTasks(req, createRepairOrder)
+
             }
         }
     }
-    catch (Exception){
+    catch (Exception) {
+        console.log(Exception);
+        dbFunc.closeDBConnection();
+        return null;
+    }
+}
+
+async function doInsertOldCustomerOldVehicle(req) {
+
+    try{
+        dbFunc.connectToPool()
+        // these are necessary under all circumstances
+        const createRepairOrder = await dbFunc.createRepairOrder([req.body.dataGram,{vehicleID:req.body.vehicleId},req.body.date]);
+        // we are adding rows to the repair order based on what info is passed to us
+        // Basically on first IF we are going there if their arent any otherServiceReq
+        // then second IF is if we have unCommonReq and some commonRequests
+        // second else we go there if and only if we have only otherServiceRequests
+
+        if (req.body.requests.otherReqTotal == 0) {
+            // if there are only commonWorkTasks create entries in repair order
+            return await insertWithOnlyCommonTasks(req.body.requests.commonRequests, createRepairOrder);
+        }
+        else {
+
+            if (req.body.requests.commonRequestsTotal != 0) {
+                // if there are common and uncommon work tasks insert them to DB
+                return insertCommonUnCommonWorkTasks(req, createRepairOrder)
+            }
+            else {
+                // if there are only unCommon work tasks come here
+                return insertOnlyUnCommonWorkTasks(req, createRepairOrder)
+
+            }
+        }
+    }
+    catch (Exception) {
         console.log(Exception);
         dbFunc.closeDBConnection();
         return null;
@@ -86,8 +156,5 @@ async function insertOnlyUnCommonWorkTasks(req, createRepairOrder) {
     dbFunc.closeDBConnection();
     return await testMethod;
 }
-
-
-
 
 module.exports = router;

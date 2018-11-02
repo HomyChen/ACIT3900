@@ -32,13 +32,14 @@
     </head>
     
 <body>
-    <div id="searchPosition"></div>    
-
+       
+    <div class="row" id="firstRow">
+        <div id="logoDiv"></div>
+        <div id="menuPosition"></div>
+    </div>
+    <div id="searchPosition"></div> 
     <div class="container-fluid" id="container">
-        <div class="row" id="firstRow">
-            <div id="logoDiv"></div>
-            <div id="menuPosition"></div>
-        </div>
+        
         <div class="row"> <div class="col-sm-12" id="headerDiv"> Vehicle Check-in</div></div>
 
             <div class="row">
@@ -102,7 +103,7 @@
                         <div class="form-group row">
                             <label for="yrInp" class="col-sm-3 col-form-label">Year</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="yrInp" placeholder="eg. 1998" maxlength="4">
+                                <input type="text" class="form-control" id="yrInp" placeholder="eg. 1998" maxlength="4">
                             </div>
                         </div>
                         <div class="form-group row">

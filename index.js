@@ -76,9 +76,11 @@ app.post("/setVariables",function (req,resp) {
 })
 
 app.post("/getVariables",function (req,resp) {
-    console.log("b");
-    console.log(req.session.status);
-    resp.send(req.session.status);
+    resp.send({
+        status: 3,
+        cust_id:2,
+        vehicleId:1
+    });
 })
 
 server.listen(10000, function(err){

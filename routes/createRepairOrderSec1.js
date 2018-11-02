@@ -28,7 +28,7 @@ var insertCustomer = (req) => {
     return new Promise((resolve, reject) => {
 
 
-        var data = [req.body.firstName, req.body.lastName, req.body.homePhone, req.body.cellPhone, req.body.street, req.body.city, req.body.postalCode, "2018-01-01"];
+        var data = [req.body.firstName, req.body.lastName, req.body.homePhone, req.body.cellPhone, req.body.street, req.body.city, req.body.postalCode, req.body.date];
         const query = {
             // give the query a unique name
             name: 'insertCustomer',
@@ -49,8 +49,9 @@ var insertVehicles = (info) => {
             // give the query a unique name
             name: 'insertVehicle',
             text: insetVehicleQuery,
-            values: [info[0].vin, parseInt(info[0].year), info[0].license, info[0].make, info[0].model, info[0].color, "2018-01-01", info[1].cust_id]
+            values: [info[0].vin, parseInt(info[0].year), info[0].license, info[0].make, info[0].model, info[0].color, info[2], info[1].cust_id]
         };
+
         pool.query(query)
             .then(result => resolve({vehicleID: result.rows[0].vehicle_id}))
             .catch(err => reject(err))
@@ -77,9 +78,9 @@ var insertUnCommonTasks = (info) => {
 }
 
 
-var createWorkOrder = (dataGram) =>{
+var createRepairOrder = (dataGram) =>{
     return new Promise((resolve,reject) =>{
-        var repairOrderData = [dataGram[0].vehicleNotes, parseFloat(dataGram[0].odometer), "2018-01-01",dataGram[1].vehicleID];
+        var repairOrderData = [dataGram[0].vehicleNotes, parseFloat(dataGram[0].odometer), dataGram[2],dataGram[1].vehicleID];
 
         pool.connect((err, client, done)=> {
             if (err) {
@@ -112,7 +113,7 @@ var createWorkTaskUnCommon = (unCommonTasksID, repairOrderId) => {
 
             const query = {
                 // give the query a unique name
-                name: 'createWorkOrder',
+                name: 'createRepairOrder',
                 text: 'INSERT INTO repair_tasks (RO_ID, Task_id) VALUES ($1, $2) returning worktask_id',
                 values: [repairOrderId.ro_id, unCommonTasksID[i].task_id]
             };
@@ -138,7 +139,7 @@ var createWorkTaskCommon = (unCommonTasksID, repairOrderId) => {
 
             const query = {
                 // give the query a unique name
-                name: 'createWorkOrder',
+                name: 'createRepairOrder',
                 text: 'INSERT INTO repair_tasks (RO_ID, Task_id) VALUES ($1, $2) returning worktask_id',
                 values: [repairOrderId.ro_id, unCommonTasksID[i]]
             };
@@ -209,7 +210,7 @@ module.exports = {
     insertCustomer,
     insertVehicles,
     insertUnCommonTasks,
-    createWorkOrder,
+    createRepairOrder,
     createWorkTaskUnCommon,
     getInfo,
     createWorkTaskCommon,

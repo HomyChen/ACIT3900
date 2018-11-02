@@ -27,8 +27,10 @@
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
         
-        
-        
+        <!-- X-editable
+        <link rel="stylesheet" href="bootstrap-editable/css/bootstrap-editable.css" >
+        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+        -->
         
         <script src="/scripts/ro.js"></script>
         <script src="/scripts/getmenu.js"></script>
@@ -63,9 +65,11 @@
                             <div id="logoDiv"></div>
                         </div>-->
                         <div class="row">
-                            <div class="col-md-6" id="roTitle">Repair Order</div>
-                            <div class="col-md-4 text-right font-weight-bold " id="roFieldTitle">Order #:</div>
-                            <div class=".col-md-2" id="roNum"></div>
+                            <div class="col-md-6" id="roTitle"><div id="roLogo"></div></div>
+                            <div class="col-md-3 text-right" id="roFieldTitle">Repair Order #:</div>
+                            <div class="col-md-2" id="roNum"></div>
+                            <div class="col-md-3 text-right">Promised Time:</div>
+                            <div class="col-md-2"><input class="form-control input-sm" id="promisedTime" disabled></div>
                             
                         </div>
                         <br>
@@ -73,6 +77,7 @@
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Customer Information</div>   
                         </div>
+                        <!--<hr class="lineBreak">-->
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roCustName"></div>  
                         </div>
@@ -87,37 +92,58 @@
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Vehicle Information</div>   
                         </div>
+
+                        <!--<hr class="lineBreak">-->
                         <div class="row">
                             <div class="col-md-2" id="roFieldTitle">VIN:</div>
-                             <div class="col-md-2" id="roVIN"></div>
+                            <div class="col-md-3" id="roVIN"></div>
+                            
+                            <div class="col-md-2" id="roFieldTitle">Model:</div>
+                            <div class="col-md-2" id="roModel"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-2" id="roFieldTitle">License Plate:</div>
-                             <div class="col-md-2" id="roLicense"></div>
+                            <div class="col-md-3" id="roLicense"></div>
+                            
+                            <div class="col-md-2" id="roFieldTitle">Odometer In:</div>
+                            <div class="col-md-2" id="roOdometerIn"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-2" id="roFieldTitle">Year:</div>
-                             <div class="col-md-2" id="roYear"></div>
+                            <div class="col-md-3" id="roYear"></div>
+                            
+                            <div class="col-md-2" id="roFieldTitle">Odometer Out:</div>
+                            <div class="col-md-2" id="roOdometerOut"><input class='form-control input-sm' id='odometerOut' disabled></div>
                         </div>
                         <div class="row">
                             <div class="col-md-2" id="roFieldTitle">Make:</div>
-                             <div class="col-md-2" id="roMake"></div>
+                            <div class="col-md-3" id="roMake"></div>
+                            
+                            <div class="col-md-2" id="roFieldTitle">Vehicle Notes:</div>
+                            <div class="col-md-5" id="roNotes"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2" id="roFieldTitle">Model:</div>
-                             <div class="col-md-2" id="roModel"></div>
+                            
                         </div>
                         <br>
                         <br>
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Work Requested</div>   
                         </div>
+                        <!--<hr class="lineBreak">-->
                         <ol id="roTask">
+                            <!--
                             <li>&#9634;</li>
                             <li>&#9634;</li>
                             <li>&#9634;</li>
+                            -->
                         </ol>
-                        <h3></h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-default pull-right" id="editRO">Edit</button>
+                                <button class="btn btn-default pull-right invisible" id="saveRO">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,21 +152,23 @@
             <div class="row">
                 <div class="col-sm-12">
                     <form class="form" id="searchDiv">
-                        <div class="col-sm-6">
-                            <input type="search" class="form-control" id="roSearchInp" >
-                        </div>
                         <div class="col-sm-2">
                             <select class="form-control" id="SOptionsDropdown">
-                                <option value="None">Search by...</option>
                                 <option value="last_name">Last Name</option>
                                 <option value="license_plate">License Plate </option>
                                 <option value="ro_id">RO#</option>
                             </select>
                         </div>
+                        
+                        <div class="col-sm-6">
+                            <input type="search" class="form-control" id="roSearchInp" >
+                        </div>
+                        
                         <div class="col-sm-2">
                             <select class="form-control" id="ROOptionsDropdown">
-                                <option value="open">Open ROs</option>
-                                <option value="closed">All ROs</option>
+                                <option value="false">Open ROs</option>
+                                <option value="true">Closed ROs</option>
+                                <option value="1">All ROs</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
