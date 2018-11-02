@@ -41,10 +41,28 @@
 			width: 100%;
 			margin-top: 25px;
 		}
+		#img1 {
+			width: 100%;
+			height: 100%;
+		}
+		#logo {
+			position: absolute;
+			left: 11px;
+			width: 85px;
+			height: 85px;
+		}
+		.checkbox {
+			width: 20px;
+			height: 17px;
+		}
 		</style>
 	</head>
 	<body>
 		<div id="pageHeader-first">
+			{{!-- Do not touch the img src because it might disrupt the image --}}
+			<div id="logo">
+				<img src="{{logo}}" id="img1"/>
+			</div>
 			<div id="right_side_1">
 				<div>Repair Order: {{repair_order}}</div>
 				<div>Promised Time: {{promised_time}}</div>
@@ -68,16 +86,19 @@
 			</div>
 		</div>
 		<div id="pageHeader">
+			<div id="logo">
+				<img src="{{logo}}" id="img1"/>
+			</div>
 			<div id="right_side_1">
 				<div>Repair Order: {{repair_order}}</div>
 				<div>Promised Time: {{promised_time}}</div>
 			</div>
 		</div>
 		<div id="main_order">
-			<div>Work Requested:</div>
+			<div style="margin-bottom: 20px">Work Requested:</div>
 			{{#each work_task}}
 			<div class={{setStack @index}}>
-				[_]{{this.task_name}}<br>
+				<input type="checkbox" class="checkbox">{{this.task_name}}<br>
 				<hr class="text_field">
 				<hr class="text_field">
 				<hr class="text_field">
@@ -88,6 +109,7 @@
 		<div id="pageFooter">Sponsored by: BCIT</div>
 		<div id="pageFooter-last">
 			<div>Mileage Out: _______________________________</div>
+			<br>
 			<div>If Wheels Removed/Wheels Torqued</div>
 			<div>To:________________ By:______________________</div>	
 		</div>
