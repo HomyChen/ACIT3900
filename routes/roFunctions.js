@@ -9,14 +9,14 @@ const pg = require('pg');
 const config = {
     user: 'postgres',
     database: 'sot',
-    password: 'password',
+    password: 'thegreatpass',
     port: 5432
 };
 
 const pool = new pg.Pool(config);
 
 router.post("/rosearch",function (req,resp) {
-    console.log(req.body);
+    // console.log(req.body);
     resp.send("Hello")
 })
 
@@ -27,9 +27,9 @@ router.post("/AroSearch", function (req,resp){
     var searchBy = req.body.roSearchBy;
     var roStatus = req.body.roStatus;
     
-    console.log(roSearchWord);
-    console.log(searchBy);
-    console.log(roStatus);
+    // console.log(roSearchWord);
+    // console.log(searchBy);
+    // console.log(roStatus);
     
     if(searchBy == "ro_id"){
         var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
@@ -44,8 +44,8 @@ router.post("/AroSearch", function (req,resp){
     
     
     
-    console.log(roQuery);
-    console.log(data);
+    // console.log(roQuery);
+    // console.log(data);
     
     pool.connect(function (err, client, done){
         if (err) {
@@ -95,7 +95,7 @@ router.post("/taskSearch", function (req,resp){
     
     var roID = req.body.roID;
     
-    console.log(roID);
+    // console.log(roID);
     
     var data = [roID];
     
@@ -106,7 +106,7 @@ router.post("/taskSearch", function (req,resp){
             console.log("(taskSearch - Unable to connect to the database: " + err );
         }
         else{
-            console.log("taskSearch - Successfully login to database!")
+            // console.log("taskSearch - Successfully login to database!")
         }
         
         client.query(taskQuery, data, function(err, result){
@@ -116,7 +116,7 @@ router.post("/taskSearch", function (req,resp){
                 resp.send(null);
             }
             else{
-                console.log(result.rows);
+                // console.log(result.rows);
                 resp.send(result.rows);
             }
         })

@@ -40,6 +40,10 @@ $(document).ready(function() {
     
     var roDetails = document.getElementById("roDetails");
     
+//--------------------------These are the changes that I have done---------------------------------------------------------------
+    var openPDF = document.getElementById("openPDF");
+    var vehicle_info = null;
+//-------------------------------------------------------------------------------------------------------------------------------
     searchROBut.onclick = function() {
     console.log("search button clicked");
         
@@ -56,7 +60,6 @@ $(document).ready(function() {
             success:function(data){
                 if (data){
                     console.log(data);
-                    
                 var resultsTable = $('#resultsTable').DataTable({
                     destroy: true,
                     select: true,
@@ -73,13 +76,15 @@ $(document).ready(function() {
                 });
                  
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
+                	
                     var rowData = resultsTable.rows( indexes ).data()[0];
-
                     odometerOut.disabled = true;
                     promisedTime.disabled = true;
                     saveRO.className = "btn btn-default pull-right invisible";
                     editRO.className = "btn btn-default pull-right visible";
-                    
+//--------------------------These are the changes that I have done---------------------------------------------------------------
+                    vehicle_info = rowData;
+//-------------------------------------------------------------------------------------------------------------------------------                    
                     roPopup.style.display = "block";
                     roNum.innerHTML = rowData.ro_id;
                     roCustName.innerHTML = rowData.last_name + ", " + rowData.first_name;
@@ -103,8 +108,10 @@ $(document).ready(function() {
                         },
                         success:function(data){
                         if (data){
-                            console.log(data);
-                            
+//--------------------------These are the changes that I have done---------------------------------------------------------------
+                            vehicle_info['tasks_info'] = data;
+                            console.log(vehicle_info);
+//-------------------------------------------------------------------------------------------------------------------------------
                             roTask.innerHTML="";
                             for(var i = 0; i<data.length; i++){
                                 var comment = data[i].comments;
@@ -199,8 +206,19 @@ $(document).ready(function() {
     }
     
     
-
-    
+//--------------------------These are the changes that I have done---------------------------------------------------------------
+    openPDF.onclick = function(){
+        $.ajax({
+            url: "/pdf/recievePDFInfo",
+            type: "post",
+            data: vehicle_info,
+            success: function(data){
+                console.log(data);
+                window.open("/pdf/createRepairOrderPDF")
+            }
+        })
+    }
+//-------------------------------------------------------------------------------------------------------------------------------
     popupClose.onclick = function() {
         roPopup.style.display = "none";
         roTask.innerHTML="";

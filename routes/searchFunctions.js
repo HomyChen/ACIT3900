@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg');
 
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:password@localhost:5432/sot"; //Change According to Database Requirements
+var dbURL = process.env.DATABASE_URL || "postgres://postgres:thegreatpass@localhost:5432/sot"; //Change According to Database Requirements
 
 
 const pgpool = new Pool({

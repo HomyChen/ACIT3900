@@ -1,0 +1,16 @@
+{
+  "name": "vaegir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "htmlpdf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.12",
+    "hbs": "^4.0.1",
+    "html-pdf": "^2.1.0"
+  }
+}

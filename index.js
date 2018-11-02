@@ -15,7 +15,9 @@ const expressSession = require("express-session");
 const seaFunctions = require('./routes/searchFunctions.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
-
+//---------------------------------------------------------------------------------------------------------------------------------------
+const pdfFunctions = require("./pdf/repordpdf")
+//---------------------------------------------------------------------------------------------------------------------------------------
 var pF = path.resolve(__dirname, "public");
 var app = exp();
 
@@ -53,6 +55,9 @@ app.get("/orders", function(req, resp){
 
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
+//-----------------------------------------------------------------------------------------------
+app.use("/pdf", pdfFunctions)
+//------------------------------------------------------------------------------------------------
 //app.use("/cisearch", seaFunctions);
 
 //search function from Glenn
