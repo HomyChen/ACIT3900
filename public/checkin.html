@@ -26,19 +26,20 @@
         <script src="/scripts/rejexValidator.js"></script>
         <script src="/scripts/getmenu.js"></script>
         <script src="/scripts/checkInSubmit.js"></script>
-        <script src="/scripts/checkIn.js"></script>
         <script src="/scripts/search_overlay.js"></script>
+        <script src="/scripts/checkIn.js"></script>
         
     </head>
     
 <body>
-    <div id="searchPosition"></div>    
-
+       
+    <div class="row" id="firstRow">
+        <div id="logoDiv"></div>
+        <div id="menuPosition"></div>
+    </div>
+    <div id="searchPosition"></div> 
     <div class="container-fluid" id="container">
-        <div class="row" id="firstRow">
-            <div id="logoDiv"></div>
-            <div id="menuPosition"></div>
-        </div>
+        
         <div class="row"> <div class="col-sm-12" id="headerDiv"> Vehicle Check-in</div></div>
 
             <div class="row">
@@ -61,13 +62,13 @@
                         <div class="form-group row">
                             <label for="hpInp" class="col-sm-3 col-form-label">Home Phone</label>
                             <div class="col-sm-9">
-                                <input type="tel" class="form-control" id="hpInp" placeholder="e.g 6041231234 or 604 123 1234">
+                                <input type="tel" class="form-control" id="hpInp" placeholder="eg. 6041231234 or 604 123 1234">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="cpInp" class="col-sm-3 col-form-label">Cell Phone</label>
                             <div class="col-sm-9">
-                                <input type="tel" class="form-control" id="cpInp" placeholder="e.g 6041231234 or 604 123 1234">
+                                <input type="tel" class="form-control" id="cpInp" placeholder="eg. 6041231234 or 604 123 1234">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,7 +86,7 @@
                         <div class="form-group row">
                             <label for="pcInp" class="col-sm-3 col-form-label">Postal Code</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="pcInp" placeholder="e.g A1A 1A1 or A1A1A1">
+                                <input type="text" class="form-control" id="pcInp" placeholder="eg. A1A 1A1 or A1A1A1">
                             </div>
                         </div>
                     </form>
@@ -96,13 +97,13 @@
                         <div class="form-group row">
                             <label for="vinInp" class="col-sm-3 col-form-label">VIN</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="vinInp" placeholder="e.g 4S4BP60C787362794">
+                                <input type="text" class="form-control" id="vinInp" placeholder="eg. 4S4BP60C787362794" maxlength="17">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="yrInp" class="col-sm-3 col-form-label">Year</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="yrInp" placeholder="eg. 1998">
+                                <input type="text" class="form-control" id="yrInp" placeholder="eg. 1998" maxlength="4">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -120,7 +121,7 @@
                         <div class="form-group row">
                             <label for="lpInp" class="col-sm-3 col-form-label">License Plate</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="lpInp" placeholder="e.g 111aaa or EBR123">
+                                <input type="text" class="form-control" id="lpInp" placeholder="eg. 111aaa or EBR123">
                             </div>
                         </div>
                         <div class="form-group row">

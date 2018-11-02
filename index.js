@@ -6,11 +6,13 @@ const exp = require("express");
 const port = process.env.PORT || 10000;
 const path = require("path");
 const bodyParser = require("body-parser");
+const expressSession = require("express-session");
+
 
 // had to change button Id of second add button for the other request option
 
 //defining routed function files -Homy
-const dbfun = require('./routes/searchFunctions.js')
+const seaFunctions = require('./routes/searchFunctions.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
 
@@ -28,6 +30,12 @@ app.use(function(req, res, next){
     next();
 });
 
+app.use(expressSession({
+    secret:"HIGJLCPJOPUD",
+    resave: true,
+    saveUninitialized:true
+}));
+
 app.use("/scripts", exp.static("build"));
 app.use("/css", exp.static("style"));
 app.use("/pages",exp.static("public"))
@@ -43,21 +51,37 @@ app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
 
-app.get("/s", function(req, resp){
-    resp.sendFile(pF+"/search.html")
-});
-
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
+//app.use("/cisearch", seaFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{
-	dbfun.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
-		response.send({status: 'OK', data: result})
+	seaFunctions.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
+		response.send(result);
 	}).catch((result)=>{
-        console.log(result);
+        response.send(result);
     });
 });
+
+app.post("/setVariables",function (req,resp) {
+    //req.session.status in index.js determines the scenario:
+    //Status 0: New Customer, New Vehicle
+    //Status 1: Old Customer, New Vehicle
+    //Status 2: Old Customer, Old Vehicle
+    console.log(req.body);
+    req.session.status = req.body;
+    console.log(req.session.status);
+    resp.send(req.body.status);
+})
+
+app.post("/getVariables",function (req,resp) {
+    resp.send({
+        status: 3,
+        cust_id:2,
+        vehicleId:1
+    });
+})
 
 server.listen(10000, function(err){
     if(err){
