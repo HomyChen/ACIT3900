@@ -4,8 +4,8 @@ var pdf = require('html-pdf')
 
 hbs.registerHelper("setStack", (number) => {
     task = number + 1
-    if((task%6) === 0){
-        if((task/6) === 1){
+    if((task%5) === 0){
+        if((task/5) === 1){
             return "work_order"
         } else {
             return "work_order_skip"
