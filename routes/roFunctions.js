@@ -123,4 +123,76 @@ router.post("/taskSearch", function (req,resp){
     })
 });
 
+
+router.post("/updateRO", function (req,resp){
+    console.log("updateRO ajax");
+    
+    var arraytaskIDComments = req.body.worktaskIDComments;
+    console.log("length");
+    console.log(arraytaskIDComments.length);
+    console.log(arraytaskIDComments);
+    console.log('first record');
+    console.log(arraytaskIDComments[0].comments);
+    console.log(arraytaskIDComments[0].worktask_id);
+    
+    
+    for(var i = 0; i<arraytaskIDComments.length; i++){
+        
+        var commentsData = [arraytaskIDComments[0].comments, arraytaskIDComments[0].worktask_id];
+        
+        var updateQuery = 'UPDATE repair_tasks SET comments = $1 WHERE worktask_id = $2';
+    
+        pool.connect(function (err, client, done){
+            if (err) {
+                console.log("(updateRO - Unable to connect to the database: " + err );
+            }
+            else{
+                console.log("updateRO - Successfully login to database!")
+            }
+
+            client.query(updateQuery, commentsData, function(err, result){
+                done();
+                if(err){
+                    console.log("updateRO failed");
+                    
+                }
+                else{
+                    console.log("updateRO successful");
+                }
+            })
+        })
+    }
+    
+    var odometerOut = req.body.odometerOut;
+    console.log("roOdometerOut:");
+    console.log(odometerOut);
+    
+    var roID = req.body.roID;
+    
+    var odometerOutData = [odometerOut, roID];
+        
+    var updateOdoQuery = 'UPDATE repair_order SET odometer_out = $1 WHERE ro_id = $2';
+    
+    pool.connect(function (err, client, done){
+            if (err) {
+                console.log("(updateOdoRO - Unable to connect to the database: " + err );
+            }
+            else{
+                console.log("updateOdoRO - Successfully login to database!")
+            }
+
+            client.query(updateOdoQuery, odometerOutData, function(err, result){
+                done();
+                if(err){
+                    console.log("updateOdoRO failed");
+                    
+                }
+                else{
+                    console.log("updateOdoRO successful");
+                }
+            })
+        })
+    
+});
+
 module.exports = router;

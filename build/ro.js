@@ -91,9 +91,9 @@ $(document).ready(function() {
                     roModel.innerHTML = rowData.model;
                     roYear.innerHTML = rowData.year;
                     roOdometerIn.innerHTML = rowData.odometer_in;
-                    //roOdometerOut.innerHTML = "<input class='form-control input-sm' id='OdometerOut' disabled>"
-                        //rowData.odometer_out;
+                    odometerOut.innerHTML = rowData.odometer_out;
                     roNotes.innerHTML = rowData.vehicle_notes;
+                    promisedTime.innerHTML = rowData.promised_time;
                     
                     $.ajax({
                         url:"/rosearch/taskSearch",
@@ -116,7 +116,7 @@ $(document).ready(function() {
                                 var taskEntry = document.createElement('li');
                                 var editTask = document.createElement("textarea");
                                 editTask.className = 'form-control';
-                                editTask.id = 'worktask' + data[i].worktask_id;
+                                editTask.id = 'comments' + data[i].worktask_id;
                                 editTask.disabled = true;
                                 editTask.rows = '5';
                                 editTask.style.marginBottom = '10px';
@@ -142,7 +142,7 @@ $(document).ready(function() {
                             
                             editRO.onclick = function(){
                                 for(var j = 0; j<data.length; j++){
-                                    document.getElementById('worktask' + data[j].worktask_id).disabled = false;
+                                    document.getElementById('comments' + data[j].worktask_id).disabled = false;
                                 }
                                     saveRO.className = "btn btn-default pull-right visible";
                                     editRO.className = "btn btn-default pull-right invisible";
@@ -156,22 +156,36 @@ $(document).ready(function() {
                                 ('worktask' + data[k].worktask_id) : ('worktask' + data[k].worktask_id).value,
                                 ('worktask' + data[k].worktask_id) : ('worktask' + data[k].worktask_id).value
                             }
-                            */    
+                            */   
+                            
+                            
+                            //var arrayObj = {};
+                            //array.push(arrayObj);
+                            
                             saveRO.onclick = function(){
+                                    var array = [{}];
                                     saveRO.className = "btn btn-default pull-right invisible";
                                     editRO.className = "btn btn-default pull-right visible";
                                     odometerOut.disabled = true;
                                     promisedTime.disabled = true;
+                                
                                 for(var k = 0; k<data.length; k++){
-                                    document.getElementById('worktask' + data[k].worktask_id).disabled = true;
+                                    document.getElementById('comments' + data[k].worktask_id).disabled = true;
+                                    
+                                    array.push({
+                                        'worktask_id': data[k].worktask_id,
+                                        'comments': (document.getElementById('comments' + data[k].worktask_id).value)
+                                    })
+                                    
                                 }
-                                /*
+                                
                                  $.ajax({
                                     url:"/rosearch/updateRO",
                                     type:"post",
                                     data:{
-                                        roID:rowData.ro_id,
-                                        
+                                        worktaskIDComments:array,
+                                        odometerOut:(odometerOut.value),
+                                        roID:rowData.ro_id
                                     },
                                     success:function(data){
                                         if (data){
@@ -179,7 +193,7 @@ $(document).ready(function() {
                                         }
                                     }
                                  });
-                                */
+                                
                             }                        
                             
                             }
