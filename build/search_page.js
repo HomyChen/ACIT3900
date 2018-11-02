@@ -38,7 +38,7 @@ $(document).ready(()=>{
     //Status 0: New Customer, New Vehicle
     //Status 1: Old Customer, New Vehicle
     //Status 2: Old Customer, Old Vehicle
-    ajaxSetVariables(0);
+    ajaxSetVariables('0', null, null);
     
     //Brings up search page when "Existing Customer" button is pressed. Makes the check-in page content invisible.
     searchPageBut.onclick = ()=>{
@@ -47,7 +47,7 @@ $(document).ready(()=>{
 
     //Makes "New Customer" button clear the fields if they are filled
 	ncbut.onclick = ()=>{
-        ajaxSetVariables(0);
+        ajaxSetVariables('0', null, null);
         clearCustomer();
         clearVehicle();
         makeCheckInVisible();
@@ -104,7 +104,7 @@ $(document).ready(()=>{
                             submit_button_cust_vehicle.addEventListener("click", function(){  
 
                                 //Set status to 2: Old Customer, Old Vehicle
-                                ajaxSetVariables(2); 
+                                ajaxSetVariables('2', tdata.vehicle_id, tdata.cust_id); 
                                 
                                 //Autofill both customer and vehicle forms
                                 autofillCustomer(tdata);
@@ -121,7 +121,7 @@ $(document).ready(()=>{
                             submit_button_cust_only.addEventListener("click", function(){
 
                                 //Set status to 1: Old Customer, New Vehicle
-                                ajaxSetVariables(1);
+                                ajaxSetVariables('1', null, tdata.cust_id);
 
                                 //Autofill only customer form, clear vehicle form
                                 autofillCustomer(tdata);
@@ -150,13 +150,14 @@ $(document).ready(()=>{
     });
     
     //Ajax function to set the req.session.status variable depending on the scenario
-    function ajaxSetVariables(status){
+    function ajaxSetVariables(status, vehicle_id, cust_id){
         $.ajax({
             url:"./setVariables",
             type:"post",
             data:{
-                status:status,
-                info:[1,1]
+                status: status,
+                vehicle_id: vehicle_id,
+                cust_id: cust_id
             },
             success:function (resp) {
                 console.log('Status set to '+resp);
