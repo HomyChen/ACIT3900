@@ -13,7 +13,7 @@ app.get("/result", (req, res) => {
 	data = {
 		repair_order: 1,
 		promised_time: "End of Time",
-		first_name: "Fuck",
+		first_name: "Helms",
 		last_name: "Worthy",
 		home_phone: "(123) 123-1234",
 		cell_phone: "(123) 123-1234",
