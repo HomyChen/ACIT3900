@@ -103,20 +103,20 @@ router.post("/taskSearch", function (req,resp){
     
     pool.connect(function (err, client, done){
         if (err) {
-            //console.log("(taskSearch - Unable to connect to the database: " + err );
+            console.log("(taskSearch - Unable to connect to the database: " + err );
         }
         else{
-            //console.log("taskSearch - Successfully login to database!")
+            console.log("taskSearch - Successfully login to database!")
         }
         
         client.query(taskQuery, data, function(err, result){
             done();
             if(err){
-                //console.log(err.message);
+                console.log(err.message);
                 resp.send(null);
             }
             else{
-                //console.log(result.rows);
+                console.log(result.rows);
                 resp.send(result.rows);
             }
         })
