@@ -48,7 +48,7 @@
                     <form class="form" id="customerInfo">
                         <div id="boxHeader">Customer Information</div>
                         <div class="form-group row">
-                            <label for="lnInp" class="col-sm-3 col-form-label">Last Name</label>
+                            <label for="lnInp" class="col-sm-3 col-form-label">Last Name *</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="lnInp" required placeholder="Last Name or Company Name">
                             </div>
@@ -95,7 +95,7 @@
                     <form class="form" id="vehicleInfo">
                         <div id="boxHeader">Vehicle Information</div>
                         <div class="form-group row">
-                            <label for="vinInp" class="col-sm-3 col-form-label">VIN</label>
+                            <label for="vinInp" class="col-sm-3 col-form-label">VIN *</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="vinInp" placeholder="eg. 4S4BP60C787362794" maxlength="17">
                             </div>
@@ -128,6 +128,40 @@
                             <label for="oiInp" class="col-sm-3 col-form-label">Odometer</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="oiInp" placeholder="Odometer">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="oiInp" class="col-sm-3 col-form-label">Date Promised</label>
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control" id="dtInp" placeholder="Date Promised">
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="timeHour">
+                                    <option value="00">00</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <select id="timeMin">
+                                    <option value="00">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                                <select id="timeAmPm">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

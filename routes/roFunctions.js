@@ -16,7 +16,7 @@ const config = {
 const pool = new pg.Pool(config);
 
 router.post("/rosearch",function (req,resp) {
-    console.log(req.body);
+    //console.log(req.body);
     resp.send("Hello")
 })
 
@@ -27,9 +27,9 @@ router.post("/AroSearch", function (req,resp){
     var searchBy = req.body.roSearchBy;
     var roStatus = req.body.roStatus;
     
-    console.log(roSearchWord);
-    console.log(searchBy);
-    console.log(roStatus);
+    //console.log(roSearchWord);
+    //console.log(searchBy);
+    //console.log(roStatus);
     
     if(searchBy == "ro_id"){
         var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
@@ -44,15 +44,15 @@ router.post("/AroSearch", function (req,resp){
     
     
     
-    console.log(roQuery);
-    console.log(data);
+    //console.log(roQuery);
+    //console.log(data);
     
     pool.connect(function (err, client, done){
         if (err) {
-            console.log("Unable to connect to the database: " + err );
+            //console.log("Unable to connect to the database: " + err );
         }
         else{
-            console.log("Successfully login to database!")
+            //console.log("Successfully login to database!")
         }
         
         client.query(roQuery, data, function(err, result){
@@ -62,7 +62,7 @@ router.post("/AroSearch", function (req,resp){
                 resp.send(null);
             }
             else{
-                console.log(result.rows);
+                //console.log(result.rows);
                 resp.send(result.rows);
                 
                 
@@ -95,7 +95,7 @@ router.post("/taskSearch", function (req,resp){
     
     var roID = req.body.roID;
     
-    console.log(roID);
+    //console.log(roID);
     
     var data = [roID];
     
@@ -103,24 +103,109 @@ router.post("/taskSearch", function (req,resp){
     
     pool.connect(function (err, client, done){
         if (err) {
-            console.log("(taskSearch - Unable to connect to the database: " + err );
+            //console.log("(taskSearch - Unable to connect to the database: " + err );
         }
         else{
-            console.log("taskSearch - Successfully login to database!")
+            //console.log("taskSearch - Successfully login to database!")
         }
         
         client.query(taskQuery, data, function(err, result){
             done();
             if(err){
-                console.log(err.message);
+                //console.log(err.message);
                 resp.send(null);
             }
             else{
-                console.log(result.rows);
+                //console.log(result.rows);
                 resp.send(result.rows);
             }
         })
     })
+});
+
+async function updateTaskCommentsLoop(arraytaskIDComments){
+    
+    for(var i = 0; i<arraytaskIDComments.length; i++){
+        var taskcomments = await arraytaskIDComments[i].comments;
+        var taskid = await arraytaskIDComments[i].worktask_id;
+        const varr = await connectDBTaskComments(taskid, taskcomments).catch(err => console.log(err));
+        console.log("Async function successful for loop "+i);
+    }
+}
+
+var connectDBTaskComments = (worktask_id, comments) => {
+    
+    return new Promise((resolve, reject) => {
+           pool.connect(function (err, client, done){
+               
+                if (err) {
+                    console.log("(updateRO - Unable to connect to the database: " + err );
+                    reject(err);
+                }
+                else{
+                    console.log("updateRO - Successfully login to database!");
+
+                    var commentsData = [comments, worktask_id];
+                    var updateQuery = 'UPDATE repair_tasks SET comments = $1 WHERE worktask_id = $2';
+
+                    client.query(updateQuery, commentsData, function(err, result){
+                        done();
+                        if(err){
+                            console.log("updateRO failed");
+                            reject(err);
+
+                        }
+                        else{
+                            console.log("updateRO successful");
+                            resolve("updateRO successful");
+                        }
+                    });
+                }
+
+
+            });            
+    });
+    
+}
+
+router.post("/updateRO", function (req,resp){
+    
+    var arraytaskIDComments = req.body.worktaskIDComments;
+    
+    updateTaskCommentsLoop(arraytaskIDComments)
+        .then(err => console.log(err))
+        .catch(err => console.log(err));
+    /*
+    var odometerOut = req.body.odometerOut;
+    //console.log("roOdometerOut:");
+    //console.log(odometerOut);
+    
+    var roID = req.body.roID;
+    
+    var odometerOutData = [odometerOut, roID];
+        
+    var updateOdoQuery = 'UPDATE repair_order SET odometer_out = $1 WHERE ro_id = $2';
+    
+    pool.connect(function (err, client, done){
+            if (err) {
+                //console.log("(updateOdoRO - Unable to connect to the database: " + err );
+            }
+            else{
+                //console.log("updateOdoRO - Successfully login to database!")
+            }
+
+            client.query(updateOdoQuery, odometerOutData, function(err, result){
+                done();
+                if(err){
+                    //console.log("updateOdoRO failed");
+                    
+                }
+                else{
+                    //console.log("updateOdoRO successful");
+                }
+            })
+        })
+    */
 });
 
 module.exports = router;

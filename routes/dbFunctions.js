@@ -11,16 +11,13 @@ const pg = require('pg');
 var dbFunc = require("./createRepairOrderSec1");
 
 router.post("/insertCustomer",function (req,resp) {
-
+    console.log(req.body);
     doInsertsNewCustomerNewVehicle(req).then(data => {
-
         if(data == null){
             resp.send({
                 status:1
             })
         }
-        console.log("NewCusNewVehicle:");
-        console.log(data);
         resp.send(data)
     });
 });
@@ -129,6 +126,16 @@ async function doInsertOldCustomerOldVehicle(req) {
         return null;
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 async function insertWithOnlyCommonTasks(commonTasks,createRepairOrder){
     const createWorkTasksCommon = await dbFunc.createWorkTaskCommon(commonTasks, createRepairOrder);

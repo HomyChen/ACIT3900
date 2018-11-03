@@ -20,6 +20,10 @@ $(document).ready(function(){
     var licenseInput        = document.getElementById("lpInp");
     var odoInput            = document.getElementById("oiInp");
     var vehicleNotesInput   = document.getElementById("vnInp");
+    var datePromised        = document.getElementById("dtInp");
+    var dateHourPromised    = document.getElementById("timeHour");
+    var dateMinPromised     = document.getElementById("timeMin");
+    var dateAmPmPromised    = document.getElementById("timeAmPm");
     var divToAppendCommonRequests = document.getElementById("dropDownAppended");
 
     // Buttons
@@ -61,11 +65,14 @@ $(document).ready(function(){
 
     async function submitButtonClick() {
 
+
         var commonTasksSelect = document.getElementById("requestsDropdown");
         var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
         if (validate.status == "true") {
+
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
                 packageRequests();
+
                 let result =  await getVariables();
                 switch (result.status){
                     case '0':
@@ -185,12 +192,14 @@ $(document).ready(function(){
     }
 
     function newCustomerNewVehicle() {
-
         var currentDate = new Date();
         var date = currentDate.getDate();
         var month = currentDate.getMonth();
         var year = currentDate.getFullYear();
         var monthDateYear  = year + "-" + (month+1) + "-" + date;
+
+        var Promisedate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
+            +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString()
 
         $.ajax({
             url: "/data/insertCustomer",
@@ -211,7 +220,8 @@ $(document).ready(function(){
                     model: modelInput.value,
                     license: licenseInput.value,
                     odometer: odoInput.value,
-                    vehicleNotes: vehicleNotesInput.value
+                    vehicleNotes: vehicleNotesInput.value,
+                    datePromised:Promisedate
                 },
                 requests: requestsPackaged,
 
@@ -234,6 +244,9 @@ $(document).ready(function(){
         var year = currentDate.getFullYear();
         var monthDateYear  = year + "-" + (month+1) + "-" + date;
 
+        var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
+            +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString()
+
         $.ajax({
             url: "/data/insertOldCustNewVehicle",
             type: "post",
@@ -247,7 +260,8 @@ $(document).ready(function(){
                     model: modelInput.value,
                     license: licenseInput.value,
                     odometer: odoInput.value,
-                    vehicleNotes: vehicleNotesInput.value
+                    vehicleNotes: vehicleNotesInput.value,
+                    datePromised:promiseDate
                 },
                 requests: requestsPackaged,
             },
@@ -264,7 +278,7 @@ $(document).ready(function(){
     }
 
     function oldCustomerOldVehicle(result) {
-
+        console.log(result);
         var currentDate = new Date();
         var date = currentDate.getDate();
         var month = currentDate.getMonth();
@@ -276,7 +290,7 @@ $(document).ready(function(){
             type: "post",
             data: {
                 customerId: result.cust_id,
-                vehicleId: result.vehicleId,
+                vehicleId: result.vehicle_id,
                 date:monthDateYear,
                 dataGram: {
                     vin: vinInput.value,

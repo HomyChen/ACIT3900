@@ -13,8 +13,10 @@ const expressSession = require("express-session");
 
 //defining routed function files -Homy
 const seaFunctions = require('./routes/searchFunctions.js');
+const vinFunctions = require('./routes/checkVIN.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
+const pdfFunctions = require("./pdf/repordpdf")
 
 var pF = path.resolve(__dirname, "public");
 var app = exp();
@@ -53,11 +55,20 @@ app.get("/orders", function(req, resp){
 
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
+app.use("/pdf", pdfFunctions)
 //app.use("/cisearch", seaFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{
 	seaFunctions.getSearchData(request.body.searchQuery, request.body.searchType).then((result)=>{
+		response.send(result);
+	}).catch((result)=>{
+        response.send(result);
+    });
+});
+
+app.post("/cVIN", (request,response)=>{
+	vinFunctions.checkVIN(request.body.vin).then((result)=>{
 		response.send(result);
 	}).catch((result)=>{
         response.send(result);

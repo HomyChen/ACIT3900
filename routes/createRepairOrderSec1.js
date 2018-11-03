@@ -80,7 +80,7 @@ var insertUnCommonTasks = (info) => {
 
 var createRepairOrder = (dataGram) =>{
     return new Promise((resolve,reject) =>{
-        var repairOrderData = [dataGram[0].vehicleNotes, parseFloat(dataGram[0].odometer), dataGram[2],dataGram[1].vehicleID];
+        var repairOrderData = [dataGram[0].vehicleNotes, parseFloat(dataGram[0].odometer), dataGram[2],dataGram[1].vehicleID,dataGram[0].datePromised];
 
         pool.connect((err, client, done)=> {
             if (err) {
@@ -88,7 +88,7 @@ var createRepairOrder = (dataGram) =>{
                 reject({status:0})
             }
 
-            client.query('INSERT INTO repair_order (vehicle_notes, odometer_in, date_in , vehicle_id) VALUES($1, $2, $3, $4) returning RO_ID',repairOrderData,
+            client.query('INSERT INTO repair_order (vehicle_notes, odometer_in, date_in , vehicle_id, promised_time) VALUES($1, $2, $3, $4, $5) returning RO_ID',repairOrderData,
                 (err, result)=>{
                     done();
                     if (err) {

@@ -17,11 +17,10 @@ var getSearchData = (searchQuery, searchType) => {
         if(searchRegex.test(searchQuery) || searchQuery == ''){
             console.log("Search Regex Passed");
             var searchText = searchQuery + '%';
-            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE $1 LIKE $2', [searchQuery, searchText] , (err, res) => {
+            pgpool.query('SELECT * FROM customer INNER JOIN vehicle ON customer.cust_id = vehicle.cust_id WHERE '+searchType+' LIKE $1', [ searchText] , (err, res) => {
                 if (err) {
                     reject(err)
                 } else {
-                    console.log(res.rows);
                     resolve({status: "success", data: res.rows});
                 }
             })
