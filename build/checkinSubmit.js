@@ -35,6 +35,7 @@ $(document).ready(function(){
     var tBody               = document.getElementById("requestTableBody");
     var otherTBody          = document.getElementById("otherRequestTableBody");
     var otherSerTextArea    = document.getElementById("otherRequestsInp");
+    var clearTableBut       = document.getElementById("clearTable");
 
     // these two are the variables in table row
     var tableRows = 1;
@@ -62,6 +63,8 @@ $(document).ready(function(){
 
 
     submitButton.addEventListener("click", submitButtonClick);
+    clearTableBut.addEventListener("click",clearForm);
+    document.getElementById("searchBut").addEventListener("click",clearForm);
 
     async function submitButtonClick() {
 
@@ -105,6 +108,7 @@ $(document).ready(function(){
     }
 
 
+
     serviceReqBtn.onclick = function () {
         // adding service requests to the table dynamically
         // using tableRows to dynamically change the number of elements in the table
@@ -116,6 +120,7 @@ $(document).ready(function(){
         var serviceRequestText = commonTasksSelect[commonTasksSelect.selectedIndex].innerHTML.toString();
 
         th.scope = "row";
+        tr.id="commonTasks";
         th.innerHTML= tableRows++;  //Table rows is the number that is added to the table hence it starts at 1
         td.innerHTML = serviceRequestText;
         numOfCommonRequests++; // service requests are at 0.
@@ -134,6 +139,7 @@ $(document).ready(function(){
         var otherServiceRequestText = otherSerTextArea.value;
 
         th.scope = "row";
+        tr.id="unCommonTasks";
         th.innerHTML= tableRowsOther++;  //Table rows is the number that is added to the table hence it starts at 1
         td.innerHTML = otherServiceRequestText;
         numOfUnCommonRequests++; // service requests are at 0.
@@ -188,7 +194,6 @@ $(document).ready(function(){
                 }
             })
         })
-
     }
 
     function newCustomerNewVehicle() {
@@ -224,7 +229,6 @@ $(document).ready(function(){
                     datePromised:Promisedate
                 },
                 requests: requestsPackaged,
-
             },
             success: function (data) {
                 if(data.status==1){
@@ -232,6 +236,7 @@ $(document).ready(function(){
                 }
                 else {
                     console.log(data)
+
                 }
             }
         })
@@ -245,7 +250,9 @@ $(document).ready(function(){
         var monthDateYear  = year + "-" + (month+1) + "-" + date;
 
         var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
-            +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString()
+            +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
+
+
 
         $.ajax({
             url: "/data/insertOldCustNewVehicle",
@@ -278,12 +285,14 @@ $(document).ready(function(){
     }
 
     function oldCustomerOldVehicle(result) {
-        console.log(result);
         var currentDate = new Date();
         var date = currentDate.getDate();
         var month = currentDate.getMonth();
         var year = currentDate.getFullYear();
         var monthDateYear  = year + "-" + (month+1) + "-" + date;
+
+        var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
+            +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
 
         $.ajax({
             url: "/data/insertOldCustomerOldVehicle",
@@ -299,7 +308,8 @@ $(document).ready(function(){
                     model: modelInput.value,
                     license: licenseInput.value,
                     odometer: odoInput.value,
-                    vehicleNotes: vehicleNotesInput.value
+                    vehicleNotes: vehicleNotesInput.value,
+                    datePromised:promiseDate
                 },
                 requests: requestsPackaged,
             },
@@ -313,6 +323,20 @@ $(document).ready(function(){
             }
         })
 
+    }
+
+
+    function clearForm() {
+        for(let i =1; i<=numOfCommonRequests; i++){
+            tBody.removeChild(document.getElementById("commonTasks"));
+        }
+        for(let z = 1; z <= numOfUnCommonRequests; z++){
+            otherTBody.removeChild(document.getElementById("unCommonTasks"));
+        }
+        numOfCommonRequests     = 0;
+        numOfUnCommonRequests   = 0;
+        tableRows               = 1;
+        tableRowsOther          = 1;
     }
     
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/

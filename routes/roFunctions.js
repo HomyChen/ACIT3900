@@ -131,7 +131,7 @@ async function updateTaskCommentsLoop(arraytaskIDComments){
         const varr = await connectDBTaskComments(taskid, taskcomments).catch(err => console.log(err));
         console.log("Async function successful for loop "+i);
         if(i == (arraytaskIDComments.length-1)){
-            return();
+            return;
         }
     }
 }

@@ -10,11 +10,17 @@ body {
     font-weight: bold;
 }
 
-#searchBut {
+#clearTable{
+    margin-left: 2%;
+}
+
+#buttonsDiv {
     width: 100%;
     margin-bottom: 10px;  
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
+    text-align: center;
+    height: 5vh;
 }
 
 #container {
@@ -39,6 +45,7 @@ body {
 #serviceRequests {
     margin-top: 10px;
     overflow: auto;
+    margin-bottom: 5%;
 }
 
 #requestedServicesTable {
@@ -53,6 +60,7 @@ body {
 
 #requestsDropdown {
     width: 100%;
+    padding: 5%;
 }
 
 #otherRequestsInp {
