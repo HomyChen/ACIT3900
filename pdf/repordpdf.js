@@ -7,6 +7,9 @@ app.post("/recievePDFInfo", (req, res) => {
 	req.session.pdfInfo = req.body
     res.send("Stuff")
 })
+app.get("/test",function (req,resp) {
+    resp.send("./test.html")
+})
 
 app.get("/createRepairOrderPDF", (req, res) => {
 	// console.log("-------------------------------------------------------------------------------------------------------------");

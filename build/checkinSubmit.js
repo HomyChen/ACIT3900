@@ -59,23 +59,22 @@ $(document).ready(function(){
     var odoverif = true;
     var vinverif =  false;
     /*-----------------------------------------------------------------------------------*/
+
+    // loading basic functions
     getCommonRequests();
-
-
     submitButton.addEventListener("click", submitButtonClick);
     clearTableBut.addEventListener("click",clearForm);
     document.getElementById("searchBut").addEventListener("click",clearForm);
 
     async function submitButtonClick() {
 
-
         var commonTasksSelect = document.getElementById("requestsDropdown");
-        var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
-        if (validate.status == "true") {
+        var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id);
 
+        if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
                 packageRequests();
-
+                await dateCheck()
                 let result =  await getVariables();
                 switch (result.status){
                     case '0':
@@ -106,8 +105,6 @@ $(document).ready(function(){
             }
 
     }
-
-
 
     serviceReqBtn.onclick = function () {
         // adding service requests to the table dynamically
@@ -181,6 +178,29 @@ $(document).ready(function(){
                 divToAppendCommonRequests.innerHTML = resp;
             }
         });
+    }
+
+    function dateCheck() {
+        return new Promise((resolve) =>{
+
+            if(datePromised.value ==''){
+                var currentDate = new Date();
+                var date = currentDate.getDate();
+                var month = currentDate.getMonth();
+                var year = currentDate.getFullYear();
+                if(date < 10){
+                    date = "0"+date;
+                }
+                var monthDateYear  = year + "-" + (month+1) + "-" + date;
+                dateHourPromised.value = 12;
+                dateAmPmPromised.value = "PM";
+                datePromised.value =  monthDateYear;
+                resolve();
+            }
+            else{
+                resolve()
+            }
+        })
     }
 
     function getVariables() {
@@ -324,7 +344,6 @@ $(document).ready(function(){
         })
 
     }
-
 
     function clearForm() {
         for(let i =1; i<=numOfCommonRequests; i++){
