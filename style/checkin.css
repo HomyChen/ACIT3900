@@ -10,9 +10,7 @@ body {
     font-weight: bold;
 }
 
-#clearTable{
-    margin-left: 2%;
-}
+
 
 #buttonsDiv {
     width: 100%;
@@ -20,7 +18,7 @@ body {
     font-weight: bold;
     font-size: 16px;
     text-align: center;
-    height: 5vh;
+    overflow-y: auto;
 }
 
 #container {
@@ -73,4 +71,37 @@ body {
 #logoDiv {
     margin-left: 15px;
 }
+
+#searchButDiv {
+    padding: 0 0 0 0;
+}
+
+#searchBut {
+    width: 100%;
+}
+
+#clearTableDiv {
+    padding: 0 0 0 10px;
+}
+
+@media only screen and (max-width : 768px){
+    #clearTableDiv {
+        padding: 0 0 0 0;
+        margin-top: 10px;
+    }
+}
+
+#clearTable {
+    width: 100%;
+}
+
+#timeInpDiv {
+    padding: 0 0 0 0;
+}
+
+.requiredText {
+    text-align: right;
+}
+
+
 
