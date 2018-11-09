@@ -36,7 +36,10 @@ $(document).ready(function() {
     
     var roTask = document.getElementById("roTask");
     var odometerOut= document.getElementById("odometerOut");
-    var promisedTime = document.getElementById("promisedTime");
+    var promiseDate = document.getElementById("promiseDate");
+    var promiseHour = document.getElementById("timeHour");
+    var promiseMin = document.getElementById("timeMin");
+    var promiseAmPm = document.getElementById("timeAmPm");
     
     var roDetails = document.getElementById("roDetails");
     
@@ -48,7 +51,7 @@ $(document).ready(function() {
     searchROBut.onclick = function() {
     console.log("search button clicked");
         
-        //$('#resultsTable').DataTable().destroy();
+        
         
         $.ajax({
             url:"/rosearch/AroSearch",
@@ -79,11 +82,9 @@ $(document).ready(function() {
                  
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
                     var rowData = resultsTable.rows( indexes ).data()[0];
-
-                    odometerOut.disabled = true;
-                    promisedTime.disabled = true;
-                    saveRO.className = "btn btn-default pull-right invisible";
-                    editRO.className = "btn btn-default pull-right visible";
+                    
+                    disableInputs();
+                    
 //--------------------------These are the changes that I have done---------------------------------------------------------------
                     vehicle_info = rowData;
 //-------------------------------------------------------------------------------------------------------------------------------          
@@ -98,9 +99,9 @@ $(document).ready(function() {
                     roModel.innerHTML = rowData.model;
                     roYear.innerHTML = rowData.year;
                     roOdometerIn.innerHTML = rowData.odometer_in;
-                    odometerOut.innerHTML = rowData.odometer_out;
+                    odometerOut.value = rowData.odometer_out;
                     roNotes.innerHTML = rowData.vehicle_notes;
-                    promisedTime.innerHTML = rowData.promised_time;
+                    //promisedTime.innerHTML = rowData.promised_time;
                     
                     $.ajax({
                         url:"/rosearch/taskSearch",
@@ -116,12 +117,11 @@ $(document).ready(function() {
                             console.log(vehicle_info);
 //-------------------------------------------------------------------------------------------------------------------------------
                             roTask.innerHTML="";
+                        
+                            
                             for(var i = 0; i<data.length; i++){
+                                var task_id = data[i].worktask_id;
                                 var comment = data[i].comments;
-                                var box = '\u2610';
-                                var linebreak = document.createElement('br');
-                                var horLine = document.createElement('HR');
-                                horLine.className = 'taskLine';
                                 var taskName = data[i].task_name; 
                                 var taskEntry = document.createElement('li');
                                 var editTask = document.createElement("textarea");
@@ -131,53 +131,47 @@ $(document).ready(function() {
                                 editTask.rows = '5';
                                 editTask.style.marginBottom = '10px';
                                 
-                                
                                 if(comment == null){
                                     editTask.value = "";
                                 }else{
                                     editTask.value = comment;
                                 }
                                 
-                                taskEntry.appendChild(document.createTextNode(taskName)).appendChild;
-
-                                roTask.appendChild(taskEntry);
-                                roTask.appendChild(editTask);
-                                //roTask.appendChild(linebreak);
-                                //roTask.appendChild(horLine);
-                                //roTask.appendChild(linebreak.cloneNode());
+                                //Add Parts Button
+                                var addPartBut = document.createElement("button");
+                                addPartBut.className = "btn btn-default";
+                                addPartBut.innerHTML = "Add Part";
+                                addPartBut.style.marginBottom = "15px";
+                                //addPartBut.id = task_id;
+                                addPartBut.onclick = function(task_id){
+                                    return function(){
+                                        addPartButFunc(task_id);
+                                    };
+                                }(task_id);
                                 
-                                //roTask.appendChild(horLine.cloneNode());
-                 
+                                taskEntry.appendChild(document.createTextNode(taskName)).appendChild;
+                                
+                                var taskDiv = document.createElement("div");
+                                
+                                taskDiv.appendChild(taskEntry);
+                                taskDiv.appendChild(editTask);
+                                taskDiv.appendChild(addPartBut);
+                                taskDiv.id = "taskNum"+task_id;
+                                roTask.appendChild(taskDiv);
                             }
+                            
                             
                             editRO.onclick = function(){
                                 for(var j = 0; j<data.length; j++){
                                     document.getElementById('comments' + data[j].worktask_id).disabled = false;
                                 }
-                                    saveRO.className = "btn btn-default pull-right visible";
-                                    editRO.className = "btn btn-default pull-right invisible";
-                                    odometerOut.disabled = false;
-                                    promisedTime.disabled = false;
-                                
+                                    enableInputs();
+                                    
                             }
-                            
-                            /*
-                            var taskComments = {
-                                ('worktask' + data[k].worktask_id) : ('worktask' + data[k].worktask_id).value,
-                                ('worktask' + data[k].worktask_id) : ('worktask' + data[k].worktask_id).value
-                            }
-                            */   
-                            
-                            
-                            //var arrayObj = {};
-                            //array.push(arrayObj);
                             
                             saveRO.onclick = function(){
                                     var array = [{}];
-                                    saveRO.className = "btn btn-default pull-right invisible";
-                                    editRO.className = "btn btn-default pull-right visible";
-                                    odometerOut.disabled = true;
-                                    promisedTime.disabled = true;
+                                    disableInputs();
                                 
                                 for(var k = 0; k<data.length; k++){
                                     document.getElementById('comments' + data[k].worktask_id).disabled = true;
@@ -236,6 +230,67 @@ $(document).ready(function() {
         })
     }
 //-------------------------------------------------------------------------------------------------------------------------------
+    
+    function disableInputs(){
+        saveRO.className = "btn btn-default pull-right invisible";
+        editRO.className = "btn btn-default pull-right visible";
+        odometerOut.disabled = true;
+        promiseDate.disabled = true;
+        promiseHour.disabled = true;
+        promiseMin.disabled = true;
+        promiseAmPm.disabled = true;
+        promiseHour.style.backgroundColor = "#eee";
+        promiseMin.style.backgroundColor = "#eee";
+        promiseAmPm.style.backgroundColor = "#eee";
+    }
+    
+    function enableInputs(){
+        saveRO.className = "btn btn-default pull-right visible";
+        editRO.className = "btn btn-default pull-right invisible";
+        odometerOut.disabled = false;
+        promiseDate.disabled = false;
+        promiseHour.disabled = false;
+        promiseMin.disabled = false;
+        promiseAmPm.disabled = false;
+        promiseHour.style.backgroundColor = "#fff";
+        promiseMin.style.backgroundColor = "#fff";
+        promiseAmPm.style.backgroundColor = "#fff";
+    }
+    
+    function addPartButFunc(worktask_id){
+        console.log("Task id: "+worktask_id);
+        var partsDiv = document.createElement("div");
+        partsDiv.className = "row";
+        partsDiv.style.marginBottom = "15px";
+        var partNoInp = document.createElement("input");
+        partNoInp.className = "col-sm-2";
+        partNoInp.placeholder = "Part Number";
+        //partNoInp.id = "partNoInp"
+        var partDescInp = document.createElement("input");
+        partDescInp.className = "col-sm-2";
+        partDescInp.placeholder = "Description";
+        var partQtyInp = document.createElement("input");
+        partQtyInp.className = "col-sm-2";
+        partQtyInp.placeholder = "Quantity";
+        var partUnitPriceInp = document.createElement("input");
+        partUnitPriceInp.className = "col-sm-2";
+        partUnitPriceInp.placeholder = "Unit Price";
+        var partSellPriceInp = document.createElement("input");
+        partSellPriceInp.className = "col-sm-2";
+        partSellPriceInp.placeholder = "Sell Price"
+        var partSupplierNameInp = document.createElement("input");
+        partSupplierNameInp.className = "col-sm-2";
+        partSupplierNameInp.placeholder = "Supplier"
+        
+        partsDiv.appendChild(partNoInp);
+        partsDiv.appendChild(partDescInp);
+        partsDiv.appendChild(partQtyInp);
+        partsDiv.appendChild(partUnitPriceInp);
+        partsDiv.appendChild(partSellPriceInp);
+        partsDiv.appendChild(partSupplierNameInp);
+        
+        document.getElementById("taskNum"+worktask_id).appendChild(partsDiv);
+    }
     
     popupClose.onclick = function() {
         roPopup.style.display = "none";

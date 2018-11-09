@@ -65,12 +65,59 @@
                             <div id="logoDiv"></div>
                         </div>-->
                         <div class="row">
-                            <div class="col-md-6" id="roTitle"><div id="roLogo"></div></div>
-                            <div class="col-md-3 text-right" id="roFieldTitle">Repair Order #:</div>
+                            <!--<div class="col-md-6" id="roTitle"><div id="roLogo"></div></div>-->
+                            <div class="col-md-2" id="roNumTitle">Repair Order #:</div>
                             <div class="col-md-2" id="roNum"></div>
-                            <div class="col-md-3 text-right">Promised Time:</div>
-                            <div class="col-md-2"><input class="form-control input-sm" id="promisedTime" disabled></div>
+                        </div>
+                        <p></p>
+                        <div class="row">
+                            <div class="col-md-2" id="roNumTitle">Promised Time:</div>
+                            <div class="col-md-2"><input type="date" class="form-control input-sm" id="promiseDate"></div>
+                             <div class="col-md-8">
+                                <select id="timeHour">
+                                    <optgroup class="roSelect">
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </optgroup>
+                                </select>
                             
+                            
+                                <select id="timeMin">
+                                    <optgroup class="roSelect">
+                                        <option value="00">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </optgroup>
+                                </select>
+                            
+                           
+                                <select id="timeAmPm">
+                                    <optgroup class="roSelect">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </optgroup>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="col-sm-2 pull-right">
+                                    
+                            </div>
                         </div>
                         <br>
                         <br>

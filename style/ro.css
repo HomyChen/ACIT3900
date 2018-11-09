@@ -78,6 +78,16 @@
     float: left;
 }
 
+#roNumTitle{
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+#roNum{
+    font-weight: bold;
+    font-size: 16pt;
+}
+
 #roTitle{
     font-weight: bold;
 }
@@ -111,4 +121,14 @@
     margin-left: 0px;
     margin-top: 0px;s
     margin-bottom: 10px;
+}
+
+.roSelect{
+    font-size:10px;
+}
+
+
+
+.timeInp {
+    padding: 0 0 0 0;
 }
