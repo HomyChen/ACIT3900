@@ -44,17 +44,25 @@
 
             <div class="row">
                 <div class="col-sm-6">
-
+                    
                     <div id="buttonsDiv">
-                    <button id="searchBut" type="button" class="btn btn-primary btn-lg col-sm-8">EXISTING CUSTOMER</button>
-                    <button id="clearTable" type="button" class="btn btn-primary btn-lg col-sm-3">CLEAR FORM</button>
+                        <div id="searchButDiv" class="col-sm-8">
+                            <button id="searchBut" type="button" class="btn btn-primary btn-lg">EXISTING CUSTOMER</button>
+                        </div>
+                        <div id="clearTableDiv" class="col-sm-4">
+                            <button id="clearTable" type="button" class="btn btn-primary btn-lg">Clear Form</button>
+                        </div>
                     </div>
 
 
                     <form class="form" id="customerInfo">
-                        <div id="boxHeader">Customer Information</div>
+                        <div class="row">
+                            <div id="boxHeader" class="col-sm-9">Customer Information</div>
+                            <div class="requiredText col-sm-3"><font color="red">*</font>required</div>
+                        </div>
+                        
                         <div class="form-group row">
-                            <label for="lnInp" class="col-sm-3 col-form-label">Last Name *</label>
+                            <label for="lnInp" class="col-sm-3 col-form-label">Last Name<font color="red">*</font></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="lnInp" required placeholder="Last Name or Company Name">
                             </div>
@@ -62,7 +70,7 @@
                         <div class="form-group row">
                             <label for="fnInp" class="col-sm-3 col-form-label">First Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="fnInp" placeholder="First Name">
+                                <input type="text" class="form-control" id="fnInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -80,13 +88,13 @@
                         <div class="form-group row">
                             <label for="stInp" class="col-sm-3 col-form-label">Street</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="stInp" placeholder="Street">
+                                <input type="text" class="form-control" id="stInp">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="ctInp" class="col-sm-3 col-form-label">City</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="ctInp" placeholder="City">
+                                <input type="text" class="form-control" id="ctInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -99,9 +107,12 @@
                 </div>
                 <div class="col-sm-6">
                     <form class="form" id="vehicleInfo">
-                        <div id="boxHeader">Vehicle Information</div>
+                        <div class="row">
+                            <div id="boxHeader" class="col-sm-9">Vehicle Information</div>
+                            <div class="requiredText col-sm-3"><font color="red">*</font>required</div>
+                        </div>
                         <div class="form-group row">
-                            <label for="vinInp" class="col-sm-3 col-form-label">VIN *</label>
+                            <label for="vinInp" class="col-sm-3 col-form-label">VIN<font color="red">*</font></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="vinInp" placeholder="eg. 4S4BP60C787362794" maxlength="17">
                             </div>
@@ -115,13 +126,13 @@
                         <div class="form-group row">
                             <label for="makeInp" class="col-sm-3 col-form-label">Make</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="makeInp" placeholder="Make">
+                                <input type="text" class="form-control" id="makeInp">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="modelInp" class="col-sm-3 col-form-label">Model</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="modelInp" placeholder="Model">
+                                <input type="text" class="form-control" id="modelInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -133,15 +144,15 @@
                         <div class="form-group row">
                             <label for="oiInp" class="col-sm-3 col-form-label">Odometer</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="oiInp" placeholder="Odometer">
+                                <input type="text" class="form-control" id="oiInp">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="oiInp" class="col-sm-3 col-form-label">Date Promised</label>
                             <div class="col-sm-6">
-                                <input type="date" class="form-control" id="dtInp" placeholder="Date Promised">
+                                <input type="date" class="form-control" id="dtInp">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" id="timeInpDiv">
                                 <select id="timeHour">
                                     <option value="00">00</option>
                                     <option value="01">01</option>

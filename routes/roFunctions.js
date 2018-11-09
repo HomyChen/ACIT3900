@@ -129,7 +129,7 @@ async function updateTaskCommentsLoop(arraytaskIDComments){
         var taskcomments = await arraytaskIDComments[i].comments;
         var taskid = await arraytaskIDComments[i].worktask_id;
         const varr = await connectDBTaskComments(taskid, taskcomments).catch(err => console.log(err));
-        console.log("Async function successful for loop "+i);
+        console.log("Task Comments Async function successful for loop "+i);
         if(i == (arraytaskIDComments.length-1)){
             return;
         }
@@ -180,7 +180,7 @@ router.post("/updateRO", function (req,resp){
             //Do everything here if you want to do it after the comments are added to the database
         )
         .catch(err => console.log(err));
-    /*
+    
     var odometerOut = req.body.odometerOut;
     //console.log("roOdometerOut:");
     //console.log(odometerOut);
@@ -210,7 +210,7 @@ router.post("/updateRO", function (req,resp){
                 }
             })
         })
-    */
+    
 });
 
 module.exports = router;
