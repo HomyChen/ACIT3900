@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 
 
+
 // had to change button Id of second add button for the other request option
 
 //defining routed function files -Homy
@@ -46,6 +47,11 @@ app.use(bodyParser.urlencoded({
     extended:true
 }));
 
+app.use("/data",dbFunctions);
+app.use("/rosearch", roFunctions);
+app.use("/pdf", pdfFunctions)
+
+
 app.get("/", function(req, resp){
     resp.sendFile(pF+"/checkin.html")
 });
@@ -53,9 +59,7 @@ app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
 
-app.use("/data",dbFunctions);
-app.use("/rosearch", roFunctions);
-app.use("/pdf", pdfFunctions)
+
 //app.use("/cisearch", seaFunctions);
 
 //search function from Glenn

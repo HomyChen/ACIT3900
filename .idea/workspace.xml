@@ -2,68 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="309106b5-abfa-469b-bc29-0eaafd26f408" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/nodent.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/regenerator.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/$data.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/_rules.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/patternGroups.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/refs/$data.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/refs/json-schema-v5.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/bin/phantomjs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/co/History.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/co/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/co/Readme.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/co/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/co/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/fast-deep-equal/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/fast-deep-equal/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/fast-deep-equal/index.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/fast-deep-equal/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/fast-deep-equal/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/.eslintrc.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/.npmignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/spec/.eslintrc.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/spec/fixtures/schema.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/json-schema-traverse/spec/index.spec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pdf/tese.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/checkinSubmit.js" afterPath="$PROJECT_DIR$/build/checkinSubmit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/.bin/phantomjs" afterPath="$PROJECT_DIR$/node_modules/.bin/phantomjs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/LICENSE" afterPath="$PROJECT_DIR$/node_modules/har-validator/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/README.md" afterPath="$PROJECT_DIR$/node_modules/har-validator/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/lib/async.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/lib/async.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/lib/promise.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/lib/promise.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/LICENSE" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/README.md" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.bundle.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.min.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.min.js.map" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/dist/ajv.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/ajv.d.ts" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/ajv.d.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/ajv.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/ajv.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/formats.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/formats.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/index.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/resolve.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/resolve.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/rules.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/compile/rules.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/_limit.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/_limit.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/custom.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/custom.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/errors.def" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/errors.def" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/format.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/format.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/oneOf.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/oneOf.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/properties.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/properties.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/propertyNames.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/propertyNames.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/ref.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/ref.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/uniqueItems.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/uniqueItems.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/validate.jst" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dot/validate.jst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limit.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limitItems.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limitItems.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limitProperties.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/_limitProperties.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/const.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/const.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/custom.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/format.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/format.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/oneOf.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/oneOf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/properties.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/properties.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/propertyNames.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/propertyNames.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/ref.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/ref.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/uniqueItems.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/uniqueItems.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/validate.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/dotjs/validate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/keyword.js" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/lib/keyword.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/package.json" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/info" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/prepare-tests" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/prepare-tests" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/travis-gh-pages" afterPath="$PROJECT_DIR$/node_modules/har-validator/node_modules/ajv/scripts/travis-gh-pages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/har-validator/package.json" afterPath="$PROJECT_DIR$/node_modules/har-validator/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/lib/location.js" afterPath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/lib/location.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/package.json" afterPath="$PROJECT_DIR$/node_modules/phantomjs-prebuilt/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdf/repordpdf.js" afterPath="$PROJECT_DIR$/pdf/repordpdf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdf/test.hbs" afterPath="$PROJECT_DIR$/pdf/test.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/requestDropdown.html" afterPath="$PROJECT_DIR$/public/requestDropdown.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/checkin.html" afterPath="$PROJECT_DIR$/public/checkin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/checkVIN.js" afterPath="$PROJECT_DIR$/routes/checkVIN.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/dbFunctions.js" afterPath="$PROJECT_DIR$/routes/dbFunctions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/style/checkin.css" afterPath="$PROJECT_DIR$/style/checkin.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -84,39 +52,63 @@
       <file leaf-file-name="checkinSubmit.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build/checkinSubmit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="202" column="25" lean-forward="false" selection-start-line="202" selection-start-column="25" selection-end-line="202" selection-end-column="25" />
+            <state relative-caret-position="445">
+              <caret line="341" column="43" lean-forward="false" selection-start-line="341" selection-start-column="43" selection-end-line="341" selection-end-column="43" />
               <folding>
-                <element signature="e#4726#5651#0" expanded="false" />
-                <element signature="e#5696#6350#0" expanded="false" />
-                <element signature="e#6385#7226#0" expanded="false" />
-                <element signature="e#7261#7486#0" expanded="false" />
-                <element signature="e#8257#8533#0" expanded="false" />
-                <element signature="e#8572#10261#0" expanded="false" />
-                <element signature="e#10307#11726#0" expanded="false" />
-                <element signature="e#11771#13237#0" expanded="false" />
-                <element signature="e#13264#13697#0" expanded="false" />
-                <element signature="e#13891#13943#0" expanded="false" />
-                <element signature="e#13979#14036#0" expanded="false" />
-                <element signature="e#14075#14139#0" expanded="false" />
-                <element signature="e#14162#14337#0" expanded="false" />
-                <element signature="e#14409#14767#0" expanded="false" />
-                <element signature="e#14833#15191#0" expanded="false" />
-                <element signature="e#15258#15629#0" expanded="false" />
-                <element signature="e#15693#16042#0" expanded="false" />
-                <element signature="e#16102#16422#0" expanded="false" />
-                <element signature="e#16483#16757#0" expanded="false" />
-                <element signature="e#16817#17085#0" expanded="false" />
+                <element signature="e#5743#6668#0" expanded="false" />
+                <element signature="e#6713#7367#0" expanded="false" />
+                <element signature="e#7402#8243#0" expanded="false" />
+                <element signature="e#8278#8503#0" expanded="false" />
+                <element signature="e#8530#9237#0" expanded="false" />
+                <element signature="e#9267#9543#0" expanded="false" />
+                <element signature="e#9582#11382#0" expanded="false" />
+                <element signature="e#11428#12949#0" expanded="false" />
+                <element signature="e#12994#14584#0" expanded="false" />
+                <element signature="e#14615#15048#0" expanded="false" />
+                <element signature="e#15075#15782#0" expanded="false" />
+                <element signature="e#15977#16029#0" expanded="false" />
+                <element signature="e#16065#16122#0" expanded="false" />
+                <element signature="e#16161#16225#0" expanded="false" />
+                <element signature="e#16248#16423#0" expanded="false" />
+                <element signature="e#16495#16853#0" expanded="false" />
+                <element signature="e#16919#17277#0" expanded="false" />
+                <element signature="e#17344#17715#0" expanded="false" />
+                <element signature="e#17779#18128#0" expanded="false" />
+                <element signature="e#18188#18508#0" expanded="false" />
+                <element signature="e#18569#18843#0" expanded="false" />
+                <element signature="e#18903#19171#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="checkin.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/checkin.html">
+      <file leaf-file-name="dbFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/dbFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="152" column="81" lean-forward="false" selection-start-line="152" selection-start-column="76" selection-end-line="152" selection-end-column="81" />
+            <state relative-caret-position="270">
+              <caret line="37" column="45" lean-forward="false" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
+              <folding>
+                <element signature="e#886#1239#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkVIN.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/checkVIN.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -138,6 +130,11 @@
       <find>dtInp</find>
       <find>timehour</find>
       <find>otherSer</find>
+      <find>clear</find>
+      <find>clearform</find>
+      <find>Clear form</find>
+      <find>form</find>
+      <find>cleartable</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,8 +148,12 @@
         <option value="$PROJECT_DIR$/pdf/tese.html" />
         <option value="$PROJECT_DIR$/pdf/repordpdf.js" />
         <option value="$PROJECT_DIR$/build/ro.js" />
-        <option value="$PROJECT_DIR$/routes/dbFunctions.js" />
         <option value="$PROJECT_DIR$/public/requestDropdown.html" />
+        <option value="$PROJECT_DIR$/style/checkin.css" />
+        <option value="$PROJECT_DIR$/public/checkin.html" />
+        <option value="$PROJECT_DIR$/routes/checkVIN.js" />
+        <option value="$PROJECT_DIR$/routes/dbFunctions.js" />
+        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/build/checkinSubmit.js" />
       </list>
     </option>
@@ -206,6 +207,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ACIT 3900" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ACIT 3900" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ACIT 3900" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="style" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -363,25 +378,26 @@
       <option name="presentableId" value="Default" />
       <updated>1541726380505</updated>
       <workItem from="1541726381720" duration="8159000" />
-      <workItem from="1541802622229" duration="1350000" />
+      <workItem from="1541802622229" duration="13186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9509000" />
+    <option name="totallyTimeSpent" value="21345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23326287" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1564482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3120482" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31084338" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -389,7 +405,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -423,11 +438,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/build/checkinSubmit.js</url>
-          <line>419</line>
+          <line>477</line>
           <properties />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -437,26 +452,28 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4726#5651#0" expanded="false" />
-            <element signature="e#5696#6350#0" expanded="false" />
-            <element signature="e#6385#7226#0" expanded="false" />
-            <element signature="e#7261#7486#0" expanded="false" />
-            <element signature="e#8257#8533#0" expanded="false" />
-            <element signature="e#8572#10261#0" expanded="false" />
-            <element signature="e#10307#11726#0" expanded="false" />
-            <element signature="e#11771#13237#0" expanded="false" />
-            <element signature="e#13264#13697#0" expanded="false" />
-            <element signature="e#13891#13943#0" expanded="false" />
-            <element signature="e#13979#14036#0" expanded="false" />
-            <element signature="e#14075#14139#0" expanded="false" />
-            <element signature="e#14162#14337#0" expanded="false" />
-            <element signature="e#14409#14767#0" expanded="false" />
-            <element signature="e#14833#15191#0" expanded="false" />
-            <element signature="e#15258#15629#0" expanded="false" />
-            <element signature="e#15693#16042#0" expanded="false" />
-            <element signature="e#16102#16422#0" expanded="false" />
-            <element signature="e#16483#16757#0" expanded="false" />
-            <element signature="e#16817#17085#0" expanded="false" />
+            <element signature="e#5743#6668#0" expanded="false" />
+            <element signature="e#6713#7367#0" expanded="false" />
+            <element signature="e#7402#8243#0" expanded="false" />
+            <element signature="e#8278#8503#0" expanded="false" />
+            <element signature="e#8530#9237#0" expanded="false" />
+            <element signature="e#9267#9543#0" expanded="false" />
+            <element signature="e#9582#11382#0" expanded="false" />
+            <element signature="e#11428#12949#0" expanded="false" />
+            <element signature="e#12994#14584#0" expanded="false" />
+            <element signature="e#14615#15048#0" expanded="false" />
+            <element signature="e#15075#15782#0" expanded="false" />
+            <element signature="e#15977#16029#0" expanded="false" />
+            <element signature="e#16065#16122#0" expanded="false" />
+            <element signature="e#16161#16225#0" expanded="false" />
+            <element signature="e#16248#16423#0" expanded="false" />
+            <element signature="e#16495#16853#0" expanded="false" />
+            <element signature="e#16919#17277#0" expanded="false" />
+            <element signature="e#17344#17715#0" expanded="false" />
+            <element signature="e#17779#18128#0" expanded="false" />
+            <element signature="e#18188#18508#0" expanded="false" />
+            <element signature="e#18569#18843#0" expanded="false" />
+            <element signature="e#18903#19171#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -481,6 +498,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -491,18 +509,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="55" column="15" lean-forward="false" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pdf/tese.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2124">
           <caret line="118" column="7" lean-forward="false" selection-start-line="118" selection-start-column="7" selection-end-line="118" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -534,13 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/dbFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="89" column="35" lean-forward="false" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/requestDropdown.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -549,20 +553,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/rejexValidator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/createRepairOrderSec1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-360">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/checkVIN.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -578,37 +568,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/checkin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="152" column="81" lean-forward="false" selection-start-line="152" selection-start-column="76" selection-end-line="152" selection-end-column="81" />
+        <state relative-caret-position="304">
+          <caret line="55" column="49" lean-forward="false" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/checkin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="93" column="10" lean-forward="false" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/createRepairOrderSec1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/checkVIN.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/dbFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="37" column="45" lean-forward="false" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
+          <folding>
+            <element signature="e#886#1239#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/checkinSubmit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="202" column="25" lean-forward="false" selection-start-line="202" selection-start-column="25" selection-end-line="202" selection-end-column="25" />
+        <state relative-caret-position="445">
+          <caret line="341" column="43" lean-forward="false" selection-start-line="341" selection-start-column="43" selection-end-line="341" selection-end-column="43" />
           <folding>
-            <element signature="e#4726#5651#0" expanded="false" />
-            <element signature="e#5696#6350#0" expanded="false" />
-            <element signature="e#6385#7226#0" expanded="false" />
-            <element signature="e#7261#7486#0" expanded="false" />
-            <element signature="e#8257#8533#0" expanded="false" />
-            <element signature="e#8572#10261#0" expanded="false" />
-            <element signature="e#10307#11726#0" expanded="false" />
-            <element signature="e#11771#13237#0" expanded="false" />
-            <element signature="e#13264#13697#0" expanded="false" />
-            <element signature="e#13891#13943#0" expanded="false" />
-            <element signature="e#13979#14036#0" expanded="false" />
-            <element signature="e#14075#14139#0" expanded="false" />
-            <element signature="e#14162#14337#0" expanded="false" />
-            <element signature="e#14409#14767#0" expanded="false" />
-            <element signature="e#14833#15191#0" expanded="false" />
-            <element signature="e#15258#15629#0" expanded="false" />
-            <element signature="e#15693#16042#0" expanded="false" />
-            <element signature="e#16102#16422#0" expanded="false" />
-            <element signature="e#16483#16757#0" expanded="false" />
-            <element signature="e#16817#17085#0" expanded="false" />
+            <element signature="e#5743#6668#0" expanded="false" />
+            <element signature="e#6713#7367#0" expanded="false" />
+            <element signature="e#7402#8243#0" expanded="false" />
+            <element signature="e#8278#8503#0" expanded="false" />
+            <element signature="e#8530#9237#0" expanded="false" />
+            <element signature="e#9267#9543#0" expanded="false" />
+            <element signature="e#9582#11382#0" expanded="false" />
+            <element signature="e#11428#12949#0" expanded="false" />
+            <element signature="e#12994#14584#0" expanded="false" />
+            <element signature="e#14615#15048#0" expanded="false" />
+            <element signature="e#15075#15782#0" expanded="false" />
+            <element signature="e#15977#16029#0" expanded="false" />
+            <element signature="e#16065#16122#0" expanded="false" />
+            <element signature="e#16161#16225#0" expanded="false" />
+            <element signature="e#16248#16423#0" expanded="false" />
+            <element signature="e#16495#16853#0" expanded="false" />
+            <element signature="e#16919#17277#0" expanded="false" />
+            <element signature="e#17344#17715#0" expanded="false" />
+            <element signature="e#17779#18128#0" expanded="false" />
+            <element signature="e#18188#18508#0" expanded="false" />
+            <element signature="e#18569#18843#0" expanded="false" />
+            <element signature="e#18903#19171#0" expanded="false" />
           </folding>
         </state>
       </provider>
