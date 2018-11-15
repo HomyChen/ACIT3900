@@ -114,7 +114,7 @@ $(document).ready(function() {
                             console.log(data);
 //--------------------------These are the changes that I have done---------------------------------------------------------------
                             vehicle_info['tasks_info'] = data;
-                            console.log(vehicle_info);
+                            
 //-------------------------------------------------------------------------------------------------------------------------------
                             roTask.innerHTML="";
                         
@@ -217,18 +217,19 @@ $(document).ready(function() {
     }
     
     
-//--------------------------These are the changes that I have done---------------------------------------------------------------
+//--------------------------Homy---------------------------------------------------------------
     openPDF.onclick = function(){
         $.ajax({
-            url: "/pdf/recievePDFInfo",
+            url: "/print/createPrint",
             type: "post",
             data: vehicle_info,
             success: function(data){
-                console.log(data);
-                window.open("/pdf/createRepairOrderPDF")
+                //window.location = "/print";
+                window.open("/print");
             }
-        })
+        });
     }
+    
 //-------------------------------------------------------------------------------------------------------------------------------
     
     function disableInputs(){
