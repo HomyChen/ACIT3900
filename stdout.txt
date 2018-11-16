@@ -1,0 +1,3 @@
+10000 is running
+{ status: '0', vehicle_id: '', cust_id: '' }
+0  
