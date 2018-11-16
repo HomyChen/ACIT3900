@@ -35,7 +35,7 @@ $(document).ready(function(){
     var tBody               = document.getElementById("requestTableBody");
     var otherTBody          = document.getElementById("otherRequestTableBody");
     var otherSerTextArea    = document.getElementById("otherRequestsInp");
-    var clearTableBut       = document.getElementById("clearTable");
+    var clearFormBut       = document.getElementById("clearForm");
 
     // these two are the variables in table row
     var tableRows = 1;
@@ -59,34 +59,44 @@ $(document).ready(function(){
     var odoverif = true;
     var vinverif =  false;
     /*-----------------------------------------------------------------------------------*/
+
+    // loading basic functions
     getCommonRequests();
-
-
     submitButton.addEventListener("click", submitButtonClick);
-    clearTableBut.addEventListener("click",clearForm);
-    document.getElementById("searchBut").addEventListener("click",clearForm);
+    clearFormBut.addEventListener("click",clearRequests);
+    clearFormBut.addEventListener("click",clearForm);
+    document.getElementById("searchBut").addEventListener("click",clearRequests);
 
     async function submitButtonClick() {
 
-
         var commonTasksSelect = document.getElementById("requestsDropdown");
-        var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id)
+        var validate = requireValidation(lastNameInput.value, vinInput.value, numOfUnCommonRequests, numOfCommonRequests, cust_id, vehicle_id);
+
         if (validate.status == "true") {
-
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
-                packageRequests();
+                let vinResult = await vinCheck();
+                console.log(vinResult)
+                if (vinResult.result == 1) {
 
-                let result =  await getVariables();
-                switch (result.status){
-                    case '0':
-                        newCustomerNewVehicle();
-                        break;
-                    case '1':
-                        oldCustomerNewVehicle(result);
-                        break;
-                    case '2':
-                        oldCustomerOldVehicle(result);
-                        break;
+                    packageRequests();
+                    await dateCheck();
+                    let result = await getVariables();
+
+                    switch (result.status) {
+                        case '0':
+                            newCustomerNewVehicle();
+                            break;
+                        case '1':
+                            oldCustomerNewVehicle(result);
+                            break;
+                        case '2':
+                            oldCustomerOldVehicle(result);
+                            break;
+                    }
+                }
+                else{
+                    swal("Duplicate VIN entered!","Please double check the VIN","error")
+                    return null;
                 }
 
             } else {
@@ -107,7 +117,25 @@ $(document).ready(function(){
 
     }
 
-
+    let vinCheck = () =>{
+        return new Promise((resolve) => {
+            $.ajax({
+                url:"/data/vinCheck",
+                type:"post",
+                data:{
+                    vinNum:vinInput.value
+                },
+                success(response){
+                    if(response.errorCode==1){
+                        swal("Error",response.errorMessage,"warning");
+                    }
+                    else {
+                        resolve(response)
+                    }
+                }
+            })
+        })
+    }
 
     serviceReqBtn.onclick = function () {
         // adding service requests to the table dynamically
@@ -183,6 +211,29 @@ $(document).ready(function(){
         });
     }
 
+    function dateCheck() {
+        return new Promise((resolve) =>{
+
+            if(datePromised.value ==''){
+                var currentDate = new Date();
+                var date = currentDate.getDate();
+                var month = currentDate.getMonth();
+                var year = currentDate.getFullYear();
+                if(date < 10){
+                    date = "0"+date;
+                }
+                var monthDateYear  = year + "-" + (month+1) + "-" + date;
+                dateHourPromised.value = 12;
+                dateAmPmPromised.value = "PM";
+                datePromised.value =  monthDateYear;
+                resolve();
+            }
+            else{
+                resolve()
+            }
+        })
+    }
+
     function getVariables() {
         return new Promise((resolve,reject) =>
         {
@@ -235,7 +286,9 @@ $(document).ready(function(){
                     alert("Error")
                 }
                 else {
-                    console.log(data)
+                    swal({title:"Data added to DB"}, function () {
+                            location.href = "/orders";
+                        })
 
                 }
             }
@@ -277,7 +330,9 @@ $(document).ready(function(){
                     alert("Error")
                 }
                 else {
-                    console.log(data);
+                    swal({title:"Data added to DB"}, function () {
+                        location.href = "/orders";
+                    })
                 }
             }
         })
@@ -315,18 +370,19 @@ $(document).ready(function(){
             },
             success: function (data) {
                 if(data.status==1){
-                    alert("Error")
+                    swal("Error","Problems adding data")
                 }
                 else {
-                    console.log(data);
+                    swal({title:"Data added to DB"}, function () {
+                        location.href = "/orders";
+                    })
                 }
             }
         })
 
     }
 
-
-    function clearForm() {
+    function clearRequests() {
         for(let i =1; i<=numOfCommonRequests; i++){
             tBody.removeChild(document.getElementById("commonTasks"));
         }
@@ -338,6 +394,29 @@ $(document).ready(function(){
         tableRows               = 1;
         tableRowsOther          = 1;
     }
+
+    function clearForm() {
+        lastNameInput.value     = "";
+        firstNameInput.value    = "";
+        homePhoneInput.value    = "";
+        cellPhoneInput.value    = "";
+        streetInput.value       = "";
+        cityInput.value         = "";
+        postalCodeInput.value   = "";
+        vinInput.value          = "";
+        yearInput.value         = "";
+        makeInput.value         = "";
+        modelInput.value        = "";
+        licenseInput.value      = "";
+        odoInput.value          = "";
+        datePromised.value      = "yyyy-MM-dd"
+        vehicleNotesInput.value = "";
+        dateHourPromised.value  = "00";
+        dateMinPromised.value   = "00";
+        dateAmPmPromised.value  = "AM";
+
+    }
+
     
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+
     <head>
         <title>Vehicle Check-in</title>
         <link href='/css/checkin.css' type='text/css' rel='stylesheet'/>
@@ -12,7 +13,10 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
         <!-- DataTables API -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
@@ -27,7 +31,7 @@
         <script src="/scripts/getmenu.js"></script>
         <script src="/scripts/checkInSubmit.js"></script>
         <script src="/scripts/search_overlay.js"></script>
-        
+        <script src="/scripts/checkIn.js"></script>
         
     </head>
     
@@ -35,9 +39,8 @@
        
     <div class="row" id="firstRow">
         <a href="https://www.bcit.ca/transportation/">
-            <div id="logoDiv"></div>
-        </a>
-        
+                    <div id="logoDiv"></div>
+                </a>
         <div id="menuPosition"></div>
     </div>
     <div id="searchPosition"></div> 
@@ -47,13 +50,12 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    
                     <div id="buttonsDiv">
                         <div id="searchButDiv" class="col-sm-8">
                             <button id="searchBut" type="button" class="btn btn-primary btn-lg">EXISTING CUSTOMER</button>
                         </div>
                         <div id="clearTableDiv" class="col-sm-4">
-                            <button id="clearTable" type="button" class="btn btn-primary btn-lg">Clear Form</button>
+                            <button id="clearForm" type="button" class="btn btn-primary btn-lg">Clear Form</button>
                         </div>
                     </div>
 
@@ -73,7 +75,7 @@
                         <div class="form-group row">
                             <label for="fnInp" class="col-sm-3 col-form-label">First Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="fnInp" placeholder="First Name">
+                                <input type="text" class="form-control" id="fnInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -91,13 +93,13 @@
                         <div class="form-group row">
                             <label for="stInp" class="col-sm-3 col-form-label">Street</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="stInp" placeholder="Street">
+                                <input type="text" class="form-control" id="stInp">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="ctInp" class="col-sm-3 col-form-label">City</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="ctInp" placeholder="City">
+                                <input type="text" class="form-control" id="ctInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -129,13 +131,13 @@
                         <div class="form-group row">
                             <label for="makeInp" class="col-sm-3 col-form-label">Make</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="makeInp" placeholder="Make">
+                                <input type="text" class="form-control" id="makeInp">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="modelInp" class="col-sm-3 col-form-label">Model</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="modelInp" placeholder="Model">
+                                <input type="text" class="form-control" id="modelInp">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -147,7 +149,7 @@
                         <div class="form-group row">
                             <label for="oiInp" class="col-sm-3 col-form-label">Odometer</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="oiInp" placeholder="Odometer">
+                                <input type="text" class="form-control" id="oiInp">
                             </div>
                         </div>
                         <div class="form-group row">

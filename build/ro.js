@@ -1,9 +1,6 @@
 $(document).ready(function() {
     
-    /*$('#resultsTable').DataTable( {
-        select: true,
-    } );
-    */
+    
     // user search input and parameters
     var roSearchInp = document.getElementById("roSearchInp");
     var SOptionsDropdown = document.getElementById("SOptionsDropdown");
@@ -37,9 +34,7 @@ $(document).ready(function() {
     var roTask = document.getElementById("roTask");
     var odometerOut= document.getElementById("odometerOut");
     var promiseDate = document.getElementById("promiseDate");
-    var promiseHour = document.getElementById("timeHour");
-    var promiseMin = document.getElementById("timeMin");
-    var promiseAmPm = document.getElementById("timeAmPm");
+    var openclose = document.getElementById("openclose");
     
     var roDetails = document.getElementById("roDetails");
     
@@ -49,7 +44,7 @@ $(document).ready(function() {
 //-------------------------------------------------------------------------------------------------------------------------------
     
     searchROBut.onclick = function() {
-    console.log("search button clicked");
+    //console.log("search button clicked");
         
         
         
@@ -63,26 +58,40 @@ $(document).ready(function() {
             },
             success:function(data){
                 if (data){
-                    console.log(data);
+                    //console.log(data);
+                if ( $.fn.DataTable.isDataTable('#resultsTable') ) {
+                    //$('#resultsTable').DataTable().clear();
+                    $('#resultsTable').DataTable().destroy();
                     
-                var resultsTable = $('#resultsTable').DataTable({
-                    destroy: true,
+                    console.log("Destroy Datatable");
+                }
+                
+                resultsTable = $('#resultsTable').DataTable({
+                    //destroy: true,
                     select: true,
                     data: data,
                     "autoWidth": false,
                     "columns": [
                         {"data":"ro_id"},
-                        {"data":"license_plate"},
                         {"data":"last_name"},
                         {"data":"first_name"},
-                        {"data":"status"},
+                        {"data":"license_plate"},
+                        {"data":"make"},
+                        {"data":"model"},
+                        {data:"status",
+                          render : function (data, type, row) {
+                             return data == 'true' ? 'Closed' : 'Open'
+                          }
+                        }
                     ]
                     
                 });
                  
+                
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
-                    var rowData = resultsTable.rows( indexes ).data()[0];
                     
+                    var rowData = resultsTable.rows( indexes ).data()[0];
+                    console.log(rowData);
                     disableInputs();
                     
 //--------------------------These are the changes that I have done---------------------------------------------------------------
@@ -101,7 +110,10 @@ $(document).ready(function() {
                     roOdometerIn.innerHTML = rowData.odometer_in;
                     odometerOut.value = rowData.odometer_out;
                     roNotes.innerHTML = rowData.vehicle_notes;
-                    //promisedTime.innerHTML = rowData.promised_time;
+                    openclose.value = rowData.status;
+                
+                    var promiseData = new Date(rowData.promised_time);
+                    promiseDate.innerHTML = promiseData.getFullYear() + '-' + promiseData.getMonth() + '-' + promiseData.getDate() + ' ' + promiseData.getHours() + ':' + (promiseData.getMinutes()<10?'0':'') +  promiseData.getMinutes();
                     
                     $.ajax({
                         url:"/rosearch/taskSearch",
@@ -111,11 +123,7 @@ $(document).ready(function() {
                         },
                         success:function(data){
                         if (data){
-                            console.log(data);
-//--------------------------These are the changes that I have done---------------------------------------------------------------
                             vehicle_info['tasks_info'] = data;
-                            
-//-------------------------------------------------------------------------------------------------------------------------------
                             roTask.innerHTML="";
                         
                             
@@ -189,11 +197,12 @@ $(document).ready(function() {
                                     data:{
                                         worktaskIDComments:array,
                                         odometerOut:(odometerOut.value),
-                                        roID:rowData.ro_id
+                                        roID:rowData.ro_id,
+                                        openClose:(openclose.value)
                                     },
                                     success:function(data){
                                         if (data){
-                                            console.log(data);
+                                            //console.log(data);
                                         }
                                     }
                                  });
@@ -203,18 +212,22 @@ $(document).ready(function() {
                             }
 
                         }
-                    });   
+                    }); 
+                    
                 });
-                
+
                   
                 }
                 else{
                     alert("Error! taskSearch");
                 }
             }
+            
+            
         });
         
     }
+    
     
     
 //--------------------------Homy---------------------------------------------------------------
@@ -236,30 +249,20 @@ $(document).ready(function() {
         saveRO.className = "btn btn-default pull-right invisible";
         editRO.className = "btn btn-default pull-right visible";
         odometerOut.disabled = true;
-        promiseDate.disabled = true;
-        promiseHour.disabled = true;
-        promiseMin.disabled = true;
-        promiseAmPm.disabled = true;
-        promiseHour.style.backgroundColor = "#eee";
-        promiseMin.style.backgroundColor = "#eee";
-        promiseAmPm.style.backgroundColor = "#eee";
+        openclose.disabled = true;
+        openclose.style.backgroundColor = "#eee";
     }
     
     function enableInputs(){
         saveRO.className = "btn btn-default pull-right visible";
         editRO.className = "btn btn-default pull-right invisible";
         odometerOut.disabled = false;
-        promiseDate.disabled = false;
-        promiseHour.disabled = false;
-        promiseMin.disabled = false;
-        promiseAmPm.disabled = false;
-        promiseHour.style.backgroundColor = "#fff";
-        promiseMin.style.backgroundColor = "#fff";
-        promiseAmPm.style.backgroundColor = "#fff";
+        openclose.disabled = false;
+        openclose.style.backgroundColor = "#fff";
     }
     
     function addPartButFunc(worktask_id){
-        console.log("Task id: "+worktask_id);
+        //console.log("Task id: "+worktask_id);
         var partsDiv = document.createElement("div");
         partsDiv.className = "row";
         partsDiv.style.marginBottom = "15px";
@@ -304,6 +307,4 @@ $(document).ready(function() {
             roTask.innerHTML="";
     }
 }
-    
-    
-} );
+});

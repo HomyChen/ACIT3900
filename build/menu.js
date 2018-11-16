@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    var trigger = $('.hamburger'),
-      overlay = $('.overlay'),
-     isClosed = false;
+    var trigger = $('.hamburger');
+    var overlay = $('.overlay');
+    var isClosed = false;
+    
 
     trigger.click(function () {
       hamburger_cross();      
@@ -20,9 +21,14 @@ $(document).ready(function () {
         trigger.addClass('is-open');
         isClosed = true;
       }
-  }
-  
-  $('[data-toggle="offcanvas"]').click(function () {
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
-  }); 
+    }); 
+
+        
+    overlay.onclick = function(){
+        overlay.style.display = "none";
+    }
 });

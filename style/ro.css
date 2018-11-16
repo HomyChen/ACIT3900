@@ -34,7 +34,7 @@
 .popup{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -88,6 +88,12 @@
     font-size: 16pt;
 }
 
+#promiseDate{
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+
 #roTitle{
     font-weight: bold;
 }
@@ -132,3 +138,15 @@
 .timeInp {
     padding: 0 0 0 0;
 }
+
+
+select {
+    margin: 50px;
+    width: 150px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+    background-color: #eee;
+}
+

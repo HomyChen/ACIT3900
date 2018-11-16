@@ -4,6 +4,7 @@ var dbURL = process.env.DATABASE_URL || "postgres://postgres:password@localhost:
 
 
 const pgpool = new Pool({
+
     connectionString: dbURL,
 });
 
@@ -14,11 +15,10 @@ var checkVIN = function(VIN){
             if (err) {
                 reject(err)
             } else {
-                console.log(res.rows);
                 if(res.rows.length == 0){
-                    resolve({status: "VIN not in Database"})
+                    resolve({result:1}) // vin is not in DB
                 }else{
-                    reject({status: "VIN in Database"})
+                    resolve({result:0}) // vin is in DB
                 }
             }
         })
