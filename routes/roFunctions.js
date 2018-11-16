@@ -30,16 +30,40 @@ router.post("/AroSearch", function (req,resp){
     //console.log(roSearchWord);
     //console.log(searchBy);
     //console.log(roStatus);
+    /*
+    if(searchBy == "ro_id"){
+        if(roStatus == 'all'){
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1';
+
+            var data = [roSearchWord];
+        }else{
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
+
+            var data = [roSearchWord, roStatus];
+        }
+    }else{
+        if(roStatus == 'all'){
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1';
+
+            var data = [roSearchWord + '%']
+        }else{
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1' + ' AND status=$2';
+
+            var data = [roSearchWord + '%', roStatus]
+        }
+    }
+    */
     
     if(searchBy == "ro_id"){
-        var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
-        
-        var data = [roSearchWord, roStatus];
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
+
+            var data = [roSearchWord, roStatus];
         
     }else{
-        var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1' + ' AND status=$2';
         
-        var data = [roSearchWord + '%', roStatus];
+            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1' + ' AND status=$2';
+
+            var data = [roSearchWord + '%', roStatus]
     }
     
     
@@ -49,10 +73,10 @@ router.post("/AroSearch", function (req,resp){
     
     pool.connect(function (err, client, done){
         if (err) {
-            //console.log("Unable to connect to the database: " + err );
+            console.log("Unable to connect to the database: " + err );
         }
         else{
-            //console.log("Successfully login to database!")
+            console.log("Successfully login to database!")
         }
         
         client.query(roQuery, data, function(err, result){
@@ -65,25 +89,6 @@ router.post("/AroSearch", function (req,resp){
                 //console.log(result.rows);
                 resp.send(result.rows);
                 
-                
-                /*
-                $('#resultsTable').bootstrapTable('load', searchData());
-                
-                function searchData(){
-                rows = [];
-                
-                for (var i = 0; i < result.rows.length; i++) {
-                    
-                    rows.push({
-                        ro: result.rows[i].ro_id,
-                        license: result.rows[i].license,
-                        lastname: result.rows[i].last_name,
-                        status: result.rows[i].status
-                    });
-                }
-                return rows;
-                
-                }*/
             }
         })
     })
@@ -91,7 +96,7 @@ router.post("/AroSearch", function (req,resp){
 
 
 router.post("/taskSearch", function (req,resp){
-    console.log("taskSearch ajax");
+    //console.log("taskSearch ajax");
     
     var roID = req.body.roID;
     
@@ -106,7 +111,7 @@ router.post("/taskSearch", function (req,resp){
             console.log("(taskSearch - Unable to connect to the database: " + err );
         }
         else{
-            console.log("taskSearch - Successfully login to database!")
+            //console.log("taskSearch - Successfully login to database!")
         }
         
         client.query(taskQuery, data, function(err, result){
@@ -116,7 +121,7 @@ router.post("/taskSearch", function (req,resp){
                 resp.send(null);
             }
             else{
-                console.log(result.rows);
+                //console.log(result.rows);
                 resp.send(result.rows);
             }
         })
@@ -129,7 +134,7 @@ async function updateTaskCommentsLoop(arraytaskIDComments){
         var taskcomments = await arraytaskIDComments[i].comments;
         var taskid = await arraytaskIDComments[i].worktask_id;
         const varr = await connectDBTaskComments(taskid, taskcomments).catch(err => console.log(err));
-        console.log("Task Comments Async function successful for loop "+i);
+        //console.log("Task Comments Async function successful for loop "+i);
         if(i == (arraytaskIDComments.length-1)){
             return;
         }
@@ -146,7 +151,7 @@ var connectDBTaskComments = (worktask_id, comments) => {
                     reject(err);
                 }
                 else{
-                    console.log("updateRO - Successfully login to database!");
+                    //console.log("updateRO - Successfully login to database!");
 
                     var commentsData = [comments, worktask_id];
                     var updateQuery = 'UPDATE repair_tasks SET comments = $1 WHERE worktask_id = $2';
@@ -159,7 +164,7 @@ var connectDBTaskComments = (worktask_id, comments) => {
 
                         }
                         else{
-                            console.log("updateRO successful");
+                            //console.log("updateRO successful");
                             resolve("updateRO successful");
                         }
                     });
@@ -182,14 +187,17 @@ router.post("/updateRO", function (req,resp){
         .catch(err => console.log(err));
     
     var odometerOut = req.body.odometerOut;
-    //console.log("roOdometerOut:");
-    //console.log(odometerOut);
+    var openClose = req.body.openClose;
     
     var roID = req.body.roID;
     
     var odometerOutData = [odometerOut, roID];
         
     var updateOdoQuery = 'UPDATE repair_order SET odometer_out = $1 WHERE ro_id = $2';
+    
+    var opencloseData = [openClose, roID];
+    
+    var updateroStatus = 'UPDATE repair_order SET status = $1 WHERE ro_id = $2';
     
     pool.connect(function (err, client, done){
             if (err) {
@@ -209,6 +217,18 @@ router.post("/updateRO", function (req,resp){
                     //console.log("updateOdoRO successful");
                 }
             })
+            
+            client.query(updateroStatus, opencloseData, function(err, result){
+                done();
+                if(err){
+                    console.log("updateROStatus failed");
+                    
+                }
+                else{
+                    //console.log("updateROStatus successful");
+                }
+            })
+            
         })
     
 });
