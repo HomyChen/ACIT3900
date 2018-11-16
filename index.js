@@ -18,8 +18,8 @@ const vinFunctions = require('./routes/checkVIN.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
 const pdfFunctions = require("./pdf/repordpdf")
-
 var pF = path.resolve(__dirname, "public");
+
 var app = exp();
 
 //create a new server for socket, but combine it with express functions
@@ -58,6 +58,7 @@ app.get("/", function(req, resp){
 app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
+
 
 
 //app.use("/cisearch", seaFunctions);
