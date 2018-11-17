@@ -62,10 +62,10 @@ $(document).ready(function() {
                 if ( $.fn.DataTable.isDataTable('#resultsTable') ) {
                     //$('#resultsTable').DataTable().clear();
                     $('#resultsTable').DataTable().destroy();
-                    
+
                     console.log("Destroy Datatable");
                 }
-                
+
                 resultsTable = $('#resultsTable').DataTable({
                     //destroy: true,
                     select: true,
@@ -84,8 +84,9 @@ $(document).ready(function() {
                           }
                         }
                     ]
-                    
+
                 });
+
                  
                 
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
@@ -114,7 +115,7 @@ $(document).ready(function() {
                 
                     var promiseData = new Date(rowData.promised_time);
                     promiseDate.innerHTML = promiseData.getFullYear() + '-' + promiseData.getMonth() + '-' + promiseData.getDate() + ' ' + promiseData.getHours() + ':' + (promiseData.getMinutes()<10?'0':'') +  promiseData.getMinutes();
-                    
+                    console.log("outside of ajax function");
                     $.ajax({
                         url:"/rosearch/taskSearch",
                         type:"post",
@@ -126,7 +127,7 @@ $(document).ready(function() {
                             vehicle_info['tasks_info'] = data;
                             roTask.innerHTML="";
                         
-                            
+
                             for(var i = 0; i<data.length; i++){
                                 var task_id = data[i].worktask_id;
                                 var comment = data[i].comments;
@@ -157,7 +158,7 @@ $(document).ready(function() {
                                     };
                                 }(task_id);
                                 
-                                taskEntry.appendChild(document.createTextNode(taskName)).appendChild;
+                                taskEntry.appendChild(document.createTextNode(taskName));
                                 
                                 var taskDiv = document.createElement("div");
                                 
@@ -237,7 +238,7 @@ $(document).ready(function() {
             type: "post",
             data: vehicle_info,
             success: function(data){
-                //window.location = "/print";
+
                 window.open("/print");
             }
         });
@@ -307,4 +308,10 @@ $(document).ready(function() {
             roTask.innerHTML="";
     }
 }
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
 });

@@ -60,12 +60,7 @@ $(document).ready(function(){
     var vinverif =  false;
     /*-----------------------------------------------------------------------------------*/
 
-    // loading basic functions
-    getCommonRequests();
-    submitButton.addEventListener("click", submitButtonClick);
-    clearFormBut.addEventListener("click",clearRequests);
-    clearFormBut.addEventListener("click",clearForm);
-    document.getElementById("searchBut").addEventListener("click",clearRequests);
+    loadBasics();
 
     async function submitButtonClick() {
 
@@ -74,26 +69,26 @@ $(document).ready(function(){
 
         if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
+
                 let vinResult = await vinCheck();
-                console.log(vinResult)
-                if (vinResult.result == 1) {
 
                     packageRequests();
                     await dateCheck();
                     let result = await getVariables();
-
-                    switch (result.status) {
-                        case '0':
-                            newCustomerNewVehicle();
-                            break;
-                        case '1':
-                            oldCustomerNewVehicle(result);
-                            break;
-                        case '2':
-                            oldCustomerOldVehicle(result);
-                            break;
+                    if (vinResult.result == 1 || result.status == '2') {
+                        switch (result.status) {
+                            case '0':
+                                newCustomerNewVehicle();
+                                break;
+                            case '1':
+                                oldCustomerNewVehicle(result);
+                                break;
+                            case '2':
+                                oldCustomerOldVehicle(result);
+                                break;
+                        }
                     }
-                }
+
                 else{
                     swal("Duplicate VIN entered!","Please double check the VIN","error")
                     return null;
@@ -102,6 +97,7 @@ $(document).ready(function(){
             } else {
                     alert("Please correctly fill in the yellow boxes")
                 }
+
             } else {
                 if (validate.error.includes("Last Name Error")) {
                     lastNameInput.style.borderColor = 'red'
@@ -114,7 +110,6 @@ $(document).ready(function(){
                     otherSerTextArea.style.borderColor = 'red'
                 }
             }
-
     }
 
     let vinCheck = () =>{
@@ -138,9 +133,14 @@ $(document).ready(function(){
     }
 
     serviceReqBtn.onclick = function () {
+        var commonTasksSelect   = document.getElementById("requestsDropdown");
+
+        if(commonTasksSelect[commonTasksSelect.selectedIndex].value.toString() == "Common Requests"){
+            return null;
+        }
         // adding service requests to the table dynamically
         // using tableRows to dynamically change the number of elements in the table
-        var commonTasksSelect   = document.getElementById("requestsDropdown");
+
 
         var th = document.createElement("th");
         var td = document.createElement("td");
@@ -158,6 +158,15 @@ $(document).ready(function(){
 
         tBody.appendChild(tr);
     };
+
+    function getCalendarDate() {
+        var currentDate = new Date();
+
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        return year + "-" + (month+1) + "-" + date;
+    }
 
     otherSerRequest.onclick = function () {
         // would like to make this same as serviceReqBtn function
@@ -213,16 +222,20 @@ $(document).ready(function(){
 
     function dateCheck() {
         return new Promise((resolve) =>{
-
             if(datePromised.value ==''){
+
                 var currentDate = new Date();
+                currentDate.setDate(currentDate.getDate()+1);
+
                 var date = currentDate.getDate();
                 var month = currentDate.getMonth();
                 var year = currentDate.getFullYear();
+
                 if(date < 10){
                     date = "0"+date;
                 }
-                var monthDateYear  = year + "-" + (month+1) + "-" + date;
+                var monthDateYear = year + "-" + (month+1) + "-" + date;
+
                 dateHourPromised.value = 12;
                 dateAmPmPromised.value = "PM";
                 datePromised.value =  monthDateYear;
@@ -247,12 +260,16 @@ $(document).ready(function(){
         })
     }
 
+    function loadBasics() {
+        getCommonRequests();
+        submitButton.addEventListener("click", submitButtonClick);
+        clearFormBut.addEventListener("click",clearRequests);
+        clearFormBut.addEventListener("click",clearForm);
+        document.getElementById("searchBut").addEventListener("click",clearRequests);
+    }
+
     function newCustomerNewVehicle() {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var Promisedate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString()
@@ -296,11 +313,7 @@ $(document).ready(function(){
     }
 
     function oldCustomerNewVehicle(request) {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
@@ -340,11 +353,7 @@ $(document).ready(function(){
     }
 
     function oldCustomerOldVehicle(result) {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
@@ -417,7 +426,6 @@ $(document).ready(function(){
 
     }
 
-    
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/
 
     vinInput.onclick = () => {

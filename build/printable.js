@@ -22,7 +22,7 @@ $(document).ready(function(){
             success: function(data){
                 console.log(data);
                 fillPageData(data);
-                window.print();
+                // window.print();
             }
         });
     }
