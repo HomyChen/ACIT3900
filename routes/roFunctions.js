@@ -30,7 +30,7 @@ router.post("/AroSearch", function (req,resp){
     //console.log(roSearchWord);
     //console.log(searchBy);
     //console.log(roStatus);
-    /*
+    
     if(searchBy == "ro_id"){
         if(roStatus == 'all'){
             var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1';
@@ -52,8 +52,9 @@ router.post("/AroSearch", function (req,resp){
             var data = [roSearchWord + '%', roStatus]
         }
     }
-    */
     
+    
+    /*
     if(searchBy == "ro_id"){
             var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
 
@@ -65,7 +66,7 @@ router.post("/AroSearch", function (req,resp){
 
             var data = [roSearchWord + '%', roStatus]
     }
-    
+    */
     
     
     //console.log(roQuery);

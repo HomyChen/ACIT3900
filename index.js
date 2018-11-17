@@ -16,7 +16,8 @@ const seaFunctions = require('./routes/searchFunctions.js');
 const vinFunctions = require('./routes/checkVIN.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
-const pdfFunctions = require("./pdf/repordpdf")
+//const pdfFunctions = require("./pdf/repordpdf")
+const printableFunctions = require('./routes/printableFunctions.js');
 
 var pF = path.resolve(__dirname, "public");
 var app = exp();
@@ -52,11 +53,14 @@ app.get("/", function(req, resp){
 app.get("/orders", function(req, resp){
     resp.sendFile(pF+"/ro.html")
 });
+app.get("/print", function(req, resp){
+    resp.sendFile(pF+"/roprint.html")
+});
 
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
-app.use("/pdf", pdfFunctions)
-//app.use("/cisearch", seaFunctions);
+//app.use("/pdf", pdfFunctions)
+app.use("/print", printableFunctions);
 
 //search function from Glenn
 app.post("/search", (request,response)=>{

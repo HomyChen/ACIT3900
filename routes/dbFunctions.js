@@ -9,9 +9,10 @@ const pg = require('pg');
 
 // Init the other DB file
 var dbFunc = require("./createRepairOrderSec1");
+const checkVin          = require("../routes/checkVIN");
 
 router.post("/insertCustomer",function (req,resp) {
-    console.log(req.body);
+
     doInsertsNewCustomerNewVehicle(req).then(data => {
         if(data == null){
             resp.send({
@@ -33,6 +34,29 @@ router.post("/insertOldCustomerOldVehicle",function (req,resp) {
    doInsertOldCustomerOldVehicle(req)
        .then(response => resp.send(response))
 })
+
+router.post("/vinCheck", function (req,resp) {
+    doDbCheck(req.body.vinNum)
+        .then(result => {
+            console.log(result);
+            resp.send({
+                result:result.result,
+                errorCode:0
+            });
+        })
+        .catch(err => {
+            resp.send({
+                errorCode:1,
+                errorMessage:err.code
+            });
+        })
+
+})
+
+async function doDbCheck(vin) {
+    let vinResult = await checkVin.checkVIN(vin);
+    return vinResult;
+}
 
 async function doInsertOldCustomerNewVehicle(req) {
     dbFunc.connectToPool();

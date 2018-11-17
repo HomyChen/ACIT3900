@@ -26,30 +26,22 @@
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
         
-        
-        
-        <!-- X-editable
-        <link rel="stylesheet" href="bootstrap-editable/css/bootstrap-editable.css" >
-        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
-        -->
-        
+        <!-- JavaScript -->
         <script src="/scripts/ro.js"></script>
         <script src="/scripts/getmenu.js"></script>
     </head>
     
     <body>
-        <script src=''></script>
+        <!-- Repair order popup window -->
         <div class="container-fluid" id="container">
             <div class="row" id="firstRow">
-                
-                <div id="logoDiv">
-                    
-                </div>
-                
+                <a href="https://www.bcit.ca/transportation/">
+                    <div id="logoDiv"></div>
+                </a>
                 <div id="menuPosition">
-                    
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-sm-12" id="headerDiv">
                     Repair Orders
@@ -59,14 +51,9 @@
             <div id="roPopup" class="popup">
                 <div class="container-fluid" id="roContainer">
                     <div class="popupContent">
-                        
-                        
                         <span class="close">&times;</span>
-                        <!--<div class="row">
-                            <div id="logoDiv"></div>
-                        </div>-->
+                        
                         <div class="row">
-                            <!--<div class="col-md-6" id="roTitle"><div id="roLogo"></div></div>-->
                             <div class="col-md-2" id="roNumTitle">Repair Order #:</div>
                             <div class="col-md-5" id="roNum"></div>
                             <div class="col-md-2" id="roNumTitle">Status:</div>
@@ -77,17 +64,14 @@
                                 </select>
                             </div>
                         </div>
+                        
                         <p></p>
                         <div class="row">
                             <div class="col-md-2" id="roNumTitle">Promised Time:</div>
-                            <div class="col-md-6" id="promiseDate"></div>
-                             
+                            <div class="col-md-6" id="promiseDate"></div>    
                         </div>
-
-
                         <div class="row">
-                            <div class="col-sm-2 pull-right">
-                                    
+                            <div class="col-sm-2 pull-right">     
                             </div>
                         </div>
                         <br>
@@ -95,7 +79,6 @@
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Customer Information</div>   
                         </div>
-                        <!--<hr class="lineBreak">-->
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roCustName"></div>  
                         </div>
@@ -110,8 +93,6 @@
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Vehicle Information</div>   
                         </div>
-
-                        <!--<hr class="lineBreak">-->
                         <div class="row">
                             <div class="col-md-2" id="roFieldTitle">VIN:</div>
                             <div class="col-md-3" id="roVIN"></div>
@@ -148,21 +129,15 @@
                         <div class="row">
                             <div class="col-md-6 ml-auto" id="roHeader">Work Requested</div>   
                         </div>
-                        <!--<hr class="lineBreak">-->
                         <ol id="roTask">
-                            <!--
-                            <li>&#9634;</li>
-                            <li>&#9634;</li>
-                            <li>&#9634;</li>
-                            -->
                         </ol>
                         <div class="row">
-<!-- - - - - - - - - - - - - - - - - - - - These are the changes I made- - - - - - - - - - - - - - - - - - - - - - - - - -->
+                            <!-- Button to open printable version of the repair order -->
                             <div class="col-sm-6">
                                 <button class="btn btn-primary pull-left" id="openPDF">Open PDF</button>
                             </div>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   -->
                             <div class="col-sm-6">
+                                <!-- Button to edit and save repair order -->
                                 <button class="btn btn-default pull-right" id="editRO">Edit</button>
                                 <button class="btn btn-default pull-right invisible" id="saveRO">Save</button>
                             </div>
@@ -170,8 +145,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+            <!-- End of repair order popup window -->
+            <!-- Repair order search and display using datatable -->
             <div class="row">
                 <div class="col-sm-12">
                     <form class="form" id="searchDiv">
@@ -184,14 +159,14 @@
                         </div>
                         
                         <div class="col-sm-6">
-                            <input type="search" class="form-control" id="roSearchInp" >
+                            <input type="text" class="form-control" id="roSearchInp" >
                         </div>
                         
                         <div class="col-sm-2">
                             <select class="form-control" id="ROOptionsDropdown">
                                 <option value="false">Open ROs</option>
                                 <option value="true">Closed ROs</option>
-                                <!--<option value="all">All ROs</option>-->
+                                <option value="all">All ROs</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
@@ -206,7 +181,7 @@
                                 <tr>         
                                     <th scope="col">RO #</th>
                                     <th scope="col">Customer Last Name</th>
-                                    <th scope="col"> Customer First Name</th>
+                                    <th scope="col">Customer First Name</th>
                                     <th scope="col">License Plate #</th>
                                     <th scope="col">Make</th>
                                     <th scope="col">Model</th>                                                                                    <th scope="col">Status</th>

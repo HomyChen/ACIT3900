@@ -18,6 +18,7 @@ $(document).ready(function() {
     var popupClose = document.getElementsByClassName("close")[0];
     var roContainer = document.getElementById("roContainer");
     
+    // repair order fields
     var roNum = document.getElementById("roNum");
     var roCustName = document.getElementById("roCustName");
     var roTel = document.getElementById("roTel");
@@ -31,23 +32,23 @@ $(document).ready(function() {
     var roOdometerOut = document.getElementById("roOdometerOut");
     var roNotes = document.getElementById("roNotes");
     
+    // repair order updatable fields
     var roTask = document.getElementById("roTask");
     var odometerOut= document.getElementById("odometerOut");
     var promiseDate = document.getElementById("promiseDate");
     var openclose = document.getElementById("openclose");
     
-    var roDetails = document.getElementById("roDetails");
-    
-    //--------------------------These are the changes that I have done---------------------------------------------------------------
+    // print repair order
     var openPDF = document.getElementById("openPDF");
     var vehicle_info = null;
-//-------------------------------------------------------------------------------------------------------------------------------
     
+    
+    /*
+    * This function populates the DataTable with the returned query results
+    */
     searchROBut.onclick = function() {
     //console.log("search button clicked");
-        
-        
-        
+         
         $.ajax({
             url:"/rosearch/AroSearch",
             type:"post",
@@ -60,12 +61,11 @@ $(document).ready(function() {
                 if (data){
                     //console.log(data);
                 if ( $.fn.DataTable.isDataTable('#resultsTable') ) {
-                    //$('#resultsTable').DataTable().clear();
                     $('#resultsTable').DataTable().destroy();
-                    
-                    console.log("Destroy Datatable");
+                    //console.log("Destroy Datatable");
                 }
                 
+                // var is not defined for resultsTable as it will cause a bug where the datatable will not read the data correctly 
                 resultsTable = $('#resultsTable').DataTable({
                     //destroy: true,
                     select: true,
@@ -87,16 +87,16 @@ $(document).ready(function() {
                     
                 });
                  
-                
+                // this function display a popup screen that display relevant repair order information
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
                     
                     var rowData = resultsTable.rows( indexes ).data()[0];
                     console.log(rowData);
                     disableInputs();
                     
-//--------------------------These are the changes that I have done---------------------------------------------------------------
+                    // pass data to print the repair order
                     vehicle_info = rowData;
-//-------------------------------------------------------------------------------------------------------------------------------          
+         
                     roPopup.style.display = "block";
                     roNum.innerHTML = rowData.ro_id;
                     roCustName.innerHTML = rowData.last_name + ", " + rowData.first_name;
@@ -115,6 +115,7 @@ $(document).ready(function() {
                     var promiseData = new Date(rowData.promised_time);
                     promiseDate.innerHTML = promiseData.getFullYear() + '-' + promiseData.getMonth() + '-' + promiseData.getDate() + ' ' + promiseData.getHours() + ':' + (promiseData.getMinutes()<10?'0':'') +  promiseData.getMinutes();
                     
+                    // This ajax passes the repair order iD (ro_id) to get all the service requested information (worktask_id, comments, task_name)
                     $.ajax({
                         url:"/rosearch/taskSearch",
                         type:"post",
@@ -123,14 +124,9 @@ $(document).ready(function() {
                         },
                         success:function(data){
                         if (data){
-                            //console.log(data);
-//--------------------------These are the changes that I have done---------------------------------------------------------------
-                            //vehicle_info['tasks_info'] = data;
-                            //console.log(vehicle_info);
-//-------------------------------------------------------------------------------------------------------------------------------
+                            vehicle_info['tasks_info'] = data;
                             roTask.innerHTML="";
-                        
-                            
+                    
                             for(var i = 0; i<data.length; i++){
                                 var task_id = data[i].worktask_id;
                                 var comment = data[i].comments;
@@ -161,7 +157,7 @@ $(document).ready(function() {
                                     };
                                 }(task_id);
                                 
-                                taskEntry.appendChild(document.createTextNode(taskName)).appendChild;
+                                taskEntry.appendChild(document.createTextNode(taskName));
                                 
                                 var taskDiv = document.createElement("div");
                                 
@@ -172,7 +168,7 @@ $(document).ready(function() {
                                 roTask.appendChild(taskDiv);
                             }
                             
-                            
+                            // turn off disable for updatable fields
                             editRO.onclick = function(){
                                 for(var j = 0; j<data.length; j++){
                                     document.getElementById('comments' + data[j].worktask_id).disabled = false;
@@ -181,6 +177,7 @@ $(document).ready(function() {
                                     
                             }
                             
+                            // takes the value of the updatable fields and update it in the database
                             saveRO.onclick = function(){
                                     var array = [{}];
                                     disableInputs();
@@ -233,21 +230,19 @@ $(document).ready(function() {
     }
     
     
-//--------------------------These are the changes that I have done---------------------------------------------------------------
     openPDF.onclick = function(){
         $.ajax({
-            url: "/pdf/recievePDFInfo",
+            url: "/print/createPrint",
             type: "post",
             data: vehicle_info,
             success: function(data){
-                //console.log(data);
-                window.open("/pdf/createRepairOrderPDF")
+                //window.location = "/print";
+                window.open("/print");
             }
-        })
+        });
     }
     
-//-------------------------------------------------------------------------------------------------------------------------------
-    
+    // this function disable the updatable input fields 
     function disableInputs(){
         saveRO.className = "btn btn-default pull-right invisible";
         editRO.className = "btn btn-default pull-right visible";
@@ -256,6 +251,7 @@ $(document).ready(function() {
         openclose.style.backgroundColor = "#eee";
     }
     
+    // this function enable the updatable input fields
     function enableInputs(){
         saveRO.className = "btn btn-default pull-right visible";
         editRO.className = "btn btn-default pull-right invisible";
@@ -264,6 +260,7 @@ $(document).ready(function() {
         openclose.style.backgroundColor = "#fff";
     }
     
+    // this funtion creates the parts inputs 
     function addPartButFunc(worktask_id){
         //console.log("Task id: "+worktask_id);
         var partsDiv = document.createElement("div");
@@ -299,15 +296,26 @@ $(document).ready(function() {
         document.getElementById("taskNum"+worktask_id).appendChild(partsDiv);
     }
     
+    
+    // this function closes the repair order popup when 'x' is clicked
     popupClose.onclick = function() {
         roPopup.style.display = "none";
         roTask.innerHTML="";
     }
     
+    // this function closes the repair order popup when the gray area is clicked 
     window.onclick = function(event) {
         if (event.target == roContainer) {
             roPopup.style.display = "none";
             roTask.innerHTML="";
     }
+        
+    // This function prevents refreshes on enter on #roSearchInp
+    $(window).keydown(function(event){
+       if(event.keyCode == 13) {
+         event.preventDefault();
+         return false;
+       }
+   });
 }
 });
