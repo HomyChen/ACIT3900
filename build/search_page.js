@@ -51,6 +51,8 @@ $(document).ready(()=>{
         clearCustomer();
         clearVehicle();
         makeCheckInVisible();
+        enableCustomerInputs();
+        enableVehicleInputs();
 	}
 
 	/*Search Page Search Button*/
@@ -115,6 +117,9 @@ $(document).ready(()=>{
                                 
                                 //Trigger focusout event on vinInput to get past validator on submit button
                                 vinInput.dispatchEvent(focusout);
+                                
+                                disableCustomerInputs();
+                                disableVehicleInputs();
                             });
                             
                             //Submit button for choosing customer only
@@ -132,6 +137,9 @@ $(document).ready(()=>{
                                 
                                 //Trigger focusout event on vinInput to get past validator on submit button
                                 vinInput.dispatchEvent(focusout);
+                                
+                                disableCustomerInputs();
+                                enableVehicleInputs();
                             });
                         }
                     } );
@@ -160,7 +168,7 @@ $(document).ready(()=>{
                 cust_id: cust_id
             },
             success:function (resp) {
-                console.log('Status set to '+resp);
+                console.log('Status set to '+resp.status);
             }
         });
     }
@@ -216,5 +224,42 @@ $(document).ready(()=>{
         modelInput.value = "";
         licenseInput.value = "";
         odoInput.value = "";
+    }
+    
+    //Functions for disabling or enabling inputs
+    function disableCustomerInputs(){
+        lastNameInput.disabled = true;
+        firstNameInput.disabled = true;
+        homePhoneInput.disabled = true;
+        cellPhoneInput.disabled = true;
+        streetInput.disabled = true;
+        cityInput.disabled = true;
+        postalCodeInput.disabled = true;
+    }
+    
+    function enableCustomerInputs(){
+        lastNameInput.disabled = false;
+        firstNameInput.disabled = false;
+        homePhoneInput.disabled = false;
+        cellPhoneInput.disabled = false;
+        streetInput.disabled = false;
+        cityInput.disabled = false;
+        postalCodeInput.disabled = false;
+    }
+    
+    function disableVehicleInputs(){
+        vinInput.disabled = true;
+        yearInput.disabled = true;
+        makeInput.disabled = true;
+        modelInput.disabled = true;
+        licenseInput.disabled = true;
+    }
+    
+    function enableVehicleInputs(){
+        vinInput.disabled = false;
+        yearInput.disabled = false;
+        makeInput.disabled = false;
+        modelInput.disabled = false;
+        licenseInput.disabled = false;
     }
 })

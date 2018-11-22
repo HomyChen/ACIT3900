@@ -41,7 +41,8 @@ app.use(expressSession({
 
 app.use("/scripts", exp.static("build"));
 app.use("/css", exp.static("style"));
-app.use("/pages",exp.static("public"))
+app.use("/pages",exp.static("public"));
+app.use("/dependencies",exp.static("src"))
 
 app.use(bodyParser.urlencoded({
     extended:true

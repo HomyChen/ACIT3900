@@ -72,7 +72,7 @@ function vin_validator(vin){
 
 function license_validator(license){
 	//In Accordance to Canadian License
-	var license_regex = /([a-zA-Z0-9]{6,10})|(^[\s]*$)/
+	var license_regex = /([a-zA-Z0-9])|(^[\s]*$)/
 
 	if (license_regex.test(license)) {
 		if (/(^[\s]*$)/.test(license) !== true){

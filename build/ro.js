@@ -18,6 +18,7 @@ $(document).ready(function() {
     var popupClose = document.getElementsByClassName("close")[0];
     var roContainer = document.getElementById("roContainer");
     
+    // repair order fields
     var roNum = document.getElementById("roNum");
     var roCustName = document.getElementById("roCustName");
     var roTel = document.getElementById("roTel");
@@ -31,23 +32,20 @@ $(document).ready(function() {
     var roOdometerOut = document.getElementById("roOdometerOut");
     var roNotes = document.getElementById("roNotes");
     
+    // repair order updatable fields
     var roTask = document.getElementById("roTask");
     var odometerOut= document.getElementById("odometerOut");
     var promiseDate = document.getElementById("promiseDate");
     var openclose = document.getElementById("openclose");
     
-    var roDetails = document.getElementById("roDetails");
-    
-    //--------------------------These are the changes that I have done---------------------------------------------------------------
+    // print repair order
     var openPDF = document.getElementById("openPDF");
     var vehicle_info = null;
-//-------------------------------------------------------------------------------------------------------------------------------
     
+    
+    
+    // this function populates the DataTable with the returned query result
     searchROBut.onclick = function() {
-    //console.log("search button clicked");
-        
-        
-        
         $.ajax({
             url:"/rosearch/AroSearch",
             type:"post",
@@ -58,14 +56,12 @@ $(document).ready(function() {
             },
             success:function(data){
                 if (data){
-                    //console.log(data);
-                if ( $.fn.DataTable.isDataTable('#resultsTable') ) {
-                    //$('#resultsTable').DataTable().clear();
-                    $('#resultsTable').DataTable().destroy();
                     
-                    console.log("Destroy Datatable");
+                if ( $.fn.DataTable.isDataTable('#resultsTable') ) {
+                    $('#resultsTable').DataTable().destroy();
                 }
                 
+                // var is not defined for resultsTable as it will cause a bug where the datatable will not read the data correctly 
                 resultsTable = $('#resultsTable').DataTable({
                     //destroy: true,
                     select: true,
@@ -87,133 +83,15 @@ $(document).ready(function() {
                     
                 });
                  
-                
+                // this function display a popup screen that display relevant repair order information
                 resultsTable.on('select', function ( e, dt, type, indexes ) {
                     
                     var rowData = resultsTable.rows( indexes ).data()[0];
-                    console.log(rowData);
+                    //console.log(rowData);
                     disableInputs();
-                    
-//--------------------------These are the changes that I have done---------------------------------------------------------------
                     vehicle_info = rowData;
-//-------------------------------------------------------------------------------------------------------------------------------          
-                    roPopup.style.display = "block";
-                    roNum.innerHTML = rowData.ro_id;
-                    roCustName.innerHTML = rowData.last_name + ", " + rowData.first_name;
-                    roTel.innerHTML = rowData.home_phone;
-                    roCell.innerHTML = rowData.cell_phone;
-                    roVIN.innerHTML = rowData.vin;
-                    roLicense.innerHTML = rowData.license_plate;
-                    roMake.innerHTML = rowData.make;
-                    roModel.innerHTML = rowData.model;
-                    roYear.innerHTML = rowData.year;
-                    roOdometerIn.innerHTML = rowData.odometer_in;
-                    odometerOut.value = rowData.odometer_out;
-                    roNotes.innerHTML = rowData.vehicle_notes;
-                    openclose.value = rowData.status;
-                
-                    var promiseData = new Date(rowData.promised_time);
-                    promiseDate.innerHTML = promiseData.getFullYear() + '-' + promiseData.getMonth() + '-' + promiseData.getDate() + ' ' + promiseData.getHours() + ':' + (promiseData.getMinutes()<10?'0':'') +  promiseData.getMinutes();
-                    
-                    $.ajax({
-                        url:"/rosearch/taskSearch",
-                        type:"post",
-                        data:{
-                            roID:rowData.ro_id
-                        },
-                        success:function(data){
-                        if (data){
-                            vehicle_info['tasks_info'] = data;
-                            roTask.innerHTML="";
-                        
-                            
-                            for(var i = 0; i<data.length; i++){
-                                var task_id = data[i].worktask_id;
-                                var comment = data[i].comments;
-                                var taskName = data[i].task_name; 
-                                var taskEntry = document.createElement('li');
-                                var editTask = document.createElement("textarea");
-                                editTask.className = 'form-control';
-                                editTask.id = 'comments' + data[i].worktask_id;
-                                editTask.disabled = true;
-                                editTask.rows = '5';
-                                editTask.style.marginBottom = '10px';
-                                
-                                if(comment == null){
-                                    editTask.value = "";
-                                }else{
-                                    editTask.value = comment;
-                                }
-                                
-                                //Add Parts Button
-                                var addPartBut = document.createElement("button");
-                                addPartBut.className = "btn btn-default";
-                                addPartBut.innerHTML = "Add Part";
-                                addPartBut.style.marginBottom = "15px";
-                                //addPartBut.id = task_id;
-                                addPartBut.onclick = function(task_id){
-                                    return function(){
-                                        addPartButFunc(task_id);
-                                    };
-                                }(task_id);
-                                
-                                taskEntry.appendChild(document.createTextNode(taskName)).appendChild;
-                                
-                                var taskDiv = document.createElement("div");
-                                
-                                taskDiv.appendChild(taskEntry);
-                                taskDiv.appendChild(editTask);
-                                taskDiv.appendChild(addPartBut);
-                                taskDiv.id = "taskNum"+task_id;
-                                roTask.appendChild(taskDiv);
-                            }
-                            
-                            
-                            editRO.onclick = function(){
-                                for(var j = 0; j<data.length; j++){
-                                    document.getElementById('comments' + data[j].worktask_id).disabled = false;
-                                }
-                                    enableInputs();
-                                    
-                            }
-                            
-                            saveRO.onclick = function(){
-                                    var array = [{}];
-                                    disableInputs();
-                                
-                                for(var k = 0; k<data.length; k++){
-                                    document.getElementById('comments' + data[k].worktask_id).disabled = true;
-                                    
-                                    array.push({
-                                        'worktask_id': data[k].worktask_id,
-                                        'comments': (document.getElementById('comments' + data[k].worktask_id).value)
-                                    })
-                                    
-                                }
-                                
-                                 $.ajax({
-                                    url:"/rosearch/updateRO",
-                                    type:"post",
-                                    data:{
-                                        worktaskIDComments:array,
-                                        odometerOut:(odometerOut.value),
-                                        roID:rowData.ro_id,
-                                        openClose:(openclose.value)
-                                    },
-                                    success:function(data){
-                                        if (data){
-                                            //console.log(data);
-                                        }
-                                    }
-                                 });
-                                
-                            }                        
-                            
-                            }
-
-                        }
-                    }); 
-                    
+                    populateRO(rowData);
+                    searchTask(rowData.ro_id, rowData);   
                 });
 
                   
@@ -221,16 +99,11 @@ $(document).ready(function() {
                 else{
                     alert("Error! taskSearch");
                 }
-            }
-            
-            
+            }  
         });
-        
     }
     
     
-    
-//--------------------------Homy---------------------------------------------------------------
     openPDF.onclick = function(){
         $.ajax({
             url: "/print/createPrint",
@@ -243,8 +116,145 @@ $(document).ready(function() {
         });
     }
     
-//-------------------------------------------------------------------------------------------------------------------------------
+    // this function populates the popup repair order screen with the selected repair order information
+    function populateRO(rowData){
+        roPopup.style.display = "block";
+        roNum.innerHTML = rowData.ro_id;
+        roCustName.innerHTML = rowData.last_name + ", " + rowData.first_name;
+        roTel.innerHTML = rowData.home_phone;
+        roCell.innerHTML = rowData.cell_phone;
+        roVIN.innerHTML = rowData.vin;
+        roLicense.innerHTML = rowData.license_plate;
+        roMake.innerHTML = rowData.make;
+        roModel.innerHTML = rowData.model;
+        roYear.innerHTML = rowData.year;
+        roOdometerIn.innerHTML = rowData.odometer_in;
+        odometerOut.value = rowData.odometer_out;
+        roNotes.innerHTML = rowData.vehicle_notes;
+        openclose.value = rowData.status;
+
+        var promiseData = new Date(rowData.promised_time);
+        promiseDate.innerHTML = promiseData.getFullYear() + '-' + promiseData.getMonth() + '-' + promiseData.getDate() + ' ' + promiseData.getHours() + ':' + (promiseData.getMinutes()<10?'0':'') +  promiseData.getMinutes();
+    }
     
+    
+    // ajax that sends the (ro_id) to get all the service requested information (worktask_id, comments, task_name)
+    function searchTask(roID, rowData){
+        $.ajax({
+            url:"/rosearch/taskSearch",
+            type:"post",
+            data:{
+                roID:roID
+            },
+            success:function(data){
+            if (data){
+                vehicle_info['tasks_info'] = data;
+                roTask.innerHTML="";
+
+                // populates tasks and comments for the repair order
+                populateTasksComments(data);
+
+                // enable input fields when the editRO button is clicked
+                editRO.onclick = function(){
+                        enableInputs(data);
+                }
+
+                // disabled input fields when the saveRO button is click, save the input field values into the database
+                saveRO.onclick = function(){
+                    disableInputs();
+                    saveComments(data);
+                    updateRO(saveComments(data), odometerOut.value, rowData.ro_id, openclose.value);
+                    window.location.reload(); 
+                }                        
+
+                }
+
+            }
+        }); 
+    }
+    
+    
+    // this function populates the tasks and comments for each repair order 
+    function populateTasksComments(data){
+        for(var i = 0; i<data.length; i++){
+            var task_id = data[i].worktask_id;
+            var comment = data[i].comments;
+            var taskName = data[i].task_name; 
+            var taskEntry = document.createElement('li');
+            var editTask = document.createElement("textarea");
+            editTask.className = 'form-control';
+            editTask.id = 'comments' + data[i].worktask_id;
+            editTask.disabled = true;
+            editTask.rows = '5';
+            editTask.style.marginBottom = '10px';
+
+            if(comment == null){
+                editTask.value = "";
+            }else{
+                editTask.value = comment;
+            }
+
+            //Add Parts Button
+            var addPartBut = document.createElement("button");
+            addPartBut.className = "btn btn-default";
+            addPartBut.innerHTML = "Add Part";
+            addPartBut.style.marginBottom = "15px";
+            //addPartBut.id = task_id;
+            addPartBut.onclick = function(task_id){
+                return function(){
+                    addPartButFunc(task_id);
+                };
+            }(task_id);
+
+            taskEntry.appendChild(document.createTextNode(taskName));
+
+            var taskDiv = document.createElement("div");
+
+            taskDiv.appendChild(taskEntry);
+            taskDiv.appendChild(editTask);
+            taskDiv.appendChild(addPartBut);
+            taskDiv.id = "taskNum"+task_id;
+            roTask.appendChild(taskDiv);
+        }
+    }
+    
+    
+    // function to save the comments textarea fields into an array and disable the comment textarea fields
+    function saveComments(data){
+        var array = [{}];
+        
+        for(var k = 0; k<data.length; k++){
+            document.getElementById('comments' + data[k].worktask_id).disabled = true;
+
+            array.push({
+                'worktask_id': data[k].worktask_id,
+                'comments': (document.getElementById('comments' + data[k].worktask_id).value)
+            })
+
+        }
+        return array;
+    }
+    
+    // ajax to send the input field values
+    function updateRO(worktaskIDcomments, odometerOut, roID, openClose){
+        $.ajax({
+            url:"/rosearch/updateRO",
+            type:"post",
+            data:{
+                worktaskIDComments:worktaskIDcomments,
+                odometerOut:(odometerOut),
+                roID:roID,
+                openClose:(openClose)
+            },
+            success:function(data){
+                if (data){
+                    //console.log(data);
+                }
+            }
+         });
+    }
+    
+    // this function disable the updatable input fields 
     function disableInputs(){
         saveRO.className = "btn btn-default pull-right invisible";
         editRO.className = "btn btn-default pull-right visible";
@@ -253,7 +263,13 @@ $(document).ready(function() {
         openclose.style.backgroundColor = "#eee";
     }
     
-    function enableInputs(){
+    // this function enable the updatable input fields
+    function enableInputs(data){
+        
+        for(var j = 0; j<data.length; j++){
+            document.getElementById('comments' + data[j].worktask_id).disabled = false;
+        }
+        
         saveRO.className = "btn btn-default pull-right visible";
         editRO.className = "btn btn-default pull-right invisible";
         odometerOut.disabled = false;
@@ -261,6 +277,7 @@ $(document).ready(function() {
         openclose.style.backgroundColor = "#fff";
     }
     
+    // this funtion creates the parts inputs 
     function addPartButFunc(worktask_id){
         //console.log("Task id: "+worktask_id);
         var partsDiv = document.createElement("div");
@@ -296,15 +313,32 @@ $(document).ready(function() {
         document.getElementById("taskNum"+worktask_id).appendChild(partsDiv);
     }
     
-    popupClose.onclick = function() {
+    
+    // this function closes the repair order popup when 'x' is clicked
+    
+    function closePopup(){
         roPopup.style.display = "none";
         roTask.innerHTML="";
     }
     
+    popupClose.onclick = function() {
+        closePopup();
+    }
+  
+    
+    // this function closes the repair order popup when the gray area is clicked 
     window.onclick = function(event) {
         if (event.target == roContainer) {
             roPopup.style.display = "none";
             roTask.innerHTML="";
     }
+        
+    // This function prevents refreshes on enter on #roSearchInp
+    $(window).keydown(function(event){
+       if(event.keyCode == 13) {
+         event.preventDefault();
+         return false;
+       }
+   });
 }
 });

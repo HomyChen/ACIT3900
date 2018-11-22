@@ -3,6 +3,8 @@
  * would like to take addning to table functions and make them one function
  */
 $(document).ready(function(){
+    
+    
     // input of user Info
     var lastNameInput       = document.getElementById("lnInp");
     var firstNameInput      = document.getElementById("fnInp");
@@ -60,12 +62,7 @@ $(document).ready(function(){
     var vinverif =  false;
     /*-----------------------------------------------------------------------------------*/
 
-    // loading basic functions
-    getCommonRequests();
-    submitButton.addEventListener("click", submitButtonClick);
-    clearFormBut.addEventListener("click",clearRequests);
-    clearFormBut.addEventListener("click",clearForm);
-    document.getElementById("searchBut").addEventListener("click",clearRequests);
+    loadBasics();
 
     async function submitButtonClick() {
 
@@ -74,26 +71,26 @@ $(document).ready(function(){
 
         if (validate.status == "true") {
             if (homephoneverif && cellphoneverif && postalcodeverif && licenseverif && yearverif && odoverif && vinverif){
+
                 let vinResult = await vinCheck();
-                console.log(vinResult)
-                if (vinResult.result == 1) {
 
                     packageRequests();
                     await dateCheck();
                     let result = await getVariables();
-
-                    switch (result.status) {
-                        case '0':
-                            newCustomerNewVehicle();
-                            break;
-                        case '1':
-                            oldCustomerNewVehicle(result);
-                            break;
-                        case '2':
-                            oldCustomerOldVehicle(result);
-                            break;
+                    if (vinResult.result == 1 || result.status == '2') {
+                        switch (result.status) {
+                            case '0':
+                                newCustomerNewVehicle();
+                                break;
+                            case '1':
+                                oldCustomerNewVehicle(result);
+                                break;
+                            case '2':
+                                oldCustomerOldVehicle(result);
+                                break;
+                        }
                     }
-                }
+
                 else{
                     swal("Duplicate VIN entered!","Please double check the VIN","error")
                     return null;
@@ -102,6 +99,7 @@ $(document).ready(function(){
             } else {
                     alert("Please correctly fill in the yellow boxes")
                 }
+
             } else {
                 if (validate.error.includes("Last Name Error")) {
                     lastNameInput.style.borderColor = 'red'
@@ -114,7 +112,6 @@ $(document).ready(function(){
                     otherSerTextArea.style.borderColor = 'red'
                 }
             }
-
     }
 
     let vinCheck = () =>{
@@ -138,9 +135,14 @@ $(document).ready(function(){
     }
 
     serviceReqBtn.onclick = function () {
+        var commonTasksSelect   = document.getElementById("requestsDropdown");
+
+        if(commonTasksSelect[commonTasksSelect.selectedIndex].value.toString() == "Common Requests"){
+            return null;
+        }
         // adding service requests to the table dynamically
         // using tableRows to dynamically change the number of elements in the table
-        var commonTasksSelect   = document.getElementById("requestsDropdown");
+
 
         var th = document.createElement("th");
         var td = document.createElement("td");
@@ -158,6 +160,15 @@ $(document).ready(function(){
 
         tBody.appendChild(tr);
     };
+
+    function getCalendarDate() {
+        var currentDate = new Date();
+
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        return year + "-" + (month+1) + "-" + date;
+    }
 
     otherSerRequest.onclick = function () {
         // would like to make this same as serviceReqBtn function
@@ -213,16 +224,20 @@ $(document).ready(function(){
 
     function dateCheck() {
         return new Promise((resolve) =>{
-
             if(datePromised.value ==''){
+
                 var currentDate = new Date();
+                currentDate.setDate(currentDate.getDate()+1);
+
                 var date = currentDate.getDate();
                 var month = currentDate.getMonth();
                 var year = currentDate.getFullYear();
+
                 if(date < 10){
                     date = "0"+date;
                 }
-                var monthDateYear  = year + "-" + (month+1) + "-" + date;
+                var monthDateYear = year + "-" + (month+1) + "-" + date;
+
                 dateHourPromised.value = 12;
                 dateAmPmPromised.value = "PM";
                 datePromised.value =  monthDateYear;
@@ -247,12 +262,16 @@ $(document).ready(function(){
         })
     }
 
+    function loadBasics() {
+        getCommonRequests();
+        submitButton.addEventListener("click", submitButtonClick);
+        clearFormBut.addEventListener("click",clearRequests);
+        clearFormBut.addEventListener("click",clearForm);
+        document.getElementById("searchBut").addEventListener("click",clearRequests);
+    }
+
     function newCustomerNewVehicle() {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var Promisedate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString()
@@ -296,11 +315,7 @@ $(document).ready(function(){
     }
 
     function oldCustomerNewVehicle(request) {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
@@ -340,11 +355,7 @@ $(document).ready(function(){
     }
 
     function oldCustomerOldVehicle(result) {
-        var currentDate = new Date();
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        var monthDateYear  = year + "-" + (month+1) + "-" + date;
+        let monthDateYear = getCalendarDate();
 
         var promiseDate = datePromised.value+" "+dateHourPromised[dateHourPromised.selectedIndex].value.toString()
             +":"+dateMinPromised[dateMinPromised.selectedIndex].value.toString()+":"+dateAmPmPromised[dateAmPmPromised.selectedIndex].value.toString();
@@ -394,30 +405,34 @@ $(document).ready(function(){
         tableRows               = 1;
         tableRowsOther          = 1;
     }
-
-    function clearForm() {
-        lastNameInput.value     = "";
-        firstNameInput.value    = "";
-        homePhoneInput.value    = "";
-        cellPhoneInput.value    = "";
-        streetInput.value       = "";
-        cityInput.value         = "";
-        postalCodeInput.value   = "";
-        vinInput.value          = "";
-        yearInput.value         = "";
-        makeInput.value         = "";
-        modelInput.value        = "";
-        licenseInput.value      = "";
-        odoInput.value          = "";
-        datePromised.value      = "yyyy-MM-dd"
-        vehicleNotesInput.value = "";
-        dateHourPromised.value  = "00";
-        dateMinPromised.value   = "00";
-        dateAmPmPromised.value  = "AM";
-
-    }
-
     
+    function clearForm() {
+            
+            lastNameInput.value     = "";
+            firstNameInput.value    = "";
+            homePhoneInput.value    = "";
+            cellPhoneInput.value    = "";
+            streetInput.value       = "";
+            cityInput.value         = "";
+            postalCodeInput.value   = "";
+            vinInput.value          = "";
+            yearInput.value         = "";
+            makeInput.value         = "";
+            modelInput.value        = "";
+            licenseInput.value      = "";
+            odoInput.value          = "";
+            datePromised.value      = "yyyy-MM-dd"
+            vehicleNotesInput.value = "";
+            dateHourPromised.value  = "00";
+            dateMinPromised.value   = "00";
+            dateAmPmPromised.value  = "AM";
+        
+            //Nov 16 - Homy - I made some changes to this function. Added dependent functions at the end of this file
+        
+            ajaxSetVariables('0', null, null);
+            enableCustomerInputs();
+            enableVehicleInputs();
+        }
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/
 
     vinInput.onclick = () => {
@@ -519,7 +534,41 @@ $(document).ready(function(){
             odoverif = false
         }
     })
-    /*---------------------------------------------------------------------------------------------------------------------------------*/
-
+    /*-------------------------These are functions from search_page.js---------------------------------------------------*/
+    //Maybe there is some way to import them from that file? Client side though.
+    
+    function ajaxSetVariables(status, vehicle_id, cust_id){
+        $.ajax({
+            url:"./setVariables",
+            type:"post",
+            data:{
+                status: status,
+                vehicle_id: vehicle_id,
+                cust_id: cust_id
+            },
+            success:function (resp) {
+                console.log('Status set to '+resp.status);
+            }
+        });
+    }
+    
+    function enableCustomerInputs(){
+        lastNameInput.disabled = false;
+        firstNameInput.disabled = false;
+        homePhoneInput.disabled = false;
+        cellPhoneInput.disabled = false;
+        streetInput.disabled = false;
+        cityInput.disabled = false;
+        postalCodeInput.disabled = false;
+    }
+        
+    function enableVehicleInputs(){
+        vinInput.disabled = false;
+        yearInput.disabled = false;
+        makeInput.disabled = false;
+        modelInput.disabled = false;
+        licenseInput.disabled = false;
+    }
+    
 });
 

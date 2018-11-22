@@ -16,7 +16,6 @@ const config = {
 const pool = new pg.Pool(config);
 
 router.post("/rosearch",function (req,resp) {
-    //console.log(req.body);
     resp.send("Hello")
 })
 
@@ -30,7 +29,7 @@ router.post("/AroSearch", function (req,resp){
     //console.log(roSearchWord);
     //console.log(searchBy);
     //console.log(roStatus);
-    /*
+    
     if(searchBy == "ro_id"){
         if(roStatus == 'all'){
             var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1';
@@ -52,8 +51,9 @@ router.post("/AroSearch", function (req,resp){
             var data = [roSearchWord + '%', roStatus]
         }
     }
-    */
     
+    
+    /*
     if(searchBy == "ro_id"){
             var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
 
@@ -65,7 +65,7 @@ router.post("/AroSearch", function (req,resp){
 
             var data = [roSearchWord + '%', roStatus]
     }
-    
+    */
     
     
     //console.log(roQuery);
@@ -77,24 +77,26 @@ router.post("/AroSearch", function (req,resp){
         }
         else{
             console.log("Successfully login to database!")
+            client.query(roQuery, data, function(err, result){
+                done();
+                if(err){
+                    console.log(err.message);
+                    resp.send(null);
+                }
+                else{
+                    //console.log(result.rows);
+                    resp.send(result.rows);
+
+                }
+            })
         }
         
-        client.query(roQuery, data, function(err, result){
-            done();
-            if(err){
-                console.log(err.message);
-                resp.send(null);
-            }
-            else{
-                //console.log(result.rows);
-                resp.send(result.rows);
-                
-            }
-        })
+        
     })
 });
 
 
+// search for task information using the repair order ID (ro_id)
 router.post("/taskSearch", function (req,resp){
     //console.log("taskSearch ajax");
     
@@ -112,22 +114,24 @@ router.post("/taskSearch", function (req,resp){
         }
         else{
             //console.log("taskSearch - Successfully login to database!")
+            client.query(taskQuery, data, function(err, result){
+                done();
+                if(err){
+                    console.log(err.message);
+                    resp.send(null);
+                }
+                else{
+                    //console.log(result.rows);
+                    resp.send(result.rows);
+                }
+            })
         }
         
-        client.query(taskQuery, data, function(err, result){
-            done();
-            if(err){
-                console.log(err.message);
-                resp.send(null);
-            }
-            else{
-                //console.log(result.rows);
-                resp.send(result.rows);
-            }
-        })
+        
     })
 });
 
+// this function is neccessary to update the task comments correctly 
 async function updateTaskCommentsLoop(arraytaskIDComments){
     
     for(var i = 0; i<arraytaskIDComments.length; i++){
@@ -141,6 +145,7 @@ async function updateTaskCommentsLoop(arraytaskIDComments){
     }
 }
 
+// this function connects to the database and update the comments in the repair_tasks table 
 var connectDBTaskComments = (worktask_id, comments) => {
     
     return new Promise((resolve, reject) => {
@@ -176,6 +181,7 @@ var connectDBTaskComments = (worktask_id, comments) => {
     
 }
 
+// this function update the odometer out and repair order status 
 router.post("/updateRO", function (req,resp){
     
     var arraytaskIDComments = req.body.worktaskIDComments;
