@@ -3,11 +3,12 @@ $(document).ready(function () {
     var overlay = $('.overlay');
     var isClosed = false;
     
-
+    // 
     trigger.click(function () {
       hamburger_cross();      
     });
 
+    // 
     function hamburger_cross() {
 
       if (isClosed == true) {          
@@ -27,8 +28,4 @@ $(document).ready(function () {
         $('#wrapper').toggleClass('toggled');
     }); 
 
-        
-    overlay.onclick = function(){
-        overlay.style.display = "none";
-    }
 });
