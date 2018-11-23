@@ -241,21 +241,31 @@ li{
   z-index: 2;
 }
 
-
+/*
+*
+***************************************************Changes made Nov 23 - Iris
+/*
 /*-------------------------------*/
 /*          Header for Page      */
 /*-------------------------------*/
 #logoDiv {
     background-image: url(content/bcit.png);
     background-size: contain;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     float: left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
 }
-
+/*
+*
+***************************************************Changes made Nov 23 - Iris
+/*
 #menuPosition {
     float: right;
-}
+
+*/
 
 #firstRow {
     padding-top: 10px;
@@ -293,4 +303,33 @@ li{
 }
 
 
+/*
+*
+***************************************************Changes made Nov 23 - Iris
+/*
+/*
+* Navigation Menu
+*/
 
+
+#menuNav{
+    background-color: rgba(0,0,0,0.7);
+    border-style: none;
+    float: left;
+    width: 98.5vw;
+    padding: 10px 0px 10px 0px;
+}
+
+
+.container-fluid{
+    
+}
+
+#menuItems{
+    padding: 0px 0px 0px 0px;
+    
+}
+
+@media only screen and (max-width : 768px){
+    
+}
