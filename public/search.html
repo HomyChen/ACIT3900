@@ -20,17 +20,19 @@
 </head>
 
 <body >
-    
+
     <div class="container" id="searchBody">
         <!--<div class="row" id="firstRow">
             <div id="logoDiv"></div>
             <div id="menuPosition"></div>
         </div>-->
+<div id="background"> 
+    
     <div class="row">
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-            <div id="title_ncbut">
+            <div id="headerDiv">
                 <div class="row">
                     <h2 id="title" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     Search for Existing Customers / Vehicles
@@ -38,7 +40,7 @@
                 </div>
             </div>
             <div class="row">
-                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-primary">
+                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-warning">
                 NEW CUSTOMER CHECK-IN
                 </button>
                 <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
@@ -51,7 +53,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-            <div id="main_div">
+            <div id="main_div" class="form">
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -64,7 +66,7 @@
                                     <option value="vin">VIN</option>
                                 </select>
                                 <input type="text" id="query_search" class="col-xs-12 col-sm-4 col-md-6 col-lg-6"/>
-                                <button id="search_button" class="col-xs-12 col-sm-4 col-md-3 col-lg-3 btn btn-primary">Search</button>
+                                <button id="search_button" class="col-xs-12 col-sm-4 col-md-3 col-lg-3 btn btn-warning">Search</button>
                             </div>
                         </div>
                     </div>
@@ -102,10 +104,10 @@
                                     
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <button id="submit_button_cust_only" class="btn btn-primary submit_button">Select Customer Only</button>
+                                    <button id="submit_button_cust_only" class="btn btn-primary submit_button">Select Customer <br> Only</button>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <button id="submit_button_cust_vehicle" class="btn btn-primary submit_button">Select Customer + Vehicle</button>
+                                    <button id="submit_button_cust_vehicle" class="btn btn-primary submit_button">Select Customer <br>+ Vehicle</button>
                                 </div>
                             </div>
                         </div>
@@ -118,6 +120,7 @@
     </div>
 
     </div>
+</div>
     
 </body>
 </html>

@@ -4,7 +4,6 @@ Thing to note: use margin to give spacing instead of position stuff;
 
 
 #searchBody {
-    background-color: white;
     width: 97vw;
     height: 100vh;
     display: block;
@@ -17,7 +16,6 @@ Thing to note: use margin to give spacing instead of position stuff;
 	right: 0px;
 	/*margin: 10px 10px 10px 10px;*/
 	height: auto;
-	background-color: darkgray;
     border-radius: 7px;
 }
 
@@ -31,10 +29,8 @@ Thing to note: use margin to give spacing instead of position stuff;
 
 #search_result{
 	
-	width: 83%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: darkgray;
+	margin-left: 7%;
+	margin-right: 7%;
 	margin-bottom: 15px;
     overflow: auto;
 }
@@ -52,6 +48,7 @@ Thing to note: use margin to give spacing instead of position stuff;
 }
 #query_search{
 	height:40px;
+    
 }
 #search_button {
 	height:40px;
@@ -75,11 +72,14 @@ Thing to note: use margin to give spacing instead of position stuff;
 	font-weight: bold;
     font-size: 20px;
     margin-bottom: 10px;
+    
 }
 #title{
 	text-align: center;
     margin-top: 20px;
 	margin-bottom: 15px;
+    color: white;
+    font-size: 48px;
 }
 
 /* Search Table */
@@ -91,5 +91,37 @@ Thing to note: use margin to give spacing instead of position stuff;
 #searchTable_filter {
     visibility: hidden;
 }
+
+.c1 {
+    background-color: #9AADBF;
+}
+
+.c2 {
+    background-color: #D3B99F;
+}
+
+.c3 {
+    background-color: #C17767;
+}
+
+c4 {
+    background-color: #6D98BA;
+}
+
+#background {
+    padding: 0vw 10vw 0vw 10vw;
+}
+
+#backgroundImageDiv {
+    background-image: url("content/william-daigneault-733670-unsplash-edit.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    z-index: -10;
+}
+
 
 

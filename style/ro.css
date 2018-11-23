@@ -3,9 +3,9 @@
     
     height: 100vh;
 }
-/*
+
 #backgroundImage {
-    background-image: url("content/ro_background.jpg");
+    background-image: url("content/brady-frieden-365163-unsplash.jpg");
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -14,7 +14,7 @@
     padding: 0px 0px 0px 0px;
     z-index: -10;
 }
-*/
+
 /*
 #headerDiv{
    
@@ -173,3 +173,14 @@ select {
     background-color: #eee;
 }
 
+/*-----Nov 23-----*/
+
+.background {
+    padding: 0vw 10vw 0vw 10vw;
+}
+
+@media only screen and (max-width : 768px){
+    .background {
+        padding: 0px 0px 0px 0px;
+    }
+}

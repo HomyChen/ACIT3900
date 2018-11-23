@@ -305,7 +305,7 @@ $(document).ready(function(){
                     alert("Error")
                 }
                 else {
-                    swal({title:"Data added to DB"}, function () {
+                    swal({title:"Repair Order Successfully Created"}, function () {
                             location.href = "/orders";
                         })
 
@@ -345,7 +345,7 @@ $(document).ready(function(){
                     alert("Error")
                 }
                 else {
-                    swal({title:"Data added to DB"}, function () {
+                    swal({title:"Repair Order Successfully Created"}, function () {
                         location.href = "/orders";
                     })
                 }
@@ -384,7 +384,7 @@ $(document).ready(function(){
                     swal("Error","Problems adding data")
                 }
                 else {
-                    swal({title:"Data added to DB"}, function () {
+                    swal({title:"Repair Order Successfully Created"}, function () {
                         location.href = "/orders";
                     })
                 }
