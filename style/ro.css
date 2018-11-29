@@ -5,7 +5,7 @@
 }
 
 #backgroundImage {
-    background-image: url("content/brady-frieden-365163-unsplash.jpg");
+    background-image: url("content/ro_background.jpg");
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -31,6 +31,9 @@
 
 #searchROBut {
     width: 100%;
+    font-family: calibri;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 #resultsDiv {
@@ -184,3 +187,20 @@ select {
         padding: 0px 0px 0px 0px;
     }
 }
+
+#SOptionsDropdown {
+    font-family: calibri;
+    font-size: 12pt;
+}
+
+#roSearchInp {
+    font-family: calibri;
+    font-size: 12pt;
+}
+
+#ROOptionsDropdown {
+    font-family: calibri;
+    font-size: 12pt;
+}
+
+

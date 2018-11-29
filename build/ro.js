@@ -193,8 +193,8 @@ $(document).ready(function() {
             }else{
                 editTask.value = comment;
             }
-
-            //Add Parts Button
+            /*
+            //Add Parts Button -- currently not implemented
             var addPartBut = document.createElement("button");
             addPartBut.className = "btn btn-default";
             addPartBut.innerHTML = "Add Part";
@@ -205,14 +205,17 @@ $(document).ready(function() {
                     addPartButFunc(task_id);
                 };
             }(task_id);
-
+            */
             taskEntry.appendChild(document.createTextNode(taskName));
 
             var taskDiv = document.createElement("div");
 
             taskDiv.appendChild(taskEntry);
             taskDiv.appendChild(editTask);
-            taskDiv.appendChild(addPartBut);
+            
+            //Add Parts Button -- currently not implemented
+            //taskDiv.appendChild(addPartBut);
+            
             taskDiv.id = "taskNum"+task_id;
             roTask.appendChild(taskDiv);
         }

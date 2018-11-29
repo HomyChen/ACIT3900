@@ -1,12 +1,14 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: calibri;
+    font-size: 12pt;
 }
 
 #boxHeader {
     margin-bottom: 15px;
-    font-size: 24px;
-    font-family: arial;
+    font-size: 18pt;
+    font-family: calibri;
     font-weight: bold;
 }
 
@@ -16,7 +18,7 @@ body {
     width: 100%;
     margin-bottom: 10px;  
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18pt;
     text-align: center;
     overflow-y: auto;
 }
@@ -54,6 +56,9 @@ body {
 #submitBut {
     margin-top: 20px;
     width: 100%;
+    font-family: calibri;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #requestsDropdown {
@@ -78,6 +83,9 @@ body {
 
 #searchBut {
     width: 100%;
+    font-family: calibri;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #clearTableDiv {
@@ -93,6 +101,9 @@ body {
 
 #clearForm {
     width: 100%;
+    font-family: calibri;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #timeInpDiv {
@@ -107,5 +118,16 @@ body {
     padding: 0vw 10vw 0vw 10vw;
 }
 
+#addBut {
+    font-family: calibri;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+#OtherServiceReqBut {
+    font-family: calibri;
+    font-size: 12pt;
+    font-weight: bold;
+}
 
 

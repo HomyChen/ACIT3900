@@ -1,7 +1,10 @@
 /*
 Thing to note: use margin to give spacing instead of position stuff;
 */
-
+body {
+    font-family: calibri;
+    font-size: 12pt;
+}
 
 #searchBody {
     width: 97vw;
@@ -52,6 +55,9 @@ Thing to note: use margin to give spacing instead of position stuff;
 }
 #search_button {
 	height:40px;
+    font-weight: bold;
+    font-size: 14pt;
+    font-family: calibri;
 }
 
 #submitteer{
@@ -68,18 +74,18 @@ Thing to note: use margin to give spacing instead of position stuff;
 }
 
 #ncbut{
-	height:50px;
 	font-weight: bold;
-    font-size: 20px;
+    font-size: 18pt;
     margin-bottom: 10px;
-    
+    overflow-x: auto;
+    float: left;
 }
 #title{
 	text-align: center;
     margin-top: 20px;
 	margin-bottom: 15px;
     color: white;
-    font-size: 48px;
+    font-size: 48pt;
 }
 
 /* Search Table */
@@ -123,5 +129,24 @@ c4 {
     z-index: -10;
 }
 
+#inputRowDiv {
+    padding: 0px 0px 0px 0px;
+}
 
+#submit_button_cust_only {
+    font-weight: bold;
+    font-size: 14pt;
+    font-family: calibri;
+}
 
+#submit_button_cust_vehicle {
+    font-weight: bold;
+    font-size: 14pt;
+    font-family: calibri;
+}
+
+@media only screen and (max-width : 768px){
+    #submit_button_cust_only {
+        margin-bottom: 15px;
+    }
+}

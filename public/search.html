@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>Search Existing Customers</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
     <link href="/css/search_page.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+    
     
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
     <!-- Data Tables -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.7/css/select.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <!-- Own Scripts -->    
     <script type="text/javascript" src="/scripts/search_page.js"></script>
     <!--<script src="/scripts/getmenu.js"></script>-->
@@ -35,13 +39,13 @@
             <div id="headerDiv">
                 <div class="row">
                     <h2 id="title" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    Search for Existing Customers / Vehicles
+                    Search Existing Customers &amp; Vehicles
                     </h2>    
                 </div>
             </div>
             <div class="row">
-                <button id="ncbut" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 btn btn-warning">
-                NEW CUSTOMER CHECK-IN
+                <button id="ncbut" class="col-xs-12 col-sm-8 col-md-5 col-lg-5 btn btn-warning">
+                New Customer Check-In
                 </button>
                 <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
                 <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4"></div>
@@ -56,7 +60,7 @@
             <div id="main_div" class="form">
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="inputRowDiv">
 
                         <div id="search_input">
                             <div class="row">
@@ -75,7 +79,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div id="search_result">
+                       <div id="search_result">
                             <table id="searchTable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -100,14 +104,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div id="submitteer">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                    
+                                
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <button id="submit_button_cust_only" class="btn btn-primary submit_button">Select Customer Only</button>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <button id="submit_button_cust_only" class="btn btn-primary submit_button">Select Customer <br> Only</button>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <button id="submit_button_cust_vehicle" class="btn btn-primary submit_button">Select Customer <br>+ Vehicle</button>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <button id="submit_button_cust_vehicle" class="btn btn-primary submit_button">Select Customer &amp; Vehicle</button>
                                 </div>
                             </div>
                         </div>
