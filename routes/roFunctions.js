@@ -53,23 +53,7 @@ router.post("/AroSearch", function (req,resp){
     }
     
     
-    /*
-    if(searchBy == "ro_id"){
-            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ro.' + searchBy + ' =$1' + ' AND status=$2';
-
-            var data = [roSearchWord, roStatus];
-        
-    }else{
-        
-            var roQuery = 'SELECT * FROM customer c INNER JOIN vehicle v ON c.cust_id = v.cust_id INNER JOIN repair_order ro ON ro.vehicle_id = v.vehicle_id where ' + searchBy + ' LIKE $1' + ' AND status=$2';
-
-            var data = [roSearchWord + '%', roStatus]
-    }
-    */
     
-    
-    //console.log(roQuery);
-    //console.log(data);
     
     pool.connect(function (err, client, done){
         if (err) {

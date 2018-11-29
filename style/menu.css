@@ -3,9 +3,9 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-/*-------------------------------*/
-/*           Wrappers            */
-/*-------------------------------*/
+
+/* Hamburger menu, no longer used in web application 
+
 
 #wrapper {
   margin-left: 0;
@@ -46,9 +46,7 @@ body {
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
 }
-/*-------------------------------*/
-/*     Sidebar nav styles        */
-/*-------------------------------*/
+
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -90,9 +88,7 @@ li{
 }
 
 
-/*-------------------------------*/
-/*       Hamburger               */
-/*-------------------------------*/
+
 .hamburger {
   position: absolute;
   top: 20px;
@@ -144,7 +140,7 @@ li{
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all 0.35s ease-in-out;
 }
-*/
+
 .hamburger.is-closed .hamb-top,
 .hamburger.is-closed .hamb-middle,
 .hamburger.is-closed .hamb-bottom,
@@ -185,7 +181,7 @@ li{
   bottom: 0;
   -webkit-transition: all 0.35s ease-in-out;
 }
-*/
+
 .hamburger.is-open {
   left: auto;
   right: 220px;
@@ -224,10 +220,8 @@ li{
   display: block;
  
 }
-*/
-/*-------------------------------*/
-/*            Overlay            */
-/*-------------------------------*/
+
+
 .overlay {
   position: fixed;
   display: none;
@@ -240,7 +234,7 @@ li{
   background-color: rgba(250,250,250,.8);
   z-index: 2;
 }
-
+*/
 /*
 *
 ***************************************************Changes made Nov 23 - Iris
@@ -268,18 +262,25 @@ li{
 */
 
 #firstRow {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     padding-left: 10px;
     padding-right: 10px;
 }
 
+
+/*
+*
+*******************just for testing, use Homy's when merging********************************Changes made Nov 23 - Iris
+*/
 #headerDiv{
-    background-color: rgba(255,255,255,0.5);  
+    /*background-color: rgba(255,255,255,0.5);*/
     text-align: center;
     font-size: 40px;
     font-family: calibri;
     padding: 20px;
     margin: 20px 0px 20px 0px;
+    color: white;
+    
 }
 
 #headerRow {
@@ -305,7 +306,7 @@ li{
 
 /*
 *
-***************************************************Changes made Nov 23 - Iris
+***************************************************everything new Changes made Nov 23 - Iris
 /*
 /*
 * Navigation Menu
@@ -320,16 +321,7 @@ li{
     padding: 10px 0px 10px 0px;
 }
 
-
-.container-fluid{
-    
-}
-
 #menuItems{
-    padding: 0px 0px 0px 0px;
-    
-}
-
-@media only screen and (max-width : 768px){
+    padding: 0px 30px 0px 0px;
     
 }
