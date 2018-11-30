@@ -113,6 +113,8 @@ $(document).ready(function(){
     }
 
     let vinCheck = () =>{
+        // return promise. Makes call to vinCheck function
+        // vinCheck queries DB if VIN is already present. If VIN is in DB error code 1 otherwise error code is zero. ALERT is given when vin is present in DB
         return new Promise((resolve) => {
             $.ajax({
                 url:"/data/vinCheck",
@@ -132,7 +134,7 @@ $(document).ready(function(){
         })
     }
 
-    serviceReqBtn.onclick = function () {
+    function addCommonServiceRequests () {
         var commonTasksSelect   = document.getElementById("requestsDropdown");
 
         if(commonTasksSelect[commonTasksSelect.selectedIndex].value.toString() == "Common Requests"){
@@ -145,30 +147,23 @@ $(document).ready(function(){
         var th = document.createElement("th");
         var td = document.createElement("td");
         var tr = document.createElement("tr");
-        var serviceRequestText = commonTasksSelect[commonTasksSelect.selectedIndex].innerHTML.toString();
+        var serviceRequestText = commonTasksSelect[commonTasksSelect.selectedIndex].innerHTML.toString(); // adding text to variables
 
         th.scope = "row";
         tr.id="commonTasks";
+
         th.innerHTML= tableRows++;  //Table rows is the number that is added to the table hence it starts at 1
-        td.innerHTML = serviceRequestText;
+        td.innerHTML = serviceRequestText; // adding text to td
         numOfCommonRequests++; // service requests are at 0.
-        td.title= commonTasksSelect[commonTasksSelect.selectedIndex].value.toString();
+        td.title= commonTasksSelect[commonTasksSelect.selectedIndex].value.toString(); // adding the value of the dropdown to title
+
         tr.appendChild(th);
         tr.appendChild(td);
 
         tBody.appendChild(tr);
     };
 
-    function getCalendarDate() {
-        var currentDate = new Date();
-
-        var date = currentDate.getDate();
-        var month = currentDate.getMonth();
-        var year = currentDate.getFullYear();
-        return year + "-" + (month+1) + "-" + date;
-    }
-
-    otherSerRequest.onclick = function () {
+    function addUnCommonServiceRequests () {
         // would like to make this same as serviceReqBtn function
         var th = document.createElement("th");
         var td = document.createElement("td");
@@ -185,6 +180,15 @@ $(document).ready(function(){
         tr.appendChild(td);
         otherTBody.appendChild(tr);
     };
+
+    function getCalendarDate() {
+        var currentDate = new Date();
+
+        var date = currentDate.getDate();
+        var month = currentDate.getMonth();
+        var year = currentDate.getFullYear();
+        return year + "-" + (month+1) + "-" + date;
+    }
 
     let packageRequests = () => {
         return new Promise((resolve) =>{
@@ -221,6 +225,8 @@ $(document).ready(function(){
     }
 
     function dateCheck() {
+        // func checks if the promise date is valid if it is not to a valid date
+        // it sets the date to today's date + 1 day and sets time to 12 PM
         return new Promise((resolve) =>{
             if(datePromised.value ==''){
 
@@ -265,6 +271,8 @@ $(document).ready(function(){
         submitButton.addEventListener("click", submitButtonClick);
         clearFormBut.addEventListener("click",clearRequests);
         clearFormBut.addEventListener("click",clearForm);
+        serviceReqBtn.addEventListener("click",addCommonServiceRequests);
+        otherSerRequest.addEventListener("click",addUnCommonServiceRequests);
         document.getElementById("searchBut").addEventListener("click",clearRequests);
     }
 
@@ -392,6 +400,7 @@ $(document).ready(function(){
     }
 
     function clearRequests() {
+        // purpose is to clear both requests table and reset the variables
         for(let i =1; i<=numOfCommonRequests; i++){
             tBody.removeChild(document.getElementById("commonTasks"));
         }
@@ -423,7 +432,6 @@ $(document).ready(function(){
         dateHourPromised.value  = "00";
         dateMinPromised.value   = "00";
         dateAmPmPromised.value  = "AM";
-
     }
 
     /*------Some styling Changes for Data Validation-------------------------------------------------------------------------------------------------------*/

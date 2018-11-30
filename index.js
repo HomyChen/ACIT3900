@@ -9,14 +9,11 @@ const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 
 
-// had to change button Id of second add button for the other request option
-
 //defining routed function files -Homy
 const seaFunctions = require('./routes/searchFunctions.js');
 const vinFunctions = require('./routes/checkVIN.js');
 var dbFunctions = require("./routes/dbFunctions");
 var roFunctions = require("./routes/roFunctions");
-//const pdfFunctions = require("./pdf/repordpdf")
 const printableFunctions = require('./routes/printableFunctions.js');
 
 var pF = path.resolve(__dirname, "public");

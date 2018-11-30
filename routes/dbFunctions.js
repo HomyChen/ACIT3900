@@ -38,7 +38,7 @@ router.post("/insertOldCustomerOldVehicle",function (req,resp) {
 router.post("/vinCheck", function (req,resp) {
     doDbCheck(req.body.vinNum)
         .then(result => {
-            console.log(result);
+
             resp.send({
                 result:result.result,
                 errorCode:0
@@ -150,14 +150,6 @@ async function doInsertOldCustomerOldVehicle(req) {
         return null;
     }
 }
-
-
-
-
-
-
-
-
 
 
 

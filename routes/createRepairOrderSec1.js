@@ -58,26 +58,6 @@ var insertVehicles = (info) => {
     })
 }
 
-var insertUnCommonTasks = (info) => {
-    return new Promise((resolve, reject) => {
-
-        var variablesNeeded = [];
-        for (var i = 0; i < info.requests.otherReqTotal; i++) {
-            variablesNeeded.push('($' + (i + 1) + ')');
-        }
-        const query = {
-            // give the query a unique name
-            name: 'insertUnCommonTasks',
-            text: 'INSERT INTO task (task_name) VALUES' + variablesNeeded.join(",") + 'returning task_id',
-            values: info.requests.otherRequests
-        };
-        pool.query(query)
-            .then(result => resolve(result.rows))
-            .catch(err => reject(err))
-    })
-}
-
-
 var createRepairOrder = (dataGram) =>{
     return new Promise((resolve,reject) =>{
         var repairOrderData = [dataGram[0].vehicleNotes, parseFloat(dataGram[0].odometer), dataGram[2],dataGram[1].vehicleID,dataGram[0].datePromised];
@@ -104,13 +84,31 @@ var createRepairOrder = (dataGram) =>{
     })
 }
 
+var insertUnCommonTasks = (info) => {
+    return new Promise((resolve, reject) => {
+
+        var variablesNeeded = [];
+        for (var i = 0; i < info.requests.otherReqTotal; i++) {
+            variablesNeeded.push('($' + (i + 1) + ')');
+        }
+        const query = {
+            // give the query a unique name
+            name: 'insertUnCommonTasks',
+            text: 'INSERT INTO task (task_name) VALUES' + variablesNeeded.join(",") + 'returning task_id',
+            values: info.requests.otherRequests
+        };
+        pool.query(query)
+            .then(result => resolve(result.rows))
+            .catch(err => reject(err))
+    })
+}
+
 var createWorkTaskUnCommon = (unCommonTasksID, repairOrderId) => {
     return new Promise((resolve, reject) => {
 
         let arr = [];
 
         for (let i = 0; i < unCommonTasksID.length; i++) {
-
             const query = {
                 // give the query a unique name
                 name: 'createRepairOrder',
@@ -126,7 +124,6 @@ var createWorkTaskUnCommon = (unCommonTasksID, repairOrderId) => {
                 })
                 .catch(err => reject(err))
         }
-
     })
 }
 
