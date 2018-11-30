@@ -4,7 +4,6 @@
  */
 $(document).ready(function(){
     
-    
     // input of user Info
     var lastNameInput       = document.getElementById("lnInp");
     var firstNameInput      = document.getElementById("fnInp");
