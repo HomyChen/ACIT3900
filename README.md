@@ -104,9 +104,7 @@ This is the server-side script for running the database query that will populate
 `getSearchData()`
 
 Parameters: searchQuery, searchType
-
 Returns: JSON object {status, data}
-
 Purpose:
 - This function takes in the values from the search input box, searchQuery, and the type of search, searchType, from the dropdown to run a database query that returns a JSON object with a status and data containing all customer and vehicle information from the Customer and Vehicle tables in the database which match searchQuery.
   
@@ -123,9 +121,7 @@ This is the client-side script containing the function which executes the AJAX c
 `getSearchPage()`
 
 Parameters: None.
-
 Returns: search.html, placed into the <div> element with id = “searchPosition”
-  
 Purpose:
 - Injects search.html into checkin.html to allow for search data to be passed effectively to the input forms in checkin.html so that the inputs can auto-fill.
 - This function is run automatically when the script is loaded by checkin.html.
@@ -139,9 +135,7 @@ This page contains the main scripts for the functionality of the elements in sea
 `search_button function (Event Listener for click)`
 
 Parameters: searchQuery, searchType
-
 Returns: Row data to populate the DataTable, or alert saying search should not contain special characters.
-
 Purpose:
 - Runs when the search button is clicked.
 - Has an AJAX call to send the values in the search input field and the search type from the dropdown to the server so that getSearchData() in searchFunctions.js can be run.
@@ -152,9 +146,7 @@ Purpose:
 `ajaxSetVariables()`
 
 Parameters: status, vehicle_id, cust_id
-
 Returns: None
-
 Purpose:
 - Sets the session variables for status
   - § Status variable determines which scenario is taking place:
@@ -169,18 +161,15 @@ Purpose:
 `makeCheckInVisible()`
 
 Parameters: None
-
 Returns: None
-
 Purpose:
 - Sets the entirety of search.html invisible and makes the elements of checkin.html visible.
 - Used when any of the three buttons that leads the user to the Vehicle Check-In Page is clicked.
 
 `makeSearchVisible()`
+
 Parameters: None
-
 Returns: None
-
 Purpose:
 - Sets the entirety of checkin.html invisible and makes the elements of search.html visible.
 - Used when user clicks the Existing Customer button in the Vehicle Check-In Page.
@@ -188,9 +177,7 @@ Purpose:
 `autofillCustomer()`
 
 Parameters: data
-
 Returns: None
-
 Purpose:
 - Takes in the row data from the DataTable and fills Customer Information on the Vehicle Check-In Page with this data.
 - Used when user clicks Select Customer or Select Customer + Vehicle
@@ -198,9 +185,7 @@ Purpose:
 `autofillVehicle()`
 
 Parameters: data
-
 Returns: None
-
 Purpose:
 - Takes in the row data from the DataTable and fills Vehicle Information on the Vehicle Check-In Page with this data.
 - Used when user clicks Select Customer + Vehicle
@@ -208,18 +193,14 @@ Purpose:
 `clearCustomer()`
 
 Parameters: None
-
 Returns: None
-
 Purpose:
 - Clears the data that was filled with autofillCustomer()
 
 `clearVehicle()`
 
 Parameters: None
-
 Returns: None
-
 Purpose:
 - Clears the data that was filled with autofillVehicle()
 
@@ -251,9 +232,7 @@ In the preceding section we will discuss each function:
 `loadBasics()`
 
 Parameters: None
-
 Return: None
-
 Purpose: 
 - Load requests dropdown select. 
 - The values for the select are located in requestsDropDown.html
@@ -267,9 +246,7 @@ Purpose:
 `vinCheck:`
 
 Parameters: None
-
 Return: 1 or 0
-
 Purpose:
 - checkVIN.js queries the DB to see if the VIN is already present
 - every car has a unique VIN so in the DB it has a unique constraint
@@ -278,3 +255,124 @@ Purpose:
 - If VIN is not present.
   - Returns a 0
   
+addCommonServiceRequests():
+•	Parameters: None
+•	Return: None
+•	Purpose:
+•	Before function does anything it double checks that user is not trying to add “Common Requests” to the table
+o	If it is adding “Common Requests” to the table it does not allow this and returns null
+o	“Common Requests” is not a valid option for a service request
+•	Common service requests are added dynamically to a table.
+•	When the add button closest to the dropdown is clicked three elements are created: 
+o	Th, Td, Tr
+•	It gets the value of the dropdown selected and appends that to the Td
+o	The td.title is set to the value of the drop down
+o	The value is used by the DB to assign tasks to a repair_order
+•	The Th,Td, and Tr are eventually appends to the table
+•	Two variables are updated in this function: 
+o	numberOfCommonRequests
+	Used to keep track of how many requests have been added to table
+	Used in packageRequests()  function 
+o	tableRows
+	Shows how many common requests are added to table
+
+addUnCommonServiceRequests():
+•	Parameters: None
+•	Return: None
+•	Purpose: 
+o	Similar to addCommonServiceRequests
+o	Does not have IF statement like addCommonServiceRequests()
+o	Updates different variables 
+	Variables are serving same purpose
+
+
+getCalendarDate():
+•	Parameters: None
+•	Return: Current Date formatted
+
+
+
+
+
+
+dateCheck():
+•	Parameters: None
+•	Return: None
+•	Purpose:
+o	Function check if date has been set by user
+o	Due to DB requirements if date is less than 10 a zero is added to the front of it
+o	If promise date has not been changed by user the promise date is set to today’s date plus one day and the promised time is set to 12 pm
+
+getVariables():
+•	Parameters: None
+•	Return: session variable
+•	Purpose:
+•	Function grabs from a session variable from index.js 
+o	Session variable can be 0, 1, 2
+o	The variable denotes what type of insert is going to happen
+•	Result from this function is used in submit button click
+
+
+clearRequests():
+•	Parameters: None
+•	Return: session variable
+•	Purpose:
+o	Clear both service requests tables of all entries
+o	Resets the variables after completion of deletion
+
+
+clearForm():
+•	Parameters: None
+•	Return: session variable
+•	Purpose:
+o	Reset all inputs to blanks
+o	INTERNAL USE IF ADDING STATUS UPDATE CHANG ME (setting values to false etc)
+ 
+newCustomerNewVehicle():
+●	Parameters: None
+●	Return: 1 or Null
+●	Purpose:
+○	This function is used when the  getVariables() returns a zero
+○	We are entering a customer who has not been to the shop before
+○	We will also be then entering a vehicle for that customer
+○	We package up all car and person information into a JSON object
+○	The function passes data to the insertCustomer function in the dbFunctions file
+●	Note: oldCustomerOldVehicle & oldCustomerNewVehicle are similar to this function
+○	They are invoked when the getVariables() returns a 1 or 2
+○	Depending on what function is used the amount of data that is packaged varies
+○	On success all of these functions move the user to the Repairs Orders page
+
+packageRequests():
+●	Parameters: None
+●	Return: None
+●	Purpose:
+○	This function takes all of the common and uncommon service requests that the user has made and packages them into a array
+○	We package the requests into seperate arrays
+■	CommonRequests are packaged into one array
+■	unCommonRequests are packaged into another array
+■	The length of each array is also recorded
+■	Each array and array length is packaged into one array and that is assigned to the variable requestsPackaged variable
+
+submitButtonClick
+●	Parameters: None
+●	Return: None
+●	Purpose:
+○	Note: This function is asynchronous 
+○	This function is invoked each time the submit button is clicked
+○	At the start of the function there is validation done on 
+■	Last Name
+■	Vin
+■	common Requests
+■	unCommonRequests
+■	A user must enter a last name, vin, and either a commonRequest or unCommonRequest
+■	Depending on what field value does not match the regex that input box is highlighted red
+○	After passing the regex checks on required fields we do check on non required fields to make sure, IF, data is entered into those fields that conforms to our regexs
+○	Next, we wait for the vinCheck function
+■	Depending on the result of that function we either move on or we alert the user that the vin they entered is already in the db 
+○	If the vin is not entered we call the packageRequests() 
+○	After we awaitCheck function
+○	Then we wait for the getVariables() function
+○	Then an if statement comes up where if either:
+■	The VIN isnt in the DB 
+■	Or if the status is 2
+■	Meaning we are creating a second repair order for a car and vehicle that is already in the DB
