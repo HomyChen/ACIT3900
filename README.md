@@ -104,7 +104,9 @@ This is the server-side script for running the database query that will populate
 `getSearchData()`
 
 Parameters: searchQuery, searchType
+
 Returns: JSON object {status, data}
+
 Purpose:
 - This function takes in the values from the search input box, searchQuery, and the type of search, searchType, from the dropdown to run a database query that returns a JSON object with a status and data containing all customer and vehicle information from the Customer and Vehicle tables in the database which match searchQuery.
   
@@ -120,7 +122,9 @@ This is the client-side script containing the function which executes the AJAX c
 
 `getSearchPage()`
 Parameters: None.
+
 Returns: search.html, placed into the <div> element with id = “searchPosition”
+  
 Purpose:
 - Injects search.html into checkin.html to allow for search data to be passed effectively to the input forms in checkin.html so that the inputs can auto-fill.
 - This function is run automatically when the script is loaded by checkin.html.
@@ -134,7 +138,9 @@ This page contains the main scripts for the functionality of the elements in sea
 `search_button function (Event Listener for click)`
 
 Parameters: searchQuery, searchType
+
 Returns: Row data to populate the DataTable, or alert saying search should not contain special characters.
+
 Purpose:
 - Runs when the search button is clicked.
 - Has an AJAX call to send the values in the search input field and the search type from the dropdown to the server so that getSearchData() in searchFunctions.js can be run.
@@ -144,7 +150,9 @@ Purpose:
 
 `ajaxSetVariables()`
 Parameters: status, vehicle_id, cust_id
-Returns: None.
+
+Returns: None
+
 Purpose:
 - Sets the session variables for status
   - § Status variable determines which scenario is taking place:
@@ -158,41 +166,53 @@ Purpose:
 
 `makeCheckInVisible()`
 Parameters: None
+
 Returns: None
+
 Purpose:
 - Sets the entirety of search.html invisible and makes the elements of checkin.html visible.
 - Used when any of the three buttons that leads the user to the Vehicle Check-In Page is clicked.
 
 `makeSearchVisible()`
 Parameters: None
+
 Returns: None
+
 Purpose:
 - Sets the entirety of checkin.html invisible and makes the elements of search.html visible.
 - Used when user clicks the Existing Customer button in the Vehicle Check-In Page.
 
 `autofillCustomer()`
 Parameters: data
+
 Returns: None
+
 Purpose:
 - Takes in the row data from the DataTable and fills Customer Information on the Vehicle Check-In Page with this data.
 - Used when user clicks Select Customer or Select Customer + Vehicle
 
 `autofillVehicle()`
 Parameters: data
+
 Returns: None
+
 Purpose:
 - Takes in the row data from the DataTable and fills Vehicle Information on the Vehicle Check-In Page with this data.
 - Used when user clicks Select Customer + Vehicle
  
 `clearCustomer()`
 Parameters: None
+
 Returns: None
+
 Purpose:
 - Clears the data that was filled with autofillCustomer()
 
 `clearVehicle()`
 Parameters: None
+
 Returns: None
+
 Purpose:
 - Clears the data that was filled with autofillVehicle()
 
@@ -223,7 +243,9 @@ In the preceding section we will discuss each function:
 
 `loadBasics()`
 Parameters: None
+
 Return: None
+
 Purpose: 
 - Load requests dropdown select. 
 - The values for the select are located in requestsDropDown.html
@@ -236,7 +258,9 @@ Purpose:
 
 `vinCheck:`
 Parameters: None
+
 Return: 1 or 0
+
 Purpose:
 - checkVIN.js queries the DB to see if the VIN is already present
 - every car has a unique VIN so in the DB it has a unique constraint
