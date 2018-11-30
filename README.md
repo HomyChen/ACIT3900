@@ -121,6 +121,7 @@ This is the client-side script containing the function which executes the AJAX c
 #### Functions:
 
 `getSearchPage()`
+
 Parameters: None.
 
 Returns: search.html, placed into the <div> element with id = “searchPosition”
@@ -149,6 +150,7 @@ Purpose:
 - Adds an on-select function to the rows in the DataTable for the row’s data to be passed to the Vehicle Check-In Page when either the Select Customer Only button or the Select Customer + Vehicle button is clicked.
 
 `ajaxSetVariables()`
+
 Parameters: status, vehicle_id, cust_id
 
 Returns: None
@@ -165,6 +167,7 @@ Purpose:
 
 
 `makeCheckInVisible()`
+
 Parameters: None
 
 Returns: None
@@ -183,6 +186,7 @@ Purpose:
 - Used when user clicks the Existing Customer button in the Vehicle Check-In Page.
 
 `autofillCustomer()`
+
 Parameters: data
 
 Returns: None
@@ -192,6 +196,7 @@ Purpose:
 - Used when user clicks Select Customer or Select Customer + Vehicle
 
 `autofillVehicle()`
+
 Parameters: data
 
 Returns: None
@@ -201,6 +206,7 @@ Purpose:
 - Used when user clicks Select Customer + Vehicle
  
 `clearCustomer()`
+
 Parameters: None
 
 Returns: None
@@ -209,6 +215,7 @@ Purpose:
 - Clears the data that was filled with autofillCustomer()
 
 `clearVehicle()`
+
 Parameters: None
 
 Returns: None
@@ -242,6 +249,7 @@ The majority of all functionality is provided by the checkInSubmit.js file. This
 In the preceding section we will discuss each function:
 
 `loadBasics()`
+
 Parameters: None
 
 Return: None
@@ -257,6 +265,7 @@ Purpose:
 - Remainder of function assigns values to button clicks
 
 `vinCheck:`
+
 Parameters: None
 
 Return: 1 or 0
