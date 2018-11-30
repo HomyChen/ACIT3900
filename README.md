@@ -1,7 +1,7 @@
 # OPUD
 BCIT School of Transportation Project F18-013
 
-##Introduction to Opud
+## Introduction to Opud
 Opud is a web application commissioned by Naveen Jit from the BCIT School of Transportation. It designed to be used by the customer support representative working for the School of Transportation. 
 
 Its main function is to allow the support representative to enter customer and vehicle information into a database and create a printable repair order which will be sent to the school’s automotive shop. A technician will then fill out the repair order and give it back to the customer support representative so that the information on the tasks done to the vehicle can be entered into the database.
