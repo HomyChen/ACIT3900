@@ -40,7 +40,7 @@ Stores the data for individual tasks within each repair order. A repair order co
 #### Unused Columns:
 ```
 •	 Labor_hrs
-•	Labor_rate
+•	 Labor_rate
 ```
 
 #### Task
@@ -71,11 +71,17 @@ JQuery (Linked in checkin.html)
 
 ### Related Files:
 •	search.html
+
 •	search_page.css
+
 •	searchFunctions.js
+
 •	search_overlay.js
+
 •	search_page.js
+
 •	index.js
+
 •	checkin.html
 
 #### search.html
@@ -96,12 +102,14 @@ This is the server-side script for running the database query that will populate
 
 ##### Functions:
 `getSearchData()`
-•	Parameters: searchQuery, searchType
-•	Returns: JSON object {status, data}
-•	Purpose:
-  o	This function takes in the values from the search input box, searchQuery, and the type of search, searchType, from the dropdown to run a database query that returns a JSON object with a status and data containing all customer and vehicle information from the Customer and Vehicle tables in the database which match searchQuery.
-  o	Before the database query is run, searchQuery is checked against a regex to ensure that it only contains letters and numbers.
-  o	This function is exported by this file to be used in index.js when an AJAX call is made using the search button.
+
+Parameters: searchQuery, searchType
+Returns: JSON object {status, data}
+Purpose:
+- This function takes in the values from the search input box, searchQuery, and the type of search, searchType, from the dropdown to run a database query that returns a JSON object with a status and data containing all customer and vehicle information from the Customer and Vehicle tables in the database which match searchQuery.
+  
+- Before the database query is run, searchQuery is checked against a regex to ensure that it only contains letters and numbers.
+- This function is exported by this file to be used in index.js when an AJAX call is made using the search button.
 
 
 
