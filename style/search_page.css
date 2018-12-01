@@ -2,7 +2,7 @@
 Thing to note: use margin to give spacing instead of position stuff;
 */
 body {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
 }
 
@@ -57,7 +57,7 @@ body {
 	height:40px;
     font-weight: bold;
     font-size: 14pt;
-    font-family: calibri;
+    font-family: arial;
 }
 
 #submitteer{
@@ -136,13 +136,13 @@ c4 {
 #submit_button_cust_only {
     font-weight: bold;
     font-size: 14pt;
-    font-family: calibri;
+    font-family: arial;
 }
 
 #submit_button_cust_vehicle {
     font-weight: bold;
     font-size: 14pt;
-    font-family: calibri;
+    font-family: arial;
 }
 
 @media only screen and (max-width : 768px){

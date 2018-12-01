@@ -1,14 +1,14 @@
 body {
     padding: 0;
     margin: 0;
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
 }
 
 #boxHeader {
     margin-bottom: 15px;
     font-size: 18pt;
-    font-family: calibri;
+    font-family: arial;
     font-weight: bold;
 }
 
@@ -56,7 +56,7 @@ body {
 #submitBut {
     margin-top: 20px;
     width: 100%;
-    font-family: calibri;
+    font-family: arial;
     font-size: 18pt;
     font-weight: bold;
 }
@@ -83,7 +83,7 @@ body {
 
 #searchBut {
     width: 100%;
-    font-family: calibri;
+    font-family: arial;
     font-size: 18pt;
     font-weight: bold;
 }
@@ -101,7 +101,7 @@ body {
 
 #clearForm {
     width: 100%;
-    font-family: calibri;
+    font-family: arial;
     font-size: 18pt;
     font-weight: bold;
 }
@@ -119,13 +119,13 @@ body {
 }
 
 #addBut {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
     font-weight: bold;
 }
 
 #OtherServiceReqBut {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
     font-weight: bold;
 }

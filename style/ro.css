@@ -31,7 +31,7 @@
 
 #searchROBut {
     width: 100%;
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
     font-weight: bold;
 }
@@ -189,17 +189,17 @@ select {
 }
 
 #SOptionsDropdown {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
 }
 
 #roSearchInp {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
 }
 
 #ROOptionsDropdown {
-    font-family: calibri;
+    font-family: arial;
     font-size: 12pt;
 }
 
