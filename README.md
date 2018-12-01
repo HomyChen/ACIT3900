@@ -324,6 +324,7 @@ Return: Current Date formatted
 
 
 `dateCheck()`:
+
 Parameters: None
 
 Return: None
@@ -334,6 +335,7 @@ Purpose:
 - If promise date has not been changed by user the promise date is set to today’s date plus one day and the promised time is set to 12 pm
 
 `getVariables()`:
+
 Parameters: None
 
 Return: session variable
@@ -464,18 +466,72 @@ Purpose:
 `async doInsertOldCustomerNewVehicle()`:
 
 Parmas: req
-○	Includes no customer information except customerID
-○	Has all vehicle information
-●	Purpose:
-○	This function is used when we have a customer who is already in the database
-○	The customer has multiple cars and is bringing in a car they have not previously not brought in
-○	Logic:
-○	Insert Vehicle using customerID returning vehicleID
-○	Create repairOrder using vehilceID returning repairOrder
-○	IF there is no unCommonTasks 
-■	we insert all the commonTaks into the DB using repair order
-○	ELSE
-■	IF there are commonTasks
-●	We insert both common and unCommon tasks using repair order
-○	ELSE
-■	We insert only unCommonTasks are no other tasks are present
+- Includes no customer information except customerID
+- Has all vehicle information
+
+Purpose:
+- This function is used when we have a customer who is already in the database
+- The customer has multiple cars and is bringing in a car they have not previously not brought in
+- Logic:
+  - Insert Vehicle using customerID returning vehicleID
+  - Create repairOrder using vehilceID returning repairOrder
+  - IF there is no unCommonTasks 
+    - we insert all the commonTaks into the DB using repair order
+  - ELSE
+    - IF there are commonTasks
+      - We insert both common and unCommon tasks using repair order
+  - ELSE
+    - We insert only unCommonTasks are no other tasks are present
+    
+`async doInsertOldVehicleOldCustomer()`:
+
+Parmas: req
+- Includes no customer information except customerID
+- Includes no vehicle information except vehilceID
+
+Purpose:
+- This function is used when we have an existing customer, and vehicle
+- We are creating a new repair order for this vehicle
+- Logic:
+  - Create repairOrder using vehilceID returning repairOrder
+  - IF there is no unCommonTasks 
+    - we insert all the commonTaks into the DB using repair order
+  - ELSE
+    - IF there are commonTasks
+      - We insert both common and unCommon tasks using repair order
+  - ELSE
+    - We insert only unCommonTasks are no other tasks are present
+
+`async insertWithOnlyCommonTasks()`:
+
+Parmas: commonTasks, createReapirOrder
+
+Purpose:
+- This function is called within the above three functions
+  - It only gets called when there are only commonTasks and no unCommonTasks
+- It calls one of the functions in the createRepairOrderSec1.js page
+- It lastly calls a test method which is used for confirmation only
+  - This method queries the db returning all information on the recently created repair order
+  
+`async insertCommonUnCommonWorkTasks()`:
+
+Parmas: req, createReapirOrderID
+
+Purpose:
+- This function is called when their are common and unCommonTasks that need to be added to a repair order
+- Common tasks are never entered into the db rather we add common tasks via the task_id which is provided via checkInSubmit
+- Adding unCommonTasks is different
+  - Each unCommonTask is added to the task table
+  - We keep track of the taskId
+-	This function adds both commonTasks and unCommonTasks and commonTasks
+-	Then we call the testMethod twice using both common and unCommon task IDs
+
+`async insertOnlyUnCommonTasks()`:
+
+Params:  req, createReapirOrderID
+
+Purpose:
+- To insert the unCommonTasks
+- We insert the unCommonTasks to the task table
+-	We then take the unCommonTaskIDs and add them to the reapir_tasks table
+- We then call test method to get the information we just entered
