@@ -53,6 +53,95 @@ Uncommon (user inputted) tasks will be added to this table when inputted in the 
 
 This table is currently unused. It will store the data for the parts used for each task in `Repair_Tasks`. This will be used in addition to `Labor_hrs` and `Labor_rate` to calculate the cost of each task when generating an invoice (currently not implemented).
 
+
+## Application Dependencies
+
+### Applications:
+- PostgreSQL v9.6
+- Node.js
+
+### Node Modules:
+- Express
+- Body-Parser
+- Express-Session
+- Handlebars
+- HBS
+- JQuery
+- PG
+- PhantomJs-Prebuilt
+- Socket.io
+- SweetAlert
+- WebPack
+
+### Scripts loaded into HTML files:
+- Bootstrap
+- DataTables
+- JQuery
+- SweetAlert
+
+## Server Documentation (index.js)
+
+### index.js
+
+This is the server file that Node will run to start the webserver. 
+
+### Constants for dependencies:
+- exp
+- path
+- bodyParser
+- expressSession
+
+### Constants for server:
+- port
+- server
+
+### Constants for routed server-side function files:
+- seaFunctions
+- vinFunctions
+- dbFunctions
+- roFunctions
+- printableFunctions
+
+### Functions:
+
+`/search`
+
+Parameters: request.body.searchQuery, request.body.searchType
+
+Returns: JSON object
+
+Purpose: 
+- Runs the getSearchData function from searchFunctions.js when called upon by an AJAX call from the client
+
+`/cVIN`
+
+Parameters: request.body.vin
+
+Returns: JSON object
+
+Purpose: 
+- Runs the checkVIN function from checkVIN.js
+- Used to check if a VIN already exists in the database
+
+`/setVariables`
+
+Parameters: None
+
+Returns: JSON object
+
+Purpose: 
+- Sets the session variables for status, cust_id, and vehicle_id to determine the different scenarios (new customer and new vehicle, old customer and new vehicle, or old customer and old vehicle)
+
+`/getVariables`
+
+Parameters: None
+
+Returns: JSON object
+
+Purpose: 
+- Gets the session variables for status, cust_id, and vehicle_id
+
+
 ## Search Page Documentation
 
 The Search Page is what the user will see first when they try to access Vehicle Check-In. It allows them to search for existing customers and select the vehicle data in order to fill out the Vehicle Check-In page with pre-existing data. This is also the only way to create a new order for an existing customer.
@@ -535,6 +624,100 @@ Purpose:
 - We insert the unCommonTasks to the task table
 -	We then take the unCommonTaskIDs and add them to the reapir_tasks table
 - We then call test method to get the information we just entered
+
+## createRepairOrderSec1.js
+
+### Assumption: 
+- Learning about this file please read about dbFunctions.js
+
+At the start of the file there is a connection to the postgres database
+
+`insertCustomer()`:
+
+Parmas: 
+- Takes req
+- Only uses customer information
+
+Returns:
+- A promise
+- Either resolve, reject
+- On resolve returns customerID
+
+Purpose:
+- This function takes customer information and using prepared statement (found at bottom of page) it adds customer information to DB and returns only customerID
+
+`insertVehicles()`:
+
+Parmas:
+- Takes Vehicle information, and customerID
+
+Returns:
+- A promise
+- Either resolve, reject
+- On resolve returns vehicleID
+
+Purpose:
+- This function takes vehicle information and using prepared statement (found at bottom of page) it adds vehicle information to DB and returns only vehicleID
+
+ 
+`createRepairOrder`()
+
+Params:
+- Vehicle notes, odometer, vehicleID, date promised, and dataGram
+
+Returns: 
+- A promise either resolve or reject
+- Returns repairOrderID
+
+Purpose:
+- This function takes all information provided and creates a repair order and returns repairOrderID
+
+`insertUnCommonTasks()`:
+
+Params:
+- All unCommonRequests
+
+Return:
+- The ID of the unCommonTasks
+
+Purpose:
+- So each unCommon task that a user asks for is always added to the tasks table. 
+- We use a for loop to create an array that is the size of the number of unCommonTasks
+- We enter the unCommonTasks and we return their task_ids
+
+`createWorkTasksUnCommon()`:
+
+Parmas:
+- reapirOrderID, unCommonTaskID
+
+Return:
+- An array of all workTask_IDs
+
+Purpose:
+- This function takes each unCommonTaskID and adds its to the reapir_tasks table and also adds a reference to the reapir_order table
+
+`createWorkTaskCommon()`:
+
+Params:
+- commonTaskID, and reapirOrderID
+
+Return:
+- An array of all workTask_IDs
+
+Purpose:
+- This function takes each CommonTaskID and adds its to the reapir_tasks table and also adds a reference to the reapir_order table
+
+`getInfo()`:
+
+Parmas:
+- taskID
+
+Return:
+- An array of information from DB from multiple tables
+
+Purpose:
+- This function is used to test if the information that was entered to the DB went to the right tables. 
+- It takes a taskID and queries multiple tables to get you all the information for that entry and returns that information to the user 
 
 
 ## Repair Order Documentation
