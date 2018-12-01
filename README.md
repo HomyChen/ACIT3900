@@ -831,3 +831,54 @@ Returns: None
 Purpose:
 - Takes in the array of tasks tied to the repair order and loops through each one to create a taskDiv element and append it with the task name and some lines. 
 - Depending on the index of the task in the array, some top padding will be added to the div to match the top margins of the document. This is due to the body and page margins being set to 0.
+
+## Menu
+The menu is a navigation bar that is ajax into the top of the screen of every HTML page. It contains 3 links: Vehicle Check-In, Repair Order, and About. The menu scales with mobile devices and the menu links will stack on top of each other on a small screen
+
+### Prerequisites:
+The menu is ajax into each HTML page in the menuPosition div. 
+
+Related files:
+- menu.html
+- menu.css
+- menu.js
+- getmenu.js
+
+#### menu.html
+This is the HTML file for the menu. The menu is based on the Bootstrap framework. It is located on the top of the screen with the navigation item align to the right of the navigation bar. The following Bootstrap classes are used:
+- navbar navbar-inverse
+- container-fluid
+- navbar-header
+- navbar-brand
+- nav navbar-nav navbar-right align-items-end
+- align-bottom
+
+For more information please refer to the Bootstrap Navbar documentation:
+(https://getbootstrap.com/docs/4.0/components/navbar/)
+
+
+#### menu.css
+This is the stylesheet for the menu. ID are assigned to Bootstrap classes to override the styling inherit from the Bootstrap framework.
+
+#### menu.js
+This is the JavaScript file for the menu. All the JavaScript of the menu is inherited from Bootstrap and therefore this file is empty. Future enhancement for the menu could include a change of styling of the navigation link when it is the active page.
+
+#### getmenu.js
+
+`getmenu()`
+
+Parameters: None
+
+Returns: None
+
+Purpose:
+- Call the /menu.html file into the menuPosition div
+
+## Known Issues
+
+1. If a user opens the printable HTML and does not close the tab, the Repair Order page will not work correctly:
+- User may be able to close the Repair Order Information pop-up, but opening another one will not display the tasks tied to that repair order
+- User may not be able to close the Repair Order Information pop-up
+
+2. An UnhandledPromiseRejectionWarning warning shows up when repair order are edited, saved, and repair order are searched again. Currently it does not affect the functionality of the web application, however unhandled promise rejections are deprecated and in the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+
