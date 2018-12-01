@@ -535,3 +535,211 @@ Purpose:
 - We insert the unCommonTasks to the task table
 -	We then take the unCommonTaskIDs and add them to the reapir_tasks table
 - We then call test method to get the information we just entered
+
+
+## Repair Order Documentation
+
+The Repair Order page allows users to search for an existing repair order(s) and view the relevant information regarding the repair order. This information is based on the data that was inputted in the Vehicle Check In page. 
+
+On this page, users can also edit and update certain fields in the report order. There is also a functionality for users to print out the repair order. 
+
+### URL: 
+- /orders
+
+### Prerequisites:
+- DataTables API script and CSS*
+- Bootstrap API script and CSS*
+- JQuery*
+- (* linked in the <head></head> of ro.html)
+
+### Related Files:
+- ro.html
+- ro.css
+- ro.js
+- roFunctions.js
+
+### ro.html
+The HTML for repair order popup window shown in Figure 1 is wrapped inside the <div class=”container-fluid”> div. The HTML for the repair order search and result follows after this div
+ 
+### ro.css
+
+This is the stylesheet for the repair order page. 
+
+### ro.js
+
+`addPartButFunc(worktask_id)`:
+
+Parameters: worktask_id
+
+Returns: None
+
+Purpose: 
+
+- Creates the input fields for part no., part description, part quantity, part unit price, part sell price and part supplier name. 
+
+Note: The part input fields functionality to save into the database is not implemented and therefore is commented out in the file.
+
+`closePopup()`:
+
+Parameters: None
+
+Returns: None
+
+Purpose: 
+- Close the report order popup screen
+
+`disableInput()`:
+
+Parameters: None
+
+Returns: None
+
+Purpose: 
+- Set the following input fields to disabled=true:
+  - odometerOut
+  - Openclose
+- Change the class for saveRO to btn btn-default pull-right invisible
+- Change the class for editRO to btn btn-default pull-right visible
+- Set the background color for the openclose input field to “#eee”
+
+`enableInputs()`
+
+Parameters: None
+
+Returns: None
+
+Purpose: 
+
+- Set the following input fields to disabled=false:
+  - odometerOut
+  - Openclose
+  - comments
+    - Change the class for saveRO to btn btn-default pull-right visible
+    - Change the class for editRO to btn btn-default pull-right invisible
+    - Set the background color for the openclose input field to “#fff”
+
+`populateRO(rowData)`:
+
+Parameters: rowData
+
+Returns: None
+
+Purpose: 
+- Takes the data associated with the selected repair order and populate it in the repair order popup screen
+
+`populateTasksComments(data)`:
+
+Parameters: data
+
+Returns: None
+
+Purpose: 
+- Takes the repair order ID (ro_id) and populate the tasks and comments of the repair order 
+
+`resultsTable (on select)`:
+
+Parameters: data
+
+Returns: None
+
+Purpose: 
+- Select the data of the selected row (data in the form of an array)
+
+`saveComments(data)`:
+
+Parameters: data
+
+Returns: array
+
+Purpose: 
+- Takes the input values of the comments textarea and save it in an array
+
+`searchROBut (event onclick)`:
+
+Parameters: None
+
+Returns: None
+
+Purpose: 
+- Search the database based on the search word, repair order status, and the search parameter values. 
+- Populates the datatable based on the search result with the repair order ID, last name, first name, license plate, make, model and repair order status. 
+
+`searchTask(roID, rowData)`:
+
+Parameters: roID, rowData
+
+Returns: None
+
+Purpose: 
+- Takes the repair order ID (ro_id) and search for tasks and comments associated with that repair order ID. 
+
+`updateRO(worktaskIDcomments, odometerOut, roID, openClose)`:
+
+Parameters: worktaskIDcomments, odometerOut, roID, openClose
+
+Returns: None
+
+Purpose: 
+- Save the comment(s), odometer out, repair order status input values into the database.
+
+`window (event onclick)`:
+
+Parameters:  None
+
+Returns: None
+
+Purpose: 
+- Changes the display of the repair order popup screen to none. 
+
+`window (event keydown)`:
+
+Parameters:  None
+
+Returns: None
+
+Purpose: 
+- Disable browser refresh on enter 
+
+### roFunctions.js
+
+This is the server-side script for running the database query that will populate the datatable in the repair order page and the repair order popup screen. 
+
+`AroSearch (router.post)`:
+
+Purpose:
+- Returns a JSON object containing all the columns and values in the customer, vehicle, and repair_order table in the database.
+
+`pool.connect`:
+
+Purpose:
+- Login to the database and query the database.
+ 
+`/tasksSearch (router.post)`:
+
+Purpose:
+- Search for the task_name, comments, and worktask_id based on the ro_id 
+
+`updateTaskCommentsLoop(arraytaskIDComments)`
+
+Parameters:  arraytaskIDComments
+
+Returns: None
+
+Purpose: 
+- Asynchronous function that is necessary to update the task comments correctly. 
+- Ensure the for loops is run step by step before running other steps
+
+`connectDBTasksComments(worktask_id, comments)`
+
+Parameters:  worktask_id, comments
+
+Returns: None
+
+Purpose: 
+- Connects to the database and update the comments in the repair_tasks table
+
+`/updateRO (router.post)`:
+
+Purpose: 
+- Updates the odometer_out and status column in the repair_order table.
+
