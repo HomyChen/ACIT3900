@@ -52,9 +52,6 @@ router.post("/AroSearch", function (req,resp){
         }
     }
     
-    
-    
-    
     pool.connect(function (err, client, done){
         if (err) {
             console.log("Unable to connect to the database: " + err );

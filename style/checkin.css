@@ -1,11 +1,13 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: arial;
+    font-size: 12pt;
 }
 
 #boxHeader {
     margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 18pt;
     font-family: arial;
     font-weight: bold;
 }
@@ -16,7 +18,7 @@ body {
     width: 100%;
     margin-bottom: 10px;  
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18pt;
     text-align: center;
     overflow-y: auto;
 }
@@ -54,11 +56,14 @@ body {
 #submitBut {
     margin-top: 20px;
     width: 100%;
+    font-family: arial;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #requestsDropdown {
     width: 100%;
-    padding: 5%;
+    height: 30px;
 }
 
 #otherRequestsInp {
@@ -68,15 +73,9 @@ body {
     padding-right: 0;
 }
 
-/*
-*********Nov23 Menu Changes***********************************************************************************************
-*/
-
-/*
 #logoDiv {
     margin-left: 15px;
 }
-*/
 
 #searchButDiv {
     padding: 0 0 0 0;
@@ -84,6 +83,9 @@ body {
 
 #searchBut {
     width: 100%;
+    font-family: arial;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #clearTableDiv {
@@ -99,6 +101,9 @@ body {
 
 #clearForm {
     width: 100%;
+    font-family: arial;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 #timeInpDiv {
@@ -109,5 +114,20 @@ body {
     text-align: right;
 }
 
+.paddingu {
+    padding: 0vw 10vw 0vw 10vw;
+}
+
+#addBut {
+    font-family: arial;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+#OtherServiceReqBut {
+    font-family: arial;
+    font-size: 12pt;
+    font-weight: bold;
+}
 
 

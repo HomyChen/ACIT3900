@@ -31,6 +31,9 @@
 
 #searchROBut {
     width: 100%;
+    font-family: arial;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 #resultsDiv {
@@ -172,4 +175,32 @@ select {
     height: 34px;
     background-color: #eee;
 }
+
+/*-----Nov 23-----*/
+
+.background {
+    padding: 0vw 10vw 0vw 10vw;
+}
+
+@media only screen and (max-width : 768px){
+    .background {
+        padding: 0px 0px 0px 0px;
+    }
+}
+
+#SOptionsDropdown {
+    font-family: arial;
+    font-size: 12pt;
+}
+
+#roSearchInp {
+    font-family: arial;
+    font-size: 12pt;
+}
+
+#ROOptionsDropdown {
+    font-family: arial;
+    font-size: 12pt;
+}
+
 

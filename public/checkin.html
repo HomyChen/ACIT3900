@@ -36,11 +36,13 @@
     </head>
     
 <body>
-       
+<div id="backgroundImageDiv"></div>   
     <div class="row" id="firstRow">
+        <!--
         <a href="https://www.bcit.ca/transportation/">
                     <div id="logoDiv"></div>
                 </a>
+        -->
         <div id="menuPosition"></div>
     </div>
     <div id="searchPosition"></div> 
@@ -48,11 +50,11 @@
         
         <div class="row"> <div class="col-sm-12" id="headerDiv"> Vehicle Check-in</div></div>
 
-            <div class="row">
+            <div class="row paddingu">
                 <div class="col-sm-6">
                     <div id="buttonsDiv">
                         <div id="searchButDiv" class="col-sm-8">
-                            <button id="searchBut" type="button" class="btn btn-primary btn-lg">EXISTING CUSTOMER</button>
+                            <button id="searchBut" type="button" class="btn btn-warning btn-lg">EXISTING CUSTOMER</button>
                         </div>
                         <div id="clearTableDiv" class="col-sm-4">
                             <button id="clearForm" type="button" class="btn btn-primary btn-lg">Clear Form</button>
@@ -154,10 +156,10 @@
                         </div>
                         <div class="form-group row">
                             <label for="oiInp" class="col-sm-3 col-form-label">Date Promised</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <input type="date" class="form-control" id="dtInp">
                             </div>
-                            <div class="col-sm-3" id="timeInpDiv">
+                            <div class="col-sm-4" id="timeInpDiv">
                                 <select id="timeHour">
                                     <option value="00">00</option>
                                     <option value="01">01</option>
@@ -193,7 +195,7 @@
                     </form>
                 </div>
             </div>
-            <div class="row">
+            <div class="row paddingu">
                 <div class="col-sm-12">
                     <form class="form" id="serviceRequests">
                         <div id="boxHeader">Service Requests</div>
@@ -228,7 +230,7 @@
                                     </div>
 
                                     <div class="col-sm-2" id="butDiv">
-                                        <button id="addBut" type="button" class="btn btn-primary btn-xs">Add</button>
+                                        <button id="addBut" type="button" class="btn btn-primary btn-sm">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -238,14 +240,14 @@
                                         <textarea class="form-control" id="otherRequestsInp" rows="3" placeholder="Other Requests"></textarea>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button id="OtherServiceReqBut" type="button" class="btn btn-primary btn-xs">Add</button>
+                                        <button id="OtherServiceReqBut" type="button" class="btn btn-primary btn-sm">Add</button>
                                     </div>
 
                                 </div>
                             </div>
 
                             <div class="col-sm-12" id="submitDiv">
-                                <button id="submitBut" type="button" class="btn btn-primary btn-lg">Submit</button>
+                                <button id="submitBut" type="button" class="btn btn-warning btn-lg">Submit</button>
                             </div>
 
 
@@ -254,6 +256,7 @@
                 </div>
             </div>
         </div>
+    
     </body>
     <script>
     </script>
