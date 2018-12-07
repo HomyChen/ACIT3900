@@ -118,7 +118,7 @@ async function updateTaskCommentsLoop(arraytaskIDComments){
     for(var i = 0; i<arraytaskIDComments.length; i++){
         var taskcomments = await arraytaskIDComments[i].comments;
         var taskid = await arraytaskIDComments[i].worktask_id;
-        const varr = await connectDBTaskComments(taskid, taskcomments).catch(err => console.log(err));
+        const varr = await connectDBTaskComments(taskid, taskcomments).then().catch(err => console.log(err));
         //console.log("Task Comments Async function successful for loop "+i);
         if(i == (arraytaskIDComments.length-1)){
             return;
@@ -173,7 +173,12 @@ router.post("/updateRO", function (req,resp){
         )
         .catch(err => console.log(err));
     
-    var odometerOut = req.body.odometerOut;
+    if(req.body.odometerOut == ""){
+        var odometerOut = null;
+    }else{
+        var odometerOut = req.body.odometerOut;
+    }
+    
     var openClose = req.body.openClose;
     
     var roID = req.body.roID;
@@ -188,34 +193,32 @@ router.post("/updateRO", function (req,resp){
     
     pool.connect(function (err, client, done){
             if (err) {
-                //console.log("(updateOdoRO - Unable to connect to the database: " + err );
+                console.log("(updateOdoRO - Unable to connect to the database: " + err );
             }
             else{
-                //console.log("updateOdoRO - Successfully login to database!")
+                console.log("updateOdoRO - Successfully login to database!")
             }
 
             client.query(updateOdoQuery, odometerOutData, function(err, result){
-                done();
+                
                 if(err){
-                    //console.log("updateOdoRO failed");
+                    console.log(err);
                     
                 }
                 else{
-                    //console.log("updateOdoRO successful");
+                    client.query(updateroStatus, opencloseData, function(err, result){
+                        done();
+                        if(err){
+                            console.log("updateROStatus failed");
+
+                        }
+                        else{
+                            console.log("Updated Repair Order");
+                            resp.send('Updated Repair Order');
+                        }
+                    });
                 }
             })
-            
-            client.query(updateroStatus, opencloseData, function(err, result){
-                done();
-                if(err){
-                    console.log("updateROStatus failed");
-                    
-                }
-                else{
-                    //console.log("updateROStatus successful");
-                }
-            })
-            
         })
     
 });

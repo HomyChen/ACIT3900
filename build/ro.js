@@ -164,7 +164,8 @@ $(document).ready(function() {
                     disableInputs();
                     saveComments(data);
                     updateRO(saveComments(data), odometerOut.value, rowData.ro_id, openclose.value);
-                    window.location.reload(); 
+                    
+                    
                 }                        
 
                 }
@@ -251,7 +252,8 @@ $(document).ready(function() {
             },
             success:function(data){
                 if (data){
-                    //console.log(data);
+                    console.log(data);
+                    window.location.reload(); 
                 }
             }
          });
