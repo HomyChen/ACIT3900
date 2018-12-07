@@ -58,6 +58,11 @@ app.get("/print", function(req, resp){
     resp.sendFile(pF+"/roprint.html")
 });
 
+app.get("/about", function(req,resp){
+    resp.sendFile(pF+"/about.html")
+});
+
+
 app.use("/data",dbFunctions);
 app.use("/rosearch", roFunctions);
 //app.use("/pdf", pdfFunctions)
